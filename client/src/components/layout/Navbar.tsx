@@ -2,8 +2,8 @@ import { Home, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV_ITEMS } from "../constants";
-import { toSlug } from "../utils/formatters";
+import { NAV_ITEMS } from "../../constants";
+import { toSlug } from "../../utils/formatters";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

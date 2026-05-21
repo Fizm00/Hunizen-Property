@@ -1,10 +1,10 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useProperties } from "../hooks/useProperties";
-import { PropertyVerticalCard } from "./ui/PropertyVerticalCard";
-import type { KostCard } from "../types";
-import { staggerContainer, scrollViewport, sectionTransition } from "../lib/animations";
-import UnderlineText from "./ui/UnderlineText";
+import { useProperties } from "../../hooks/useProperties";
+import { PropertyVerticalCard } from "../ui/PropertyVerticalCard";
+import type { KostCard } from "../../types";
+import { staggerContainer, scrollViewport, sectionTransition } from "../../lib/animations";
+import UnderlineText from "../ui/UnderlineText";
 
 /* ─── Sub-Components ─── */
 
@@ -90,7 +90,7 @@ export default function PropertyList() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((n) => (
               <div key={n} className="h-[390px] bg-slate-50 border border-slate-100 rounded-3xl p-4 flex flex-col gap-4">
-                <div className="h-60 w-full bg-slate-200 rounded-[1.5rem]" />
+                <div className="h-60 w-full bg-slate-200 rounded-3xl" />
                 <div className="h-4 w-24 bg-slate-200 rounded" />
                 <div className="h-6 w-48 bg-slate-200 rounded" />
                 <div className="h-4 w-32 bg-slate-200 rounded" />

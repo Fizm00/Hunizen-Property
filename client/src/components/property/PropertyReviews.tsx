@@ -16,7 +16,7 @@ export default function PropertyReviews({
   setShowAllReviews,
 }: PropertyReviewsProps) {
   return (
-    <div className="py-8 flex flex-col gap-6">
+    <div className="pt-8 pb-4 flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold text-slate-800 flex items-center gap-1.5">
           <span>Reviews</span>
@@ -52,7 +52,7 @@ export default function PropertyReviews({
         ))}
       </div>
 
-      <div className="h-[1px] bg-slate-100 w-full" />
+      <div className="h-px bg-slate-100 w-full" />
 
       {/* Reviews List */}
       <div className="flex flex-col gap-6">
@@ -109,7 +109,7 @@ export default function PropertyReviews({
               </div>
 
               {/* Reviews body list */}
-              <div className="p-5 flex-grow overflow-y-auto flex flex-col gap-6 custom-scrollbar">
+              <div className="p-5 grow overflow-y-auto flex flex-col gap-6 custom-scrollbar">
                 {reviewsList.map((rev, i) => (
                   <div
                     key={i}

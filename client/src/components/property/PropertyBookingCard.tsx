@@ -19,7 +19,7 @@ export default function PropertyBookingCard({
   handleBooking,
 }: PropertyBookingCardProps) {
   return (
-    <div className="hidden lg:block sticky top-28 bg-white border border-slate-100 rounded-3xl p-6 shadow-md flex flex-col gap-6">
+    <div className="hidden lg:block sticky top-28 bg-white border border-slate-100 rounded-3xl p-6 shadow-md flex-col gap-6">
       {/* Pricing row */}
       <div className="flex justify-between items-end">
         <div>
@@ -42,7 +42,7 @@ export default function PropertyBookingCard({
         </span>
       </div>
 
-      <div className="h-[1px] bg-slate-100 w-full" />
+      <div className="h-px bg-slate-100 w-full" />
 
       {/* Checkout Form */}
       <div className="flex flex-col gap-4">

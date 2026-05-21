@@ -1,18 +1,47 @@
-import { Wifi, Wind, Utensils, Tv, Zap, Check } from "lucide-react";
+import { 
+  Wifi, 
+  Wind, 
+  Utensils, 
+  Tv, 
+  Check, 
+  Bath, 
+  Flame, 
+  Shield, 
+  Plug, 
+  Droplet,
+  ShowerHead,
+  Toilet
+} from "lucide-react";
 
 interface PropertyFacilitiesProps {
   facilities: string[];
   bathroomFacilities: string[];
 }
 
-const getFacilityIcon = (facility: string) => {
-  const f = facility.toLowerCase();
+const getFacilityIcon = (name: string) => {
+  const f = name.toLowerCase();
+  
   if (f.includes("wifi")) return Wifi;
   if (f.includes("ac")) return Wind;
   if (f.includes("dapur") || f.includes("masak")) return Utensils;
   if (f.includes("tv")) return Tv;
   if (f.includes("laundry") || f.includes("cuci")) return Check;
-  if (f.includes("panas")) return Zap;
+  
+  // Power / Electricity
+  if (f.includes("listrik")) return Plug;
+  
+  // Security / Host guard
+  if (f.includes("penjaga") || f.includes("keamanan") || f.includes("security")) return Shield;
+  
+  // Hot water
+  if (f.includes("air panas") || f.includes("heater")) return Flame;
+  
+  // Bathroom / Bath
+  if (f.includes("kamar mandi dalam") || f.includes("km dalam")) return Bath;
+  if (f.includes("kloset") || f.includes("toilet")) return Toilet;
+  if (f.includes("shower")) return ShowerHead;
+  if (f.includes("wastafel") || f.includes("sink")) return Droplet;
+  
   return Check;
 };
 
@@ -39,19 +68,22 @@ export default function PropertyFacilities({
         </div>
       </div>
 
-      <div className="h-[1px] bg-slate-100 w-full" />
+      <div className="h-px bg-slate-100 w-full" />
 
       <div>
         <h2 className="text-lg font-bold text-slate-800 mb-4">Fasilitas Kamar Mandi</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          {bathroomFacilities.map((bf, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm font-bold text-slate-600">
-              <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
-                <Check className="w-4 h-4" />
+          {bathroomFacilities.map((bf, i) => {
+            const IconComp = getFacilityIcon(bf);
+            return (
+              <div key={i} className="flex items-center gap-2 text-sm font-bold text-slate-600">
+                <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                  <IconComp className="w-4 h-4" />
+                </div>
+                <span>{bf}</span>
               </div>
-              <span>{bf}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

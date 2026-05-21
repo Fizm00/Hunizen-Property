@@ -1,10 +1,11 @@
 import { SlidersHorizontal } from "lucide-react";
 import { usePropertySearch } from "../hooks/usePropertySearch";
-import { SearchHeader } from "./search/SearchHeader";
-import { FilterChipsBar } from "./search/FilterChipsBar";
-import { PropertyHorizontalCard } from "./search/PropertyHorizontalCard";
-import { PropertyLeafletMap } from "./search/PropertyLeafletMap";
-import { AdvancedFilterModal } from "./search/AdvancedFilterModal";
+import { SearchHeader } from "../components/search/SearchHeader";
+import { FilterChipsBar } from "../components/search/FilterChipsBar";
+import { PropertyHorizontalCard } from "../components/search/PropertyHorizontalCard";
+import { PropertyLeafletMap } from "../components/search/PropertyLeafletMap";
+import { AdvancedFilterModal } from "../components/search/AdvancedFilterModal";
+import { PropertyHorizontalSkeleton } from "../components/search/PropertyHorizontalSkeleton";
 
 export default function SearchPage() {
   const {
@@ -77,9 +78,13 @@ export default function SearchPage() {
               <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
                 Kost di Sekitarmu
               </h1>
-              <p className="mt-1 text-xs text-zinc-400">
-                Menampilkan <span className="font-semibold text-zinc-300">{filteredProperties.length}</span> properti terbaik
-              </p>
+              {loading ? (
+                <div className="mt-2 h-3.5 bg-zinc-800/60 rounded w-40 animate-pulse" />
+              ) : (
+                <p className="mt-1 text-xs text-zinc-400">
+                  Menampilkan <span className="font-semibold text-zinc-300">{filteredProperties.length}</span> properti terbaik
+                </p>
+              )}
             </div>
             
             {/* Sorting indicator */}
@@ -95,17 +100,7 @@ export default function SearchPage() {
           {loading ? (
             <div className="flex flex-col gap-4 w-full">
               {[1, 2, 3].map((n) => (
-                <div key={n} className="w-full h-40 bg-zinc-900/40 border border-zinc-800/80 rounded-3xl animate-pulse flex p-4 gap-4">
-                  <div className="w-48 h-full bg-zinc-800 rounded-2xl shrink-0" />
-                  <div className="flex flex-col justify-between flex-grow py-2">
-                    <div className="flex flex-col gap-2">
-                      <div className="h-4 w-24 bg-zinc-800 rounded" />
-                      <div className="h-6 w-48 bg-zinc-800 rounded" />
-                      <div className="h-3 w-32 bg-zinc-800 rounded" />
-                    </div>
-                    <div className="h-8 w-24 bg-zinc-800 rounded-full align-self-end mt-auto" />
-                  </div>
-                </div>
+                <PropertyHorizontalSkeleton key={n} />
               ))}
             </div>
           ) : filteredProperties.length > 0 ? (

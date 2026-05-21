@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import heroBg from "../assets/hero_bg_indoor_kost.png";
-import { SEARCH_FILTERS } from "../constants";
-import { ease } from "../lib/animations";
+import heroBg from "../../assets/hero_bg_indoor_kost.png";
+import { SEARCH_FILTERS } from "../../constants";
+import { ease } from "../../lib/animations";
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function Hero() {
           animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.2, delay: 0.4, ease: ease.expo }}
           onClick={() => navigate("/search")}
-          className="w-full max-w-[1000px] bg-white rounded-[2rem] md:rounded-full p-2 flex flex-col md:flex-row items-center justify-between shadow-2xl overflow-hidden cursor-pointer"
+          className="w-full max-w-[1000px] bg-white rounded-4xl md:rounded-full p-2 flex flex-col md:flex-row items-center justify-between shadow-2xl overflow-hidden cursor-pointer"
         >
           <div className="flex w-full md:w-auto overflow-x-auto divide-x divide-slate-200">
             {SEARCH_FILTERS.map((filter) => (

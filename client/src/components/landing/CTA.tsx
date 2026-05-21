@@ -1,7 +1,7 @@
 import { Play, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
-import { CTA_VIDEO_CARDS } from "../constants";
-import { staggerContainer, itemScaleUp, scrollViewport, sectionTransition } from "../lib/animations";
+import { CTA_VIDEO_CARDS } from "../../constants";
+import { staggerContainer, itemScaleUp, scrollViewport, sectionTransition } from "../../lib/animations";
 
 export default function CTA() {
   return (

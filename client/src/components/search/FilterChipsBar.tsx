@@ -56,7 +56,7 @@ export function FilterChipsBar({
           </button>
         ))}
 
-        <div className="h-4 w-[1px] bg-zinc-800 mx-1 shrink-0" />
+        <div className="h-4 w-px bg-zinc-800 mx-1 shrink-0" />
 
         {/* Period Filter Chips */}
         {periods.map((period) => (

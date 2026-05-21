@@ -21,7 +21,7 @@ export default function PropertyRoomTypes({
             <div className="h-32 w-full overflow-hidden bg-slate-100">
               <img src={rt.img} alt={rt.name} className="w-full h-full object-cover" />
             </div>
-            <div className="p-4 flex flex-col flex-grow justify-between gap-3">
+            <div className="p-4 flex flex-col grow justify-between gap-3">
               <div>
                 <h4 className="font-bold text-slate-800 text-base leading-tight">{rt.name}</h4>
                 <span className="text-xs text-slate-400 block font-bold mt-1 uppercase">Mulai Dari</span>

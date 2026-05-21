@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import bannerBg from "../assets/kost_banner.png";
-import { FEATURE_CARDS } from "../constants";
-import { staggerContainer, itemFadeUp, scrollViewport, sectionTransition } from "../lib/animations";
-import UnderlineText from "./ui/UnderlineText";
+import bannerBg from "../../assets/kost_banner.png";
+import { FEATURE_CARDS } from "../../constants";
+import { staggerContainer, itemFadeUp, scrollViewport, sectionTransition } from "../../lib/animations";
+import UnderlineText from "../ui/UnderlineText";
 
 export default function Features() {
   return (
@@ -46,7 +46,7 @@ export default function Features() {
                 <img
                   src={card.img}
                   alt={card.title}
-                  className="w-full h-full object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1.5 rounded-full z-10">
                   {card.badge}
@@ -54,7 +54,7 @@ export default function Features() {
               </div>
 
               {/* Card Body */}
-              <div className="p-6 pt-4 flex flex-col flex-grow">
+              <div className="p-6 pt-4 flex flex-col grow">
                 <h3 className="text-xl font-bold text-slate-800 mb-1">{card.title}</h3>
                 <p className="text-xs text-slate-400 mb-6">{card.desc}</p>
 
@@ -82,7 +82,7 @@ export default function Features() {
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           viewport={scrollViewport}
           transition={sectionTransition()}
-          className="w-full bg-[#18181B] rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-2xl relative"
+          className="w-full bg-[#18181B] rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-2xl relative"
         >
           <div className="flex-1 p-10 md:p-16 lg:p-24 flex flex-col justify-center z-10">
             <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
@@ -99,8 +99,8 @@ export default function Features() {
           </div>
 
           <div className="flex-1 relative min-h-[300px] md:min-h-full hidden sm:block">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#18181B] via-transparent to-transparent z-10 hidden md:block" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#18181B] via-transparent to-transparent z-10 block md:hidden" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#18181B] via-transparent to-transparent z-10 hidden md:block" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#18181B] via-transparent to-transparent z-10 block md:hidden" />
             <img src={bannerBg} alt="Premium Kost Join Banner" className="w-full h-full object-cover" />
           </div>
         </motion.div>

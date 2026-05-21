@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { propertyService } from "../services/propertyService";
 import { useFavorites } from "./useFavorites";
 import type { PropertyDetail, SearchKostCard, RoomType } from "../types";
 
 export function usePropertyDetail(id: string | undefined) {
+  const navigate = useNavigate();
   const [property, setProperty] = useState<PropertyDetail | null>(null);
   const [similarProperties, setSimilarProperties] = useState<SearchKostCard[]>([]);
   const [loading, setLoading] = useState(true);
@@ -82,12 +84,14 @@ export function usePropertyDetail(id: string | undefined) {
       alert("Silakan pilih tanggal mulai ngekos terlebih dahulu!");
       return;
     }
-    alert(
-      `Pengajuan sewa diajukan!\nProperti: ${property.title}\nTanggal Masuk: ${checkInDate}\nDurasi: ${duration}\nTipe Kamar: ${
-        selectedRoomType?.name || "Standart"
-      }`
-    );
-  }, [property, checkInDate, duration, selectedRoomType]);
+    navigate(`/booking/${property.id}`, {
+      state: {
+        checkInDate,
+        duration,
+        roomType: selectedRoomType?.name || "Standard Room"
+      }
+    });
+  }, [navigate, property, checkInDate, duration, selectedRoomType]);
 
   const handleSelectRoomTypeAndBook = useCallback((roomType: RoomType) => {
     setSelectedRoomType(roomType);
@@ -96,10 +100,14 @@ export function usePropertyDetail(id: string | undefined) {
       return;
     }
     if (!property) return;
-    alert(
-      `Pengajuan sewa diajukan!\nProperti: ${property.title}\nTanggal Masuk: ${checkInDate}\nDurasi: ${duration}\nTipe Kamar: ${roomType.name}`
-    );
-  }, [property, checkInDate, duration]);
+    navigate(`/booking/${property.id}`, {
+      state: {
+        checkInDate,
+        duration,
+        roomType: roomType.name
+      }
+    });
+  }, [navigate, property, checkInDate, duration]);
 
   return {
     property,

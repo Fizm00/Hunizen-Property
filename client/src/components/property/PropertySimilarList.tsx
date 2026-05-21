@@ -12,7 +12,7 @@ export default function PropertySimilarList({
   const navigate = useNavigate();
 
   return (
-    <section className="mt-12 pt-8 border-t border-slate-100 w-full">
+    <section className="mt-2 pt-8 border-t border-slate-100 w-full">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight leading-none">
           Kamu mungkin suka
@@ -47,7 +47,7 @@ export default function PropertySimilarList({
             </div>
 
             {/* Info block */}
-            <div className="p-4 flex flex-col flex-grow justify-between">
+            <div className="p-4 flex flex-col grow justify-between">
               <div>
                 <div className="flex justify-between items-center text-[10px] font-bold text-slate-400">
                   <span className="flex items-center gap-0.5 text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">

@@ -2,24 +2,25 @@ import { useParams, Link } from "react-router-dom";
 import { Heart, Share2, Star, MapPin, ChevronRight, Info } from "lucide-react";
 
 import { usePropertyDetail } from "../hooks/usePropertyDetail";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 // Modular UI sub-components
-import PropertyGallery from "./property/PropertyGallery";
-import PropertyHighlights from "./property/PropertyHighlights";
-import PropertyHostInfo from "./property/PropertyHostInfo";
-import PropertyDescription from "./property/PropertyDescription";
-import PropertySpecs from "./property/PropertySpecs";
-import PropertyFacilities from "./property/PropertyFacilities";
-import PropertyRules from "./property/PropertyRules";
-import PropertyRoomTypes from "./property/PropertyRoomTypes";
-import PropertyLocationMap from "./property/PropertyLocationMap";
-import PropertyRentalTerms from "./property/PropertyRentalTerms";
-import PropertyReviews from "./property/PropertyReviews";
-import PropertyBookingCard from "./property/PropertyBookingCard";
-import PropertyMobileStickyBar from "./property/PropertyMobileStickyBar";
-import PropertySimilarList from "./property/PropertySimilarList";
+import PropertyGallery from "../components/property/PropertyGallery";
+import PropertyHighlights from "../components/property/PropertyHighlights";
+import PropertyHostInfo from "../components/property/PropertyHostInfo";
+import PropertyDescription from "../components/property/PropertyDescription";
+import PropertySpecs from "../components/property/PropertySpecs";
+import PropertyFacilities from "../components/property/PropertyFacilities";
+import PropertyRules from "../components/property/PropertyRules";
+import PropertyRoomTypes from "../components/property/PropertyRoomTypes";
+import PropertyLocationMap from "../components/property/PropertyLocationMap";
+import PropertyRentalTerms from "../components/property/PropertyRentalTerms";
+import PropertyReviews from "../components/property/PropertyReviews";
+import PropertyBookingCard from "../components/property/PropertyBookingCard";
+import PropertyMobileStickyBar from "../components/property/PropertyMobileStickyBar";
+import PropertySimilarList from "../components/property/PropertySimilarList";
+import PropertyDetailSkeleton from "../components/property/PropertyDetailSkeleton";
 
 export default function PropertyDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -55,25 +56,14 @@ export default function PropertyDetailPage() {
   } = usePropertyDetail(id);
 
   if (loading) {
-    return (
-      <div className="w-full min-h-screen bg-slate-50 flex flex-col justify-between">
-        <div className="h-20 w-full bg-[#09090B]" />
-        <div className="flex-grow flex items-center justify-center p-8">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-zinc-300 border-t-[#09090B] rounded-full animate-spin" />
-            <span className="text-sm font-semibold text-slate-500">Memuat detail kost...</span>
-          </div>
-        </div>
-        <div className="h-20 w-full bg-[#09090B]" />
-      </div>
-    );
+    return <PropertyDetailSkeleton />;
   }
 
   if (!property) {
     return (
       <div className="w-full min-h-screen bg-slate-50 flex flex-col justify-between">
         <div className="h-20 w-full bg-[#09090B]" />
-        <div className="flex-grow flex flex-col items-center justify-center p-8 gap-4 text-center">
+        <div className="grow flex flex-col items-center justify-center p-8 gap-4 text-center">
           <Info className="w-12 h-12 text-slate-400" />
           <h2 className="text-xl font-bold text-slate-800">Properti Tidak Ditemukan</h2>
           <p className="text-xs text-slate-500 max-w-sm">Detail kost yang Anda cari tidak tersedia atau telah dihapus.</p>

@@ -1,13 +1,12 @@
 import { Shield, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import adminPromoBg from "../assets/banner_admin_promo.png";
-import mainWhyImg from "../assets/kost_banner.png";
-import { WHY_CHOOSE_US_ITEMS, WHY_ICONS } from "../constants";
-import { scrollViewport, sectionTransition, slideInLeft, slideInRight } from "../lib/animations";
-import UnderlineText from "./ui/UnderlineText";
-import FavoriteButton from "./ui/FavoriteButton";
-
-import { useFavorites } from "../hooks/useFavorites";
+import adminPromoBg from "../../assets/banner_admin_promo.png";
+import mainWhyImg from "../../assets/kost_banner.png";
+import { WHY_CHOOSE_US_ITEMS, WHY_ICONS } from "../../constants";
+import { scrollViewport, sectionTransition, slideInLeft, slideInRight } from "../../lib/animations";
+import UnderlineText from "../ui/UnderlineText";
+import FavoriteButton from "../ui/FavoriteButton";
+import { useFavorites } from "../../hooks/useFavorites";
 
 export default function Showcase() {
   const { toggleFavorite, isFavorited } = useFavorites();
@@ -22,12 +21,12 @@ export default function Showcase() {
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           viewport={scrollViewport}
           transition={sectionTransition()}
-          className="w-full bg-[#18181B] rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-xl mb-24 relative"
+          className="w-full bg-[#18181B] rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-xl mb-24 relative"
         >
           {/* Banner Left Image */}
           <div className="flex-1 relative min-h-[220px] md:min-h-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#18181B]/40 to-[#18181B] z-10 hidden md:block" />
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#18181B]/40 to-[#18181B] z-10 block md:hidden" />
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#18181B]/40 to-[#18181B] z-10 hidden md:block" />
+            <div className="absolute inset-0 bg-linear-to-t from-transparent via-[#18181B]/40 to-[#18181B] z-10 block md:hidden" />
             <img src={adminPromoBg} alt="Promo Admin Illustration" className="w-full h-full object-cover" />
           </div>
 

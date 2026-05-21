@@ -1,6 +1,6 @@
-import { FOOTER_COLUMNS, FOOTER_LEGAL_LINKS } from "../constants";
-import type { FooterColumn } from "../types";
-import { toSlug } from "../utils/formatters";
+import { FOOTER_COLUMNS, FOOTER_LEGAL_LINKS } from "../../constants";
+import type { FooterColumn } from "../../types";
+import { toSlug } from "../../utils/formatters";
 
 /* ─── Sub-Components ─── */
 
@@ -161,4 +161,3 @@ export default function Footer() {
     </footer>
   );
 }
-

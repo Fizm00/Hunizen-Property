@@ -18,3 +18,16 @@ export const formatPriceLabel = (price: string): string => {
     .replace(" / bln", "")
     .replace(" / hari", "/h");
 };
+
+/**
+ * Formats a number to Indonesian Rupiah currency format.
+ * E.g., 4000000 -> "Rp 4.000.000"
+ */
+export const formatIDR = (num: number): string => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(num);
+};
+
