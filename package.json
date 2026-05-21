@@ -1,0 +1,20 @@
+{
+  "name": "hunizen-property-website",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "client:dev": "npm run dev -w client",
+    "client:build": "npm run build -w client",
+    "server:dev": "npm run dev -w server",
+    "server:build": "npm run build -w server",
+    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
+    "install-all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

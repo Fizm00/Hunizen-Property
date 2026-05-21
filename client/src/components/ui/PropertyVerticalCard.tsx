@@ -1,0 +1,94 @@
+import { motion } from "framer-motion";
+import { Bed, Bath, Wind, Wifi, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+import type { KostCard, KostSpecs } from "../../types";
+import { itemFadeUp } from "../../lib/animations";
+
+/* ─── Sub-Components ─── */
+
+interface KostBadgeProps {
+  variant: "promo" | "recom";
+}
+
+function KostBadge({ variant }: KostBadgeProps) {
+  const colorClass = variant === "promo" ? "text-amber-500" : "text-emerald-600";
+  const fillClass = variant === "promo" ? "fill-amber-500 stroke-amber-500" : "fill-emerald-600 stroke-emerald-600";
+  
+  return (
+    <div className={`absolute top-4 right-4 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl shadow-md z-10 ${colorClass}`}>
+      <Zap className={`w-4 h-4 ${fillClass}`} />
+    </div>
+  );
+}
+
+interface SpecsRowProps {
+  specs: KostSpecs;
+}
+
+function SpecsRow({ specs }: SpecsRowProps) {
+  const specItems = [
+    { Icon: Bed, value: specs.bed, label: "Bed" },
+    { Icon: Bath, value: specs.bath, label: "Bath" },
+    { Icon: Wind, value: specs.ac, label: "AC" },
+    { Icon: Wifi, value: specs.wifi, label: "WiFi" },
+  ];
+
+  return (
+    <div className="flex items-center gap-5 text-slate-500">
+      {specItems.map(({ Icon, value, label }) => (
+        <div key={label} className="flex items-center gap-1.5 text-xs font-semibold">
+          <Icon className="w-4 h-4 text-slate-400" />
+          <span>{value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Main Component ─── */
+
+interface PropertyVerticalCardProps {
+  property: KostCard;
+  variant: "promo" | "recom";
+  index?: number;
+}
+
+export function PropertyVerticalCard({ property, variant }: PropertyVerticalCardProps) {
+  return (
+    <motion.div
+      variants={itemFadeUp(30)}
+      className="bg-white rounded-3xl overflow-hidden flex flex-col group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border border-slate-100/60 p-2"
+    >
+      <Link to={`/property/${property.id}`} className="flex flex-col h-full w-full">
+        {/* Image Container */}
+        <div className="relative h-60 w-full overflow-hidden rounded-[1.5rem] bg-slate-100">
+          <img
+            src={property.img}
+            alt={property.title}
+            className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
+            loading="lazy"
+          />
+          <KostBadge variant={variant} />
+        </div>
+
+        {/* Details Box */}
+        <div className="p-5 flex flex-col flex-grow">
+          <span className="text-sm font-semibold text-slate-400 mb-1">
+            {property.price}
+          </span>
+          <h3 className="text-lg font-bold text-slate-800 leading-tight mb-1 group-hover:text-slate-900 transition-colors line-clamp-1">
+            {property.title}
+          </h3>
+          <p className="text-xs text-slate-400 mb-4 line-clamp-1">
+            {property.location}
+          </p>
+          
+          <div className="w-full h-[1px] bg-slate-100 mb-4" />
+          
+          <SpecsRow specs={property.specs} />
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
