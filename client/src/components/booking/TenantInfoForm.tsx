@@ -1,4 +1,4 @@
-import { User, Phone, Briefcase, ChevronDown } from "lucide-react";
+import { User, Phone, Briefcase, ChevronDown, Lock } from "lucide-react";
 import type { BookingFormErrors } from "../../types/booking";
 import { OCCUPATION_OPTIONS } from "../../constants/booking";
 
@@ -12,6 +12,8 @@ interface TenantInfoFormProps {
   occupation: string;
   setOccupation: (val: string) => void;
   errors: BookingFormErrors;
+  isGenderLocked?: boolean;
+  propertyType?: "Campur" | "Putra" | "Putri";
 }
 
 export default function TenantInfoForm({
@@ -23,13 +25,15 @@ export default function TenantInfoForm({
   setGender,
   occupation,
   setOccupation,
-  errors
+  errors,
+  isGenderLocked = false,
+  propertyType
 }: TenantInfoFormProps) {
   return (
     <div className="bg-white border border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-6">
       <div className="border-b border-slate-100 pb-4">
         <h2 className="text-lg font-black text-slate-800 flex items-center gap-2">
-          <User className="w-5 h-5 text-indigo-500" />
+          <User className="w-5 h-5 text-black" />
           Informasi Penyewa
         </h2>
         <p className="text-xs text-slate-400 mt-1">Data identitas utama pemohon sewa kost</p>
@@ -74,27 +78,43 @@ export default function TenantInfoForm({
           <div className="flex gap-3">
             <button
               type="button"
-              onClick={() => setGender("Laki-laki")}
-              className={`flex-1 h-12 border rounded-xl text-sm font-bold text-center flex items-center justify-center transition-all cursor-pointer ${
-                gender === "Laki-laki"
-                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm"
-                  : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+              disabled={isGenderLocked}
+              onClick={() => !isGenderLocked && setGender("Laki-laki")}
+              className={`flex-1 h-12 border rounded-xl text-sm font-bold text-center flex items-center justify-center transition-all ${
+                isGenderLocked
+                  ? gender === "Laki-laki"
+                    ? "bg-zinc-900 border-zinc-900 text-zinc-300 pointer-events-none cursor-default"
+                    : "bg-zinc-50 border-zinc-200 text-zinc-400 opacity-40 pointer-events-none cursor-not-allowed"
+                  : gender === "Laki-laki"
+                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm cursor-pointer hover:bg-zinc-800"
+                  : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 cursor-pointer"
               }`}
             >
               Laki-laki
             </button>
             <button
               type="button"
-              onClick={() => setGender("Perempuan")}
-              className={`flex-1 h-12 border rounded-xl text-sm font-bold text-center flex items-center justify-center transition-all cursor-pointer ${
-                gender === "Perempuan"
-                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm"
-                  : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+              disabled={isGenderLocked}
+              onClick={() => !isGenderLocked && setGender("Perempuan")}
+              className={`flex-1 h-12 border rounded-xl text-sm font-bold text-center flex items-center justify-center transition-all ${
+                isGenderLocked
+                  ? gender === "Perempuan"
+                    ? "bg-zinc-900 border-zinc-900 text-zinc-300 pointer-events-none cursor-default"
+                    : "bg-zinc-50 border-zinc-200 text-zinc-400 opacity-40 pointer-events-none cursor-not-allowed"
+                  : gender === "Perempuan"
+                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm cursor-pointer hover:bg-zinc-800"
+                  : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 cursor-pointer"
               }`}
             >
               Perempuan
             </button>
           </div>
+          {isGenderLocked && (
+            <div className="flex items-center gap-1.5 mt-1 text-[11px] font-bold text-zinc-700 bg-zinc-100/50 border border-zinc-200/80 px-3 py-1.5 rounded-xl w-fit">
+              <Lock className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+              <span>Ditetapkan otomatis untuk Kost Khusus {propertyType}</span>
+            </div>
+          )}
         </div>
 
         {/* Occupation */}

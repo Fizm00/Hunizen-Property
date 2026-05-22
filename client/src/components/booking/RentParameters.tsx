@@ -118,7 +118,7 @@ export default function RentParameters({
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-transparent text-sm font-bold text-slate-800 focus:outline-none w-full cursor-pointer [color-scheme:light]"
+              className="bg-transparent text-sm font-bold text-slate-800 focus:outline-none w-full cursor-pointer scheme-light"
             />
           </div>
           <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider w-28 shrink-0">

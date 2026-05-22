@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { propertyService } from "../services/propertyService";
 import { useFavorites } from "./useFavorites";
 import type { PropertyDetail, SearchKostCard, RoomType } from "../types";
+import { showToast, showAlert } from "../utils/alerts";
 
 export function usePropertyDetail(id: string | undefined) {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ export function usePropertyDetail(id: string | undefined) {
 
   const handleShare = useCallback(() => {
     navigator.clipboard.writeText(window.location.href);
-    alert("Link halaman telah disalin ke clipboard!");
+    showToast("success", "Link halaman telah disalin ke clipboard!");
   }, []);
 
   const handleToggleFavorite = useCallback(() => {
@@ -81,7 +82,7 @@ export function usePropertyDetail(id: string | undefined) {
   const handleBooking = useCallback(() => {
     if (!property) return;
     if (!checkInDate) {
-      alert("Silakan pilih tanggal mulai ngekos terlebih dahulu!");
+      showAlert("warning", "Tanggal Belum Dipilih", "Silakan pilih tanggal mulai ngekos terlebih dahulu!");
       return;
     }
     navigate(`/booking/${property.id}`, {
@@ -96,7 +97,7 @@ export function usePropertyDetail(id: string | undefined) {
   const handleSelectRoomTypeAndBook = useCallback((roomType: RoomType) => {
     setSelectedRoomType(roomType);
     if (!checkInDate) {
-      alert("Silakan pilih tanggal mulai ngekos terlebih dahulu!");
+      showAlert("warning", "Tanggal Belum Dipilih", "Silakan pilih tanggal mulai ngekos terlebih dahulu!");
       return;
     }
     if (!property) return;

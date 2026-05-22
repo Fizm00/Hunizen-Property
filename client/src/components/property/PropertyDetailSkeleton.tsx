@@ -44,7 +44,7 @@ export default function PropertyDetailSkeleton() {
             {/* Header info block */}
             <div className="pb-8 border-b border-slate-200/80 flex flex-col gap-4">
               <div className="flex justify-between items-start gap-4">
-                <div className="flex-grow">
+                <div className="grow">
                   <div className="h-8 bg-slate-200 rounded-lg w-3/4 animate-pulse mb-3" />
                   <div className="flex items-center gap-2">
                     <div className="h-5 bg-slate-200 rounded w-12 animate-pulse" />
@@ -112,7 +112,7 @@ export default function PropertyDetailSkeleton() {
 
           {/* Right Column (Booking Card) */}
           <div className="lg:col-span-1">
-            <div className="hidden lg:block sticky top-28 bg-white border border-slate-100 rounded-3xl p-6 shadow-md flex flex-col gap-6">
+            <div className="hidden lg:block sticky top-28 bg-white border border-slate-100 rounded-3xl p-6 shadow-md flex-col gap-6">
               <div className="flex justify-between items-end">
                 <div>
                   <div className="h-3 bg-slate-200 rounded w-16 animate-pulse mb-1.5" />

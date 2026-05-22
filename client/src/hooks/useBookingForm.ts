@@ -14,13 +14,15 @@ interface UseBookingFormOptions {
   initialCheckInDate?: string;
   initialDuration?: string;
   initialRoomType?: string;
+  propertyType?: "Campur" | "Putra" | "Putri";
 }
 
 export function useBookingForm({
   priceVal,
   initialCheckInDate,
   initialDuration,
-  initialRoomType
+  initialRoomType,
+  propertyType
 }: UseBookingFormOptions) {
   
   // Helper to parse duration number (e.g. "Per Bulan" -> 1 month)
@@ -33,9 +35,22 @@ export function useBookingForm({
   };
 
   // Form State
+  const [step, setStep] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState("gopay");
   const [name, setName] = useState("Budi Santoso");
   const [phone, setPhone] = useState("081234567890");
-  const [gender, setGender] = useState<"Laki-laki" | "Perempuan">("Laki-laki");
+  const [selectedGender, setSelectedGender] = useState<"Laki-laki" | "Perempuan">(() => {
+    if (propertyType === "Putri") return "Perempuan";
+    return "Laki-laki";
+  });
+
+  // Derived gender based on propertyType (auto-assign & lock)
+  const gender = propertyType === "Putra"
+    ? "Laki-laki"
+    : propertyType === "Putri"
+    ? "Perempuan"
+    : selectedGender;
+
   const [occupation, setOccupation] = useState("Mahasiswa");
   const [occupantsCount, setOccupantsCount] = useState(1);
   const [durationMonths, setDurationMonths] = useState(
@@ -52,7 +67,6 @@ export function useBookingForm({
   // Status & Error States
   const [errors, setErrors] = useState<BookingFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [bookingId, setBookingId] = useState("");
 
   // Counter Actions
@@ -88,43 +102,52 @@ export function useBookingForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newErrors: BookingFormErrors = {};
-    if (!name.trim()) newErrors.name = "Nama lengkap wajib diisi";
-    if (!phone.trim()) newErrors.phone = "Nomor WhatsApp wajib diisi";
-    else if (!/^\+?[0-9]{10,14}$/.test(phone.replace(/\s+/g, ""))) {
-      newErrors.phone = "Format nomor WhatsApp tidak valid";
-    }
+    if (step === 1) {
+      const newErrors: BookingFormErrors = {};
+      if (!name.trim()) newErrors.name = "Nama lengkap wajib diisi";
+      if (!phone.trim()) newErrors.phone = "Nomor WhatsApp wajib diisi";
+      else if (!/^\+?[0-9]{10,14}$/.test(phone.replace(/\s+/g, ""))) {
+        newErrors.phone = "Format nomor WhatsApp tidak valid";
+      }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      setErrors({});
+      setStep(2);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    setErrors({});
-    setIsSubmitting(true);
+    if (step === 2) {
+      setIsSubmitting(true);
 
-    try {
-      const response = await bookingService.submitBooking({
-        name,
-        phone,
-        gender,
-        occupation,
-        occupantsCount,
-        durationMonths,
-        startDate,
-        additionalNotes,
-        selectedRoomType
-      });
+      try {
+        const response = await bookingService.submitBooking({
+          name,
+          phone,
+          gender,
+          occupation,
+          occupantsCount,
+          durationMonths,
+          startDate,
+          additionalNotes,
+          selectedRoomType,
+          paymentMethod
+        });
 
-      if (response.success) {
-        setBookingId(response.bookingId);
-        setIsSubmitted(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (response.success) {
+          setBookingId(response.bookingId);
+          setStep(3);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      } catch (err) {
+        console.error("Failed to submit booking:", err);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (err) {
-      console.error("Failed to submit booking:", err);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -141,11 +164,15 @@ export function useBookingForm({
       selectedRoomType,
       setName,
       setPhone,
-      setGender,
+      setGender: setSelectedGender,
       setOccupation,
       setStartDate,
       setAdditionalNotes,
-      setSelectedRoomType
+      setSelectedRoomType,
+      step,
+      setStep,
+      paymentMethod,
+      setPaymentMethod
     },
     actions: {
       incrementOccupants,
@@ -163,8 +190,12 @@ export function useBookingForm({
     status: {
       errors,
       isSubmitting,
-      isSubmitted,
-      bookingId
+      isSubmitted: step === 3,
+      bookingId,
+      isGenderLocked: propertyType === "Putra" || propertyType === "Putri",
+      propertyType,
+      step,
+      setStep
     }
   };
 }

@@ -8,6 +8,7 @@ export interface BookingFormData {
   startDate: string;
   additionalNotes: string;
   selectedRoomType: string;
+  paymentMethod?: string;
 }
 
 export interface BookingFormErrors {
