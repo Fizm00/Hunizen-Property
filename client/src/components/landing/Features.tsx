@@ -82,7 +82,7 @@ export default function Features() {
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           viewport={scrollViewport}
           transition={sectionTransition()}
-          className="w-full bg-[#18181B] rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-2xl relative"
+          className="w-full bg-brand-green rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-2xl relative md:max-h-[420px]"
         >
           <div className="flex-1 p-10 md:p-16 lg:p-24 flex flex-col justify-center z-10">
             <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
@@ -92,15 +92,15 @@ export default function Features() {
               Daftarkan segera usaha kost anda dan rasakan kemudahan mengelola properti bersama jutaan pengguna kami.
             </p>
             <div>
-              <a href="#daftar" className="inline-block bg-white text-[#18181B] font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-colors shadow-lg">
+              <a href="#daftar" className="inline-block bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-colors shadow-lg">
                 Daftar Sekarang
               </a>
             </div>
           </div>
 
           <div className="flex-1 relative min-h-[300px] md:min-h-full hidden sm:block">
-            <div className="absolute inset-0 bg-linear-to-r from-[#18181B] via-transparent to-transparent z-10 hidden md:block" />
-            <div className="absolute inset-0 bg-linear-to-t from-[#18181B] via-transparent to-transparent z-10 block md:hidden" />
+            <div className="absolute inset-0 bg-linear-to-r from-brand-green via-transparent to-transparent z-10 hidden md:block" />
+            <div className="absolute inset-0 bg-linear-to-t from-brand-green via-transparent to-transparent z-10 block md:hidden" />
             <img src={bannerBg} alt="Premium Kost Join Banner" className="w-full h-full object-cover" />
           </div>
         </motion.div>

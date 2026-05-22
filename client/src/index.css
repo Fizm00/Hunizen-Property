@@ -3,9 +3,11 @@
 @theme {
   --font-sans: "Plus Jakarta Sans", sans-serif;
   
-  --color-brand-primary: #0F172A; /* Deep Navy Blue */
-  --color-brand-accent: #3B82F6;  /* Clean Blue */
-  --color-brand-accent-hover: #2563EB;
+  --color-brand-green: #0F2C20;        /* Hijau Hutan Gelap Utama */
+  --color-brand-green-accent: #163F2E; /* Hijau Medium untuk Aksen/Batas */
+  --color-brand-green-hover: #123325;  /* Warna Hover */
+  --color-brand-green-light: #F0F6F3;  /* Latar Belakang Hijau Lembut */
+  --color-brand-green-vibrant: #10B981;/* Status Positif (Active/Verified) */
 }
 
 /* Base custom styles */

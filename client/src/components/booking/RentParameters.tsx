@@ -112,7 +112,7 @@ export default function RentParameters({
           <p className="text-xs text-slate-400 mt-0.5">Tanggal rencana masuk ke kost</p>
         </div>
         <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-          <div className="flex items-center px-3 border border-slate-200 rounded-xl bg-slate-50/30 focus-within:border-[#09090B] transition-colors h-12 w-48 shrink-0">
+          <div className="flex items-center px-3 border border-slate-200 rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors h-12 w-48 shrink-0">
             <Calendar className="w-4.5 h-4.5 text-slate-400 mr-2.5 shrink-0" />
             <input
               type="date"
@@ -139,7 +139,7 @@ export default function RentParameters({
                 onClick={() => setSelectedRoomType(rt.name)}
                 className={`flex flex-col p-3 border rounded-xl text-left transition-all cursor-pointer ${
                   selectedRoomType === rt.name
-                    ? "bg-slate-50 border-slate-900 shadow-sm"
+                    ? "bg-brand-green-light border-brand-green shadow-sm"
                     : "bg-white border-slate-200 hover:bg-slate-50"
                 }`}
               >

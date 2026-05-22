@@ -62,16 +62,16 @@ export default function PropertyDetailPage() {
   if (!property) {
     return (
       <div className="w-full min-h-screen bg-slate-50 flex flex-col justify-between">
-        <div className="h-20 w-full bg-[#09090B]" />
+        <div className="h-20 w-full bg-brand-green" />
         <div className="grow flex flex-col items-center justify-center p-8 gap-4 text-center">
           <Info className="w-12 h-12 text-slate-400" />
           <h2 className="text-xl font-bold text-slate-800">Properti Tidak Ditemukan</h2>
           <p className="text-xs text-slate-500 max-w-sm">Detail kost yang Anda cari tidak tersedia atau telah dihapus.</p>
-          <Link to="/search" className="px-6 py-2.5 bg-[#09090B] text-white text-xs font-bold rounded-full">
+          <Link to="/search" className="px-6 py-2.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-full">
             Kembali ke Pencarian
           </Link>
         </div>
-        <div className="h-20 w-full bg-[#09090B]" />
+        <div className="h-20 w-full bg-brand-green" />
       </div>
     );
   }
@@ -80,7 +80,7 @@ export default function PropertyDetailPage() {
     <div className="relative min-h-screen w-full bg-slate-50/60 font-sans text-slate-800 selection:bg-zinc-200 selection:text-zinc-900">
       
       {/* 1. Header Container (Dark Spacer behind transparent Navbar) */}
-      <div className="w-full bg-[#09090B] h-20 relative z-50">
+      <div className="w-full bg-brand-green h-20 relative z-50">
         <Navbar />
       </div>
 

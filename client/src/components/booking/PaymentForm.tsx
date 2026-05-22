@@ -38,7 +38,7 @@ export default function PaymentForm({
     bri: <img src={briLogo} alt="BRI" className="h-6.5 w-auto max-h-full object-contain" />,
     cod: (
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+        <div className="w-8 h-8 rounded-full bg-brand-green-light flex items-center justify-center text-brand-green">
           <Wallet className="w-4.5 h-4.5" />
         </div>
         <div className="text-left">
@@ -89,8 +89,8 @@ export default function PaymentForm({
                   onClick={() => setPaymentMethod(wallet.id)}
                   className={`h-20 px-3 border rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer relative ${
                     isSelected
-                      ? "border-[#09090B] bg-slate-50/50 shadow-inner scale-[0.98]"
-                      : "border-slate-200 bg-white hover:border-slate-400 hover:scale-[1.01]"
+                      ? "border-brand-green bg-brand-green-light shadow-inner scale-[0.98]"
+                      : "border-slate-200 bg-white hover:border-brand-green-accent hover:scale-[1.01]"
                   }`}
                 >
                   <div className="h-8 flex items-center justify-center w-full">
@@ -104,8 +104,8 @@ export default function PaymentForm({
                     {wallet.label}
                   </span>
                   {isSelected && (
-                    <div className="absolute top-2 right-2 text-black">
-                      <CheckCircle2 className="w-3.5 h-3.5 fill-black stroke-white" />
+                    <div className="absolute top-2 right-2 text-brand-green">
+                      <CheckCircle2 className="w-3.5 h-3.5 fill-brand-green stroke-white" />
                     </div>
                   )}
                 </button>
@@ -127,8 +127,8 @@ export default function PaymentForm({
                   onClick={() => setPaymentMethod(bank.id)}
                   className={`h-20 px-3 border rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer relative ${
                     isSelected
-                      ? "border-[#09090B] bg-slate-50/50 shadow-inner scale-[0.98]"
-                      : "border-slate-200 bg-white hover:border-slate-400 hover:scale-[1.01]"
+                      ? "border-brand-green bg-brand-green-light shadow-inner scale-[0.98]"
+                      : "border-slate-200 bg-white hover:border-brand-green-accent hover:scale-[1.01]"
                   }`}
                 >
                   <div className="h-8 flex items-center justify-center w-full">
@@ -142,8 +142,8 @@ export default function PaymentForm({
                     {bank.label}
                   </span>
                   {isSelected && (
-                    <div className="absolute top-2 right-2 text-black">
-                      <CheckCircle2 className="w-3.5 h-3.5 fill-black stroke-white" />
+                    <div className="absolute top-2 right-2 text-brand-green">
+                      <CheckCircle2 className="w-3.5 h-3.5 fill-brand-green stroke-white" />
                     </div>
                   )}
                 </button>
@@ -160,14 +160,14 @@ export default function PaymentForm({
             onClick={() => setPaymentMethod("cod")}
             className={`p-4 border rounded-2xl flex items-center justify-between transition-all cursor-pointer relative text-left ${
               paymentMethod === "cod"
-                ? "border-[#09090B] bg-slate-50/50 shadow-inner scale-[0.98]"
-                : "border-slate-200 bg-white hover:border-slate-400 hover:scale-[1.01]"
+                ? "border-brand-green bg-brand-green-light shadow-inner scale-[0.98]"
+                : "border-slate-200 bg-white hover:border-brand-green-accent hover:scale-[1.01]"
             }`}
           >
             {logos.cod}
             {paymentMethod === "cod" && (
-              <div className="text-black">
-                <CheckCircle2 className="w-4 h-4 fill-black stroke-white" />
+              <div className="text-brand-green">
+                <CheckCircle2 className="w-4 h-4 fill-brand-green stroke-white" />
               </div>
             )}
           </button>
@@ -187,7 +187,7 @@ export default function PaymentForm({
         type="button"
         onClick={onSubmit}
         disabled={isSubmitting}
-        className="w-full py-4 bg-[#09090B] hover:bg-[#18181B] disabled:bg-zinc-600 text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0 mt-3 flex items-center justify-center gap-2"
+        className="w-full py-4 bg-brand-green hover:bg-brand-green-hover disabled:bg-zinc-600 text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0 mt-3 flex items-center justify-center gap-2"
       >
         {isSubmitting ? (
           <>

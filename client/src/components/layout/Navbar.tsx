@@ -28,24 +28,70 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item}
-                href={toSlug(item)}
-                className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
-              >
-                {item}
-              </a>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              if (item === "Kost & Kontrakan") {
+                return (
+                  <Link
+                    key={item}
+                    to="/search"
+                    className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item}
+                  </Link>
+                );
+              }
+              if (item === "Tentang Kami") {
+                return (
+                  <Link
+                    key={item}
+                    to="/about"
+                    className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item}
+                  </Link>
+                );
+              }
+              if (item === "FAQ") {
+                return (
+                  <Link
+                    key={item}
+                    to="/faq"
+                    className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item}
+                  </Link>
+                );
+              }
+              if (item === "Kontak") {
+                return (
+                  <Link
+                    key={item}
+                    to="/contact"
+                    className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item}
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={item}
+                  href={toSlug(item)}
+                  className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                >
+                  {item}
+                </a>
+              );
+            })}
           </div>
 
           {/* Login Button */}
-          <a
-            href="#masuk"
+          <Link
+            to="/login"
             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black text-sm font-semibold px-5 md:px-6 py-2 md:py-2.5 rounded-full transition-all duration-300"
           >
             Masuk
-          </a>
+          </Link>
 
           {/* Hamburger (Mobile) */}
           <button
@@ -67,26 +113,76 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#09090B]/98 backdrop-blur-md z-40 flex flex-col justify-center items-center p-6 md:hidden"
+            className="fixed inset-0 bg-brand-green/98 backdrop-blur-md z-40 flex flex-col justify-center items-center p-6 md:hidden"
           >
             <div className="flex flex-col items-center gap-8 text-center">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item}
-                  href={toSlug(item)}
-                  onClick={closeMenu}
-                  className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
-                >
-                  {item}
-                </a>
-              ))}
-              <a
-                href="#masuk"
+              {NAV_ITEMS.map((item) => {
+                if (item === "Kost & Kontrakan") {
+                  return (
+                    <Link
+                      key={item}
+                      to="/search"
+                      onClick={closeMenu}
+                      className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
+                    >
+                      {item}
+                    </Link>
+                  );
+                }
+                if (item === "Tentang Kami") {
+                  return (
+                    <Link
+                      key={item}
+                      to="/about"
+                      onClick={closeMenu}
+                      className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
+                    >
+                      {item}
+                    </Link>
+                  );
+                }
+                if (item === "FAQ") {
+                  return (
+                    <Link
+                      key={item}
+                      to="/faq"
+                      onClick={closeMenu}
+                      className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
+                    >
+                      {item}
+                    </Link>
+                  );
+                }
+                if (item === "Kontak") {
+                  return (
+                    <Link
+                      key={item}
+                      to="/contact"
+                      onClick={closeMenu}
+                      className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
+                    >
+                      {item}
+                    </Link>
+                  );
+                }
+                return (
+                  <a
+                    key={item}
+                    href={toSlug(item)}
+                    onClick={closeMenu}
+                    className="text-2xl font-bold text-slate-200 hover:text-white transition-colors tracking-tight"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
+              <Link
+                to="/login"
                 onClick={closeMenu}
-                className="mt-4 bg-white text-black text-base font-bold px-8 py-3 rounded-full shadow-lg"
+                className="mt-4 bg-white text-black text-base font-bold px-8 py-3 rounded-full shadow-lg text-center"
               >
                 Masuk ke Akun
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

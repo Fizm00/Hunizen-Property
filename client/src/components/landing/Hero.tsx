@@ -79,7 +79,7 @@ export default function Hero() {
                 e.stopPropagation();
                 navigate("/search");
               }}
-              className="w-12 h-12 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center transition-colors shadow-md text-white shrink-0"
+              className="w-12 h-12 rounded-full bg-brand-green hover:bg-brand-green-hover flex items-center justify-center transition-colors shadow-md text-white shrink-0"
             >
               <Search className="w-5 h-5" strokeWidth={2.5} />
             </button>

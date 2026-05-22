@@ -5,7 +5,7 @@ export default function PropertyDetailSkeleton() {
   return (
     <div className="relative min-h-screen w-full bg-slate-50/60 font-sans text-slate-800">
       {/* 1. Header Container */}
-      <div className="w-full bg-[#09090B] h-20 relative z-50">
+      <div className="w-full bg-brand-green h-20 relative z-50">
         <Navbar />
       </div>
 

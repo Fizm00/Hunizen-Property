@@ -57,7 +57,7 @@ function PropertySection({ titlePrefix, titleHighlight, items, variant }: Proper
       <SectionHeader prefix={titlePrefix} highlight={titleHighlight} />
 
       <motion.div
-        variants={staggerContainer(0.12)}
+        variants={staggerContainer(0.06)}
         initial="hidden"
         whileInView="visible"
         viewport={scrollViewport}

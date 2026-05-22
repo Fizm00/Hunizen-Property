@@ -51,7 +51,7 @@ export default function PropertyBookingCard({
           <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
             Mulai Kos
           </label>
-          <div className="relative flex items-center px-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50/50 focus-within:border-slate-800 transition-colors">
+          <div className="relative flex items-center px-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50/50 focus-within:border-brand-green transition-colors">
             <Calendar className="w-4.5 h-4.5 text-slate-400 mr-2.5 shrink-0" />
             <input
               type="date"
@@ -70,7 +70,7 @@ export default function PropertyBookingCard({
           <select
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50/50 text-sm font-bold text-slate-800 focus:outline-none focus:border-slate-800 transition-colors cursor-pointer"
+            className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50/50 text-sm font-bold text-slate-800 focus:outline-none focus:border-brand-green transition-colors cursor-pointer"
           >
             <option value="Per Hari">Harian</option>
             <option value="Per Minggu">Mingguan</option>
@@ -86,7 +86,7 @@ export default function PropertyBookingCard({
       <div className="flex flex-col gap-3.5 mt-2">
         <button
           onClick={handleBooking}
-          className="w-full py-3.5 bg-[#09090B] hover:bg-zinc-800 text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0"
+          className="w-full py-3.5 bg-brand-green hover:bg-brand-green-hover text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0"
         >
           Ajukan Sewa
         </button>
@@ -96,14 +96,14 @@ export default function PropertyBookingCard({
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3.5 border border-slate-200 hover:border-slate-800 text-slate-700 hover:text-slate-800 text-center text-sm font-bold rounded-full transition-all block cursor-pointer"
+          className="w-full py-3.5 border border-slate-200 hover:border-brand-green hover:text-brand-green text-slate-700 text-center text-sm font-bold rounded-full transition-all block cursor-pointer"
         >
           Hubungi Pemilik
         </a>
       </div>
 
       {/* Verifications guarantee info */}
-      <div className="flex items-center gap-2 p-3 bg-emerald-50 rounded-xl text-emerald-800 text-xs font-bold border border-emerald-100">
+      <div className="flex items-center gap-2 p-3 bg-brand-green-light rounded-xl text-brand-green text-xs font-bold border border-brand-green-accent/20">
         <ShieldCheck className="w-4.5 h-4.5 shrink-0" />
         <span>Pembayaran Anda aman. Jaminan uang kembali jika kost tidak sesuai.</span>
       </div>

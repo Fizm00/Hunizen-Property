@@ -65,10 +65,10 @@ export default function BookingPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-        <div className="h-20 w-full bg-[#09090B]" />
+        <div className="h-20 w-full bg-brand-green" />
         <div className="grow flex items-center justify-center p-8">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-zinc-300 border-t-[#09090B] rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-zinc-300 border-t-brand-green rounded-full animate-spin" />
             <span className="text-sm font-semibold text-slate-500">Mempersiapkan formulir sewa...</span>
           </div>
         </div>
@@ -80,10 +80,10 @@ export default function BookingPage() {
   if (!property) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-        <div className="h-20 w-full bg-[#09090B]" />
+        <div className="h-20 w-full bg-brand-green" />
         <div className="grow flex flex-col items-center justify-center p-8 gap-4 text-center">
           <h2 className="text-xl font-bold text-slate-800">Properti Tidak Ditemukan</h2>
-          <Link to="/" className="px-6 py-2.5 bg-[#09090B] text-white text-xs font-bold rounded-full">
+          <Link to="/" className="px-6 py-2.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-full">
             Kembali ke Beranda
           </Link>
         </div>
@@ -94,7 +94,7 @@ export default function BookingPage() {
 
   return (
     <div className="min-h-screen w-full bg-slate-50/60 font-sans text-slate-800">
-      <div className="w-full bg-[#09090B] h-20 relative z-50">
+      <div className="w-full bg-brand-green h-20 relative z-50">
         <Navbar />
       </div>
 
@@ -201,7 +201,7 @@ export default function BookingPage() {
                   {/* Lanjut ke Pembayaran Trigger Button */}
                   <button
                     type="submit"
-                    className="w-full py-4 bg-[#09090B] hover:bg-zinc-800 text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0 mt-2 flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-brand-green hover:bg-brand-green-hover text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0 mt-2 flex items-center justify-center gap-2"
                   >
                     Lanjut ke Pembayaran
                   </button>

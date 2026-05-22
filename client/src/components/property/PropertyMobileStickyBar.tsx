@@ -31,7 +31,7 @@ export default function PropertyMobileStickyBar({
         </a>
         <button
           onClick={handleBooking}
-          className="px-5 py-2.5 bg-[#09090B] text-white text-sm font-bold rounded-full transition-all shadow-md cursor-pointer border-0"
+          className="px-5 py-2.5 bg-brand-green hover:bg-brand-green-hover text-white text-sm font-bold rounded-full transition-all shadow-md cursor-pointer border-0"
         >
           Ajukan Sewa
         </button>

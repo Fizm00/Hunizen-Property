@@ -11,8 +11,8 @@ interface KostBadgeProps {
 }
 
 function KostBadge({ variant }: KostBadgeProps) {
-  const colorClass = variant === "promo" ? "text-amber-500" : "text-emerald-600";
-  const fillClass = variant === "promo" ? "fill-amber-500 stroke-amber-500" : "fill-emerald-600 stroke-emerald-600";
+  const colorClass = variant === "promo" ? "text-amber-500" : "text-brand-green";
+  const fillClass = variant === "promo" ? "fill-amber-500 stroke-amber-500" : "fill-brand-green stroke-brand-green";
   
   return (
     <div className={`absolute top-4 right-4 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl shadow-md z-10 ${colorClass}`}>
@@ -56,8 +56,10 @@ interface PropertyVerticalCardProps {
 export function PropertyVerticalCard({ property, variant }: PropertyVerticalCardProps) {
   return (
     <motion.div
-      variants={itemFadeUp(30)}
-      className="bg-white rounded-3xl overflow-hidden flex flex-col group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border border-slate-100/60 p-2"
+      variants={itemFadeUp(20, 0.55)}
+      whileHover={{ y: -6, boxShadow: "0 12px 30px -10px rgba(0, 0, 0, 0.08), 0 8px 15px -8px rgba(0, 0, 0, 0.08)" }}
+      transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+      className="bg-white rounded-3xl overflow-hidden flex flex-col group border border-slate-100/60 p-2 cursor-pointer"
     >
       <Link to={`/property/${property.id}`} className="flex flex-col h-full w-full">
         {/* Image Container */}
@@ -76,7 +78,7 @@ export function PropertyVerticalCard({ property, variant }: PropertyVerticalCard
           <span className="text-sm font-semibold text-slate-400 mb-1">
             {property.price}
           </span>
-          <h3 className="text-lg font-bold text-slate-800 leading-tight mb-1 group-hover:text-slate-900 transition-colors line-clamp-1">
+          <h3 className="text-lg font-bold text-slate-800 leading-tight mb-1 group-hover:text-brand-green-accent transition-colors line-clamp-1">
             {property.title}
           </h3>
           <p className="text-xs text-slate-400 mb-4 line-clamp-1">

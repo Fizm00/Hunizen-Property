@@ -1,6 +1,7 @@
 import { FOOTER_COLUMNS, FOOTER_LEGAL_LINKS } from "../../constants";
 import type { FooterColumn } from "../../types";
 import { toSlug } from "../../utils/formatters";
+import { Link } from "react-router-dom";
 
 /* ─── Sub-Components ─── */
 
@@ -15,16 +16,54 @@ function LinkColumn({ column }: LinkColumnProps) {
         {column.title}
       </span>
       <ul className="flex flex-col gap-3.5">
-        {column.links.map((link) => (
-          <li key={link}>
-            <a
-              href={toSlug(link)}
-              className="text-lg md:text-xl font-medium tracking-tight text-white hover:text-slate-300 transition-colors"
-            >
-              {link}
-            </a>
-          </li>
-        ))}
+        {column.links.map((link) => {
+          if (link === "Tentang Kami") {
+            return (
+              <li key={link}>
+                <Link
+                  to="/about"
+                  className="text-lg md:text-xl font-medium tracking-tight text-white hover:text-slate-300 transition-colors"
+                >
+                  {link}
+                </Link>
+              </li>
+            );
+          }
+          if (link === "Pusat Bantuan") {
+            return (
+              <li key={link}>
+                <Link
+                  to="/faq"
+                  className="text-lg md:text-xl font-medium tracking-tight text-white hover:text-slate-300 transition-colors"
+                >
+                  {link}
+                </Link>
+              </li>
+            );
+          }
+          if (link === "Hubungi Kami") {
+            return (
+              <li key={link}>
+                <Link
+                  to="/contact"
+                  className="text-lg md:text-xl font-medium tracking-tight text-white hover:text-slate-300 transition-colors"
+                >
+                  {link}
+                </Link>
+              </li>
+            );
+          }
+          return (
+            <li key={link}>
+              <a
+                href={toSlug(link)}
+                className="text-lg md:text-xl font-medium tracking-tight text-white hover:text-slate-300 transition-colors"
+              >
+                {link}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -37,7 +76,7 @@ export default function Footer() {
   const companyColumn = FOOTER_COLUMNS[4];
 
   return (
-    <footer className="w-full bg-[#09090B] text-slate-400 pt-24 pb-12 px-6 md:px-12 flex flex-col items-center">
+    <footer className="w-full bg-brand-green text-slate-400 pt-24 pb-12 px-6 md:px-12 flex flex-col items-center">
       <div className="w-full max-w-7xl">
 
         {/* Grid Area */}
@@ -131,7 +170,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2.5 mt-8 w-full">
               <a
                 href="#cari"
-                className="bg-[#F4F3EC] hover:bg-white text-[#09090B] text-center text-xs font-bold px-6 py-3.5 rounded-full transition-colors tracking-wide block"
+                className="bg-[#F4F3EC] hover:bg-white text-brand-green text-center text-xs font-bold px-6 py-3.5 rounded-full transition-colors tracking-wide block"
               >
                 CARI SEKARANG
               </a>

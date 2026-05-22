@@ -21,26 +21,26 @@ export default function Showcase() {
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           viewport={scrollViewport}
           transition={sectionTransition()}
-          className="w-full bg-[#18181B] rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-xl mb-24 relative"
+          className="w-full bg-brand-green rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-xl mb-24 relative md:max-h-[420px]"
         >
           {/* Banner Left Image */}
-          <div className="flex-1 relative min-h-[220px] md:min-h-full">
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#18181B]/40 to-[#18181B] z-10 hidden md:block" />
-            <div className="absolute inset-0 bg-linear-to-t from-transparent via-[#18181B]/40 to-[#18181B] z-10 block md:hidden" />
+          <div className="flex-1 relative min-h-[200px] md:min-h-full">
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-brand-green/40 to-brand-green z-10 hidden md:block" />
+            <div className="absolute inset-0 bg-linear-to-t from-transparent via-brand-green/40 to-brand-green z-10 block md:hidden" />
             <img src={adminPromoBg} alt="Promo Admin Illustration" className="w-full h-full object-cover" />
           </div>
 
           {/* Banner Right Content */}
-          <div className="flex-1 p-10 md:p-16 lg:p-20 flex flex-col justify-center items-start md:items-end text-left md:text-right z-10">
+          <div className="flex-1 p-8 md:p-12 lg:p-14 flex flex-col justify-center items-start md:items-end text-left md:text-right z-10">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3">
               Dapatkan Potongan Admin!
             </h2>
-            <p className="text-slate-400 text-sm md:text-base mb-8 max-w-sm">
+            <p className="text-slate-400 text-sm md:text-base mb-6 max-w-sm">
               Daftarkan segera usaha kost atau kontrakan anda sekarang juga dan nikmati diskon biaya admin di awal!
             </p>
             <a
               href="#daftar"
-              className="bg-white text-[#18181B] font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-md"
+              className="bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-md"
             >
               Daftar
             </a>
@@ -100,7 +100,7 @@ export default function Showcase() {
                     Sistem keamanan kost terintegrasi dengan CCTV, penjagaan security, serta gerbang smart lock untuk memberikan rasa tenang maksimal selama Anda tinggal.
                   </p>
                 </div>
-                <button className="w-12 h-12 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center transition-colors shadow-md shrink-0">
+                <button className="w-12 h-12 rounded-full bg-brand-green hover:bg-brand-green-hover text-white flex items-center justify-center transition-colors shadow-md shrink-0">
                   <ArrowRight className="w-5 h-5" />
                 </button>
               </div>

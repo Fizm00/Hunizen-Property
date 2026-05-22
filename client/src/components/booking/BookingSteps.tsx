@@ -10,11 +10,11 @@ export default function BookingSteps({ currentStep = 1 }: BookingStepsProps) {
       {/* Step 1 */}
       <div className="flex items-center gap-1.5">
         {currentStep > 1 ? (
-          <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center">
+          <span className="w-5 h-5 rounded-full bg-brand-green-vibrant text-white flex items-center justify-center">
             <Check className="w-3.5 h-3.5 stroke-[3]" />
           </span>
         ) : (
-          <span className="w-5 h-5 rounded-full bg-[#09090B] text-white text-[10px] font-bold flex items-center justify-center animate-pulse">
+          <span className="w-5 h-5 rounded-full bg-brand-green text-white text-[10px] font-bold flex items-center justify-center animate-pulse">
             1
           </span>
         )}
@@ -28,12 +28,12 @@ export default function BookingSteps({ currentStep = 1 }: BookingStepsProps) {
       {/* Step 2 */}
       <div className="flex items-center gap-1.5">
         {currentStep > 2 ? (
-          <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center">
+          <span className="w-5 h-5 rounded-full bg-brand-green-vibrant text-white flex items-center justify-center">
             <Check className="w-3.5 h-3.5 stroke-[3]" />
           </span>
         ) : (
           <span className={`w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center ${
-            currentStep === 2 ? "bg-[#09090B] text-white animate-pulse" : "bg-slate-100 text-slate-400"
+            currentStep === 2 ? "bg-brand-green text-white animate-pulse" : "bg-slate-100 text-slate-400"
           }`}>
             2
           </span>
@@ -48,7 +48,7 @@ export default function BookingSteps({ currentStep = 1 }: BookingStepsProps) {
       {/* Step 3 */}
       <div className="flex items-center gap-1.5">
         <span className={`w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center ${
-          currentStep === 3 ? "bg-[#09090B] text-white" : "bg-slate-100 text-slate-400"
+          currentStep === 3 ? "bg-brand-green text-white" : "bg-slate-100 text-slate-400"
         }`}>
           3
         </span>

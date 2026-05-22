@@ -8,10 +8,10 @@ interface UnderlineTextProps {
  */
 export default function UnderlineText({ children }: UnderlineTextProps) {
   return (
-    <span className="relative inline-block text-slate-600">
+    <span className="relative inline-block text-brand-green">
       {children}
       <svg
-        className="absolute w-full h-2.5 -bottom-0.5 left-0 text-[#0F172A]"
+        className="absolute w-full h-2.5 -bottom-0.5 left-0 text-brand-green-accent"
         viewBox="0 0 100 10"
         preserveAspectRatio="none"
         fill="currentColor"

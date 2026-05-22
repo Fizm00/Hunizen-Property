@@ -13,13 +13,13 @@ export default function CTA() {
         whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
         viewport={scrollViewport}
         transition={sectionTransition()}
-        className="w-full max-w-7xl bg-[#09090B] rounded-[2.5rem] md:rounded-[4rem] px-6 md:px-16 py-20 md:py-24 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl border border-zinc-900"
+        className="w-full max-w-7xl bg-brand-green rounded-[2.5rem] md:rounded-[4rem] px-6 md:px-16 py-20 md:py-24 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl border border-emerald-950/40"
       >
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
         {/* Top Pill Badge */}
-        <div className="inline-block bg-[#18181B] border border-zinc-800 rounded-full px-4 py-1.5 mb-6 shadow-sm z-10">
+        <div className="inline-block bg-brand-green-accent border border-emerald-900/30 rounded-full px-4 py-1.5 mb-6 shadow-sm z-10">
           <span className="text-white text-xs font-semibold tracking-wide">Mulai Sekarang</span>
         </div>
 
@@ -37,9 +37,9 @@ export default function CTA() {
         {/* CTA Button */}
         <a
           href="#cari"
-          className="inline-flex items-center gap-2 bg-white text-[#09090B] font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-lg mb-20 text-sm z-10"
+          className="inline-flex items-center gap-2 bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-lg mb-20 text-sm z-10"
         >
-          <Rocket className="w-4 h-4 fill-[#09090B]" />
+          <Rocket className="w-4 h-4 fill-brand-green" />
           Cari Kost Sekarang
         </a>
 

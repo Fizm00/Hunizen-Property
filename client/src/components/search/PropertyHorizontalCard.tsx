@@ -26,7 +26,7 @@ export function PropertyHorizontalCard({
       onClick={onClick}
       className={`flex flex-col sm:flex-row gap-4 p-3 w-full bg-zinc-900/40 border rounded-3xl hover:bg-zinc-900/90 transition-all duration-300 cursor-pointer group ${
         isHovered || isSelected
-          ? "border-[#F4F3EC] shadow-lg shadow-black/40"
+          ? "border-brand-green-accent shadow-lg shadow-black/40"
           : "border-zinc-800/50 hover:border-zinc-700"
       }`}
     >
@@ -109,7 +109,7 @@ export function PropertyHorizontalCard({
                 {property.originalPrice}
               </span>
             )}
-            <span className="text-sm font-extrabold text-[#F4F3EC]">
+            <span className="text-sm font-extrabold text-brand-green-vibrant">
               {property.price}
             </span>
           </div>
@@ -117,7 +117,7 @@ export function PropertyHorizontalCard({
           <Link
             to={`/property/${property.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-1 text-xs font-semibold text-[#F4F3EC] hover:underline hover:text-white transition-colors"
+            className="flex items-center gap-1 text-xs font-semibold text-brand-green-vibrant hover:underline hover:text-white transition-colors"
           >
             <span>Detail</span>
             <ChevronRight className="w-3.5 h-3.5" />

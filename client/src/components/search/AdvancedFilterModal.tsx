@@ -148,7 +148,7 @@ export function AdvancedFilterModal({
                           onClick={() => setActiveGender(isActive ? "Semua Tipe" : g.value)}
                           className={`py-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                             isActive
-                              ? "bg-[#F4F3EC] text-zinc-900 border-[#F4F3EC]"
+                              ? "bg-brand-green-accent text-white border-brand-green-accent shadow-sm"
                               : "bg-zinc-950/40 text-zinc-400 border-zinc-800 hover:border-zinc-700"
                           }`}
                         >
@@ -171,7 +171,7 @@ export function AdvancedFilterModal({
                           onClick={() => setActivePeriod(isActive ? "Semua Periode" : p.value)}
                           className={`py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                             isActive
-                              ? "bg-[#F4F3EC] text-zinc-900 border-[#F4F3EC]"
+                              ? "bg-brand-green-accent text-white border-brand-green-accent shadow-sm"
                               : "bg-zinc-950/40 text-zinc-400 border-zinc-800 hover:border-zinc-700"
                           }`}
                         >
@@ -227,7 +227,7 @@ export function AdvancedFilterModal({
                           onClick={() => setActiveSort(s.value)}
                           className={`py-2 px-1 rounded-xl text-[10px] font-semibold border transition-all cursor-pointer text-center ${
                             isActive
-                              ? "bg-[#F4F3EC] text-zinc-900 border-[#F4F3EC]"
+                              ? "bg-brand-green-accent text-white border-brand-green-accent shadow-sm"
                               : "bg-zinc-950/40 text-zinc-400 border-zinc-800 hover:border-zinc-700"
                           }`}
                         >
@@ -252,13 +252,13 @@ export function AdvancedFilterModal({
                         onClick={() => handleFacilityToggle(fac)}
                         className={`flex items-center gap-2 px-3 py-2.5 border rounded-xl text-xs font-medium transition-all cursor-pointer text-left ${
                           isActive
-                            ? "bg-[#F4F3EC]/10 border-[#F4F3EC] text-[#F4F3EC]"
+                            ? "bg-brand-green-accent/10 border-brand-green-accent text-white"
                             : "bg-zinc-950/20 border-zinc-800 hover:border-zinc-700 text-zinc-400"
                         }`}
                       >
                         <div className={`flex justify-center items-center w-4 h-4 border rounded-md shrink-0 ${
                           isActive
-                            ? "bg-[#F4F3EC] border-[#F4F3EC] text-zinc-900"
+                            ? "bg-brand-green-accent border-brand-green-accent text-white"
                             : "border-zinc-750"
                         }`}>
                           {isActive && <Check className="w-2.5 h-2.5" strokeWidth={3} />}
@@ -285,13 +285,13 @@ export function AdvancedFilterModal({
                           onClick={() => handleFacilityToggle(fac)}
                           className={`flex items-center gap-2 px-3 py-2.5 border rounded-xl text-xs font-medium transition-all cursor-pointer text-left ${
                             isActive
-                              ? "bg-[#F4F3EC]/10 border-[#F4F3EC] text-[#F4F3EC]"
+                              ? "bg-brand-green-accent/10 border-brand-green-accent text-white"
                               : "bg-zinc-950/20 border-zinc-800 hover:border-zinc-700 text-zinc-400"
                           }`}
                         >
                           <div className={`flex justify-center items-center w-4 h-4 border rounded-md shrink-0 ${
                             isActive
-                              ? "bg-[#F4F3EC] border-[#F4F3EC] text-zinc-900"
+                              ? "bg-brand-green-accent border-brand-green-accent text-white"
                               : "border-zinc-750"
                           }`}>
                             {isActive && <Check className="w-2.5 h-2.5" strokeWidth={3} />}
@@ -315,13 +315,13 @@ export function AdvancedFilterModal({
                           onClick={() => handleRuleToggle(rule)}
                           className={`flex items-center gap-2 px-3 py-2 border rounded-xl text-xs font-medium transition-all cursor-pointer text-left ${
                             isActive
-                              ? "bg-[#F4F3EC]/10 border-[#F4F3EC] text-[#F4F3EC]"
+                              ? "bg-brand-green-accent/10 border-brand-green-accent text-white"
                               : "bg-zinc-950/20 border-zinc-800 hover:border-zinc-700 text-zinc-400"
                           }`}
                         >
                           <div className={`flex justify-center items-center w-4 h-4 border rounded-md shrink-0 ${
                             isActive
-                              ? "bg-[#F4F3EC] border-[#F4F3EC] text-zinc-900"
+                              ? "bg-brand-green-accent border-brand-green-accent text-white"
                               : "border-zinc-750"
                           }`}>
                             {isActive && <Check className="w-2.5 h-2.5" strokeWidth={3} />}
@@ -348,7 +348,7 @@ export function AdvancedFilterModal({
               
               <button
                 onClick={onClose}
-                className="flex-1 py-3 text-xs font-bold bg-[#F4F3EC] hover:bg-white text-zinc-900 rounded-full shadow-lg transition-colors cursor-pointer text-center"
+                className="flex-1 py-3 text-xs font-bold bg-brand-green-accent hover:bg-brand-green-hover text-white border border-brand-green-accent rounded-full shadow-lg transition-colors cursor-pointer text-center"
               >
                 Terapkan Hasil
               </button>

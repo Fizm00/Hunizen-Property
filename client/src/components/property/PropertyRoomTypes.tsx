@@ -41,7 +41,7 @@ export default function PropertyRoomTypes({
 
               <button
                 onClick={() => onSelectRoomTypeAndBook(rt)}
-                className="w-full py-1.5 bg-[#09090B] hover:bg-zinc-800 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                className="w-full py-1.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
               >
                 Ajukan Sewa
               </button>

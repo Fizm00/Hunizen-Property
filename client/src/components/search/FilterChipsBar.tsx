@@ -26,7 +26,7 @@ export function FilterChipsBar({
   const periods: PeriodFilter[] = ["Semua Periode", "Bulanan", "Harian"];
 
   return (
-    <div className="sticky top-20 z-20 flex justify-between items-center px-4 md:px-8 w-full h-14 bg-[#09090B] border-b border-zinc-800/40 overflow-x-auto shrink-0 scrollbar-none gap-3">
+    <div className="sticky top-20 z-20 flex justify-between items-center px-4 md:px-8 w-full h-14 bg-brand-green border-b border-brand-green-accent/40 overflow-x-auto shrink-0 scrollbar-none gap-3">
       
       {/* Search bar specifically for mobile screens */}
       <div className="flex sm:hidden items-center px-3 py-1.5 w-full max-w-[200px] bg-zinc-900 border border-zinc-800 rounded-full">
@@ -48,7 +48,7 @@ export function FilterChipsBar({
             onClick={() => setActiveGender(gender)}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 cursor-pointer ${
               activeGender === gender
-                ? "bg-[#F4F3EC] text-zinc-900 border-[#F4F3EC]"
+                ? "bg-brand-green-accent text-white border-brand-green-accent shadow-sm"
                 : "bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white"
             }`}
           >
@@ -65,7 +65,7 @@ export function FilterChipsBar({
             onClick={() => setActivePeriod(period)}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 cursor-pointer ${
               activePeriod === period
-                ? "bg-[#F4F3EC] text-zinc-900 border-[#F4F3EC]"
+                ? "bg-brand-green-accent text-white border-brand-green-accent shadow-sm"
                 : "bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white"
             }`}
           >

@@ -29,7 +29,7 @@ import heroBg from "../assets/hero_bg_indoor_kost.png";
 
 /* ─── Navbar ─── */
 
-export const NAV_ITEMS = ["Tentang Kami", "Fasilitas", "FAQ", "Kontak"] as const;
+export const NAV_ITEMS = ["Kost & Kontrakan", "Tentang Kami", "FAQ", "Kontak"] as const;
 
 /* ─── Hero Search Filters ─── */
 
@@ -396,7 +396,7 @@ export const PROPERTY_DETAILS_DB: Record<string, Omit<PropertyDetail, keyof Sear
         avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=John",
         name: "John Doberman",
         date: "Mar 12 2026",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+        content: "Kamar sangat bersih, fasilitas lengkap sesuai dengan foto di aplikasi. Lokasi strategis dekat minimarket dan area kuliner. Sangat recommended!",
         rating: 5
       },
       {

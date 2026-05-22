@@ -43,7 +43,7 @@ export default function TenantInfoForm({
         {/* Full Name */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Nama Lengkap</label>
-          <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-[#09090B] transition-colors ${errors.name ? "border-red-400" : "border-slate-200"}`}>
+          <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors ${errors.name ? "border-red-400" : "border-slate-200"}`}>
             <User className="w-4.5 h-4.5 text-slate-400 mr-2.5 shrink-0" />
             <input
               type="text"
@@ -59,7 +59,7 @@ export default function TenantInfoForm({
         {/* WhatsApp Phone */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Nomor WhatsApp</label>
-          <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-[#09090B] transition-colors ${errors.phone ? "border-red-400" : "border-slate-200"}`}>
+          <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors ${errors.phone ? "border-red-400" : "border-slate-200"}`}>
             <Phone className="w-4.5 h-4.5 text-slate-400 mr-2.5 shrink-0" />
             <input
               type="text"
@@ -86,7 +86,7 @@ export default function TenantInfoForm({
                     ? "bg-zinc-900 border-zinc-900 text-zinc-300 pointer-events-none cursor-default"
                     : "bg-zinc-50 border-zinc-200 text-zinc-400 opacity-40 pointer-events-none cursor-not-allowed"
                   : gender === "Laki-laki"
-                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm cursor-pointer hover:bg-zinc-800"
+                  ? "bg-brand-green border-brand-green text-white shadow-sm cursor-pointer hover:bg-brand-green-hover"
                   : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 cursor-pointer"
               }`}
             >
@@ -102,7 +102,7 @@ export default function TenantInfoForm({
                     ? "bg-zinc-900 border-zinc-900 text-zinc-300 pointer-events-none cursor-default"
                     : "bg-zinc-50 border-zinc-200 text-zinc-400 opacity-40 pointer-events-none cursor-not-allowed"
                   : gender === "Perempuan"
-                  ? "bg-[#09090B] border-[#09090B] text-white shadow-sm cursor-pointer hover:bg-zinc-800"
+                  ? "bg-brand-green border-brand-green text-white shadow-sm cursor-pointer hover:bg-brand-green-hover"
                   : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 cursor-pointer"
               }`}
             >
@@ -120,7 +120,7 @@ export default function TenantInfoForm({
         {/* Occupation */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Pekerjaan</label>
-          <div className="flex items-center h-12 px-4 border border-slate-200 rounded-xl bg-slate-50/30 focus-within:border-[#09090B] transition-colors relative">
+          <div className="flex items-center h-12 px-4 border border-slate-200 rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors relative">
             <Briefcase className="w-4.5 h-4.5 text-slate-400 mr-2.5 shrink-0" />
             <select
               value={occupation}

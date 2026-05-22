@@ -91,7 +91,7 @@ export default function SuccessReceipt({
             <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">
               Pengajuan Sewa Berhasil!
             </h2>
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+            <div className="w-8 h-8 rounded-full bg-brand-green-light flex items-center justify-center text-brand-green shrink-0">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function SuccessReceipt({
               <span className={`px-3 py-0.5 rounded-full text-[11px] font-bold ${
                 paymentMethod === "cod" 
                   ? "bg-amber-500/10 text-amber-600 border border-amber-500/20" 
-                  : "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
+                  : "bg-brand-green-vibrant/10 text-brand-green-vibrant border border-brand-green-vibrant/20"
               }`}>
                 {paymentMethod === "cod" ? "Menunggu Pembayaran" : "Lunas"}
               </span>
@@ -140,7 +140,7 @@ export default function SuccessReceipt({
           <div>
             <Link
               to="/"
-              className="px-10 py-3.5 bg-[#09090B] hover:bg-zinc-800 text-white text-xs font-bold rounded-full transition-all inline-block shadow-md active:scale-95 text-center cursor-pointer border-0 mt-6"
+              className="px-10 py-3.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-full transition-all inline-block shadow-md active:scale-95 text-center cursor-pointer border-0 mt-6"
             >
               Home
             </Link>
@@ -221,7 +221,7 @@ export default function SuccessReceipt({
             {/* Total */}
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-800 uppercase tracking-wider">Total Pembayaran</span>
-              <span className="text-base font-black text-[#09090B]">{formatIDR(totalPayment)}</span>
+              <span className="text-base font-black text-brand-green">{formatIDR(totalPayment)}</span>
             </div>
           </div>
 
@@ -230,7 +230,7 @@ export default function SuccessReceipt({
             <button
               type="button"
               onClick={() => window.print()}
-              className="flex-1 py-3.5 border border-slate-200 hover:border-[#09090B] hover:text-[#09090B] text-slate-600 text-xs font-bold rounded-full transition-all text-center cursor-pointer bg-white"
+              className="flex-1 py-3.5 border border-slate-200 hover:border-brand-green hover:text-brand-green text-slate-600 text-xs font-bold rounded-full transition-all text-center cursor-pointer bg-white"
             >
               Cetak
             </button>
@@ -240,7 +240,7 @@ export default function SuccessReceipt({
               )}.%20Mohon%20untuk%20segera%20dikonfirmasi.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3.5 bg-[#09090B] hover:bg-zinc-800 text-white text-xs font-bold rounded-full transition-all text-center shadow-md active:scale-98 cursor-pointer border-0 block"
+              className="flex-1 py-3.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-full transition-all text-center shadow-md active:scale-98 cursor-pointer border-0 block"
             >
               Chat Pemilik
             </a>
