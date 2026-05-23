@@ -1,41 +1,48 @@
-/* ─── Contact Page Constants ─── */
+/* ─── Konstanta Halaman Kontak ─── */
 
 export const CONTACT_HERO = {
-  tag: "Hubungi Kami",
-  title: "Contact Us",
-  desc: "Sampaikan kebutuhan hunian Anda dan tim kami akan merespons dalam waktu 24 jam untuk membantu Anda menemukan kost atau kontrakan terbaik.",
+  tag: "Rencanakan Kunjungan",
+  title: "Hubungi Kami",
+  desc: "Sampaikan kebutuhan kunjungan Anda dan tim kami akan menghubungi Anda dalam waktu 24 jam untuk mengonfirmasi jadwal.",
 };
 
 export const CONTACT_FORM_FIELDS = {
-  name: { label: "Nama Lengkap", placeholder: "Nama lengkap Anda" },
-  email: { label: "Email", placeholder: "email@contoh.com" },
-  phone: { label: "Nomor Telepon", placeholder: "+62 812 3456 7890" },
-  type: {
-    label: "Tipe Kebutuhan",
-    placeholder: "Pilih tipe kebutuhan...",
+  name: {
+    label: "Nama Lengkap",
+    placeholder: "Nama lengkap Anda",
+  },
+  email: {
+    label: "Email",
+    placeholder: "you@example.com",
+  },
+  phone: {
+    label: "Nomor Telepon",
+    placeholder: "+62 812 3456 7890",
+  },
+  service: {
+    label: "Pilih Layanan",
+    placeholder: "Pilih jenis layanan...",
     options: [
-      "Sewa Kost",
-      "Kontrakan",
-      "Kerjasama Bisnis",
+      "Sewa Kost Bulanan",
+      "Sewa Kontrakan Tahunan",
+      "Konsultasi Properti",
+      "Kunjungan Lokasi (Survey)",
       "Lainnya",
     ],
   },
-  city: { label: "Kota Tujuan", placeholder: "Pilih kota tujuan..." },
-  budget: {
-    label: "Budget",
-    placeholder: "Pilih rentang budget...",
-    options: [
-      "< Rp 500.000",
-      "Rp 500.000 – Rp 1.000.000",
-      "Rp 1.000.000 – Rp 2.000.000",
-      "> Rp 2.000.000",
-    ],
+  date: {
+    label: "Tanggal Kunjungan",
+    placeholder: "dd/mm/yyyy",
+  },
+  occupants: {
+    label: "Jumlah Penghuni",
+    placeholder: "misal: 1 orang, 2 orang...",
   },
   message: {
     label: "Pesan / Permintaan Khusus",
     placeholder: "Ada hal lain yang ingin Anda sampaikan?",
   },
-  submitLabel: "Kirim Pesan",
+  submitLabel: "Jadwalkan Kunjungan",
 };
 
 export const CONTACT_INFO_CARDS = [
@@ -47,19 +54,19 @@ export const CONTACT_INFO_CARDS = [
   {
     id: "hours",
     title: "Jam Operasional",
-    lines: ["Senin – Sabtu: 08.00 – 17.00", "Minggu: Libur"],
+    lines: ["Setiap Hari: 08:00 – 17:00", "Minggu: Libur"],
   },
   {
     id: "email",
-    title: "Tulis ke Kami",
-    lines: ["info@hunizen.com", "support@hunizen.com"],
+    title: "Email Kami",
+    lines: ["info@hunizen.com", "booking@hunizen.com"],
   },
 ];
 
 export const CONTACT_CTA = {
-  tag: "Mulai Sekarang",
+  tag: "Mulai sekarang",
   title: "Temukan hunian",
-  titleItalic: "impian",
-  titleEnd: "Anda",
-  desc: "Cari kost atau kontrakan yang tepat dalam hitungan menit dan nikmati setiap momen tinggal Anda.",
+  titleItalic: "terbaik",
+  titleEnd: "impian Anda",
+  desc: "Temukan hunian terbaik Anda dalam hitungan menit dan nikmati kenyamanan tinggal bersama Hunizen.",
 };

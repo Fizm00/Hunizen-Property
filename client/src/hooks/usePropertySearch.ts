@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { propertyService } from "../services/propertyService";
 import type { SearchKostCard } from "../types";
 
@@ -10,18 +11,89 @@ export type MobileLayoutView = "list" | "map";
 export function usePropertySearch() {
   const [properties, setProperties] = useState<SearchKostCard[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeGender, setActiveGender] = useState<GenderFilter>("Semua Tipe");
+  const location = useLocation();
+
+  // Parse initial query params from URL on mount
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+
+  const [searchQuery, setSearchQuery] = useState<string>(() => {
+    return searchParams.get("query") || searchParams.get("location") || "";
+  });
+  const [urlLocation, setUrlLocation] = useState<string>(() => {
+    return searchParams.get("query") ? (searchParams.get("location") || "") : "";
+  });
+  const [activeGender, setActiveGender] = useState<GenderFilter>(() => {
+    const type = searchParams.get("type");
+    if (type === "Putra" || type === "Putri" || type === "Campur") return type;
+    return "Semua Tipe";
+  });
   const [activePeriod, setActivePeriod] = useState<PeriodFilter>("Semua Periode");
-  const [activeFacilities, setActiveFacilities] = useState<string[]>([]);
-  const [minPrice, setMinPrice] = useState<number>(0);
-  const [maxPrice, setMaxPrice] = useState<number>(20000000);
-  const [activeRules, setActiveRules] = useState<string[]>([]);
+  const [activeFacilities, setActiveFacilities] = useState<string[]>(() => {
+    const facilities = searchParams.get("facilities");
+    return facilities ? [facilities] : [];
+  });
+  const [minPrice, setMinPrice] = useState<number>(() => {
+    const min = searchParams.get("minPrice");
+    return min ? Number(min) : 0;
+  });
+  const [maxPrice, setMaxPrice] = useState<number>(() => {
+    const max = searchParams.get("maxPrice");
+    return max ? Number(max) : 20000000;
+  });
+  const [activeRules, setActiveRules] = useState<string[]>(() => {
+    const rules = searchParams.get("rules");
+    return rules ? [rules] : [];
+  });
   const [activeSort, setActiveSort] = useState<SortFilter>("rekomendasi");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false);
   const [mobileView, setMobileView] = useState<MobileLayoutView>("list");
   const [hoveredPropertyId, setHoveredPropertyId] = useState<string | null>(null);
   const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
+
+  // Track location.search during render to sync URL changes to state without an effect
+  const [prevSearch, setPrevSearch] = useState(location.search);
+
+  if (location.search !== prevSearch) {
+    setPrevSearch(location.search);
+    const params = new URLSearchParams(location.search);
+    
+    const q = params.get("query");
+    const loc = params.get("location");
+    if (q !== null) {
+      setSearchQuery(q);
+      setUrlLocation(loc || "");
+    } else if (loc !== null) {
+      setSearchQuery(loc);
+      setUrlLocation("");
+    }
+    
+    const type = params.get("type");
+    if (type === "Putra" || type === "Putri" || type === "Campur") {
+      setActiveGender(type);
+    } else if (type === "") {
+      setActiveGender("Semua Tipe");
+    }
+    
+    const facilities = params.get("facilities");
+    if (facilities !== null) {
+      setActiveFacilities(facilities ? [facilities] : []);
+    }
+    
+    const rules = params.get("rules");
+    if (rules !== null) {
+      setActiveRules(rules ? [rules] : []);
+    }
+    
+    const minPrice = params.get("minPrice");
+    if (minPrice !== null) {
+      setMinPrice(Number(minPrice));
+    }
+    
+    const maxPrice = params.get("maxPrice");
+    if (maxPrice !== null) {
+      setMaxPrice(Number(maxPrice));
+    }
+  }
 
   // Load properties asynchronously on mount
   useEffect(() => {
@@ -56,6 +128,14 @@ export function usePropertySearch() {
         const matchesTitle = item.title.toLowerCase().includes(query);
         const matchesLocation = item.location.toLowerCase().includes(query);
         if (!matchesTitle && !matchesLocation) return false;
+      }
+
+      // 1b. Extra URL Location Filter (if query was also used)
+      if (urlLocation.trim() !== "") {
+        const locFilter = urlLocation.toLowerCase();
+        if (!item.location.toLowerCase().includes(locFilter)) {
+          return false;
+        }
       }
 
       // 2. Gender Type Filter
@@ -101,7 +181,7 @@ export function usePropertySearch() {
       // "rekomendasi"
       return [...filtered].sort((a, b) => b.rating - a.rating);
     }
-  }, [properties, searchQuery, activeGender, activePeriod, activeFacilities, minPrice, maxPrice, activeRules, activeSort]);
+  }, [properties, searchQuery, urlLocation, activeGender, activePeriod, activeFacilities, minPrice, maxPrice, activeRules, activeSort]);
 
   // Selected property details
   const selectedProperty = useMemo<SearchKostCard | null>(() => {
@@ -148,6 +228,7 @@ export function usePropertySearch() {
     setActiveRules([]);
     setActiveSort("rekomendasi");
     setSearchQuery("");
+    setUrlLocation("");
   }, []);
 
   return {

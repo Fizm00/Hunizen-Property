@@ -11,36 +11,32 @@ export default function ContactHero() {
       </div>
 
       {/* Content — pushed down below the solid navbar strip */}
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-        {/* Left: Tag + Heading */}
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pt-36 pb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        {/* Left: Tag Badge + Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-2.5"
         >
-          <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
+          {/* Plan Visit Pill Badge */}
+          <span className="inline-flex items-center bg-slate-100 text-slate-800 text-[11px] font-medium px-4 py-1.5 rounded-full self-start tracking-wide uppercase">
             {CONTACT_HERO.tag}
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
+          <h1 className="text-5xl sm:text-6xl md:text-[5.5rem] font-bold text-slate-900 tracking-tight leading-[1.02]">
             {CONTACT_HERO.title}
           </h1>
         </motion.div>
 
-        {/* Right: Description */}
+        {/* Right: Description (left-aligned text, but positioned in the right column, aligned bottom-wards) */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="text-slate-500 text-sm font-light leading-relaxed max-w-sm md:text-right"
+          className="text-slate-500 text-[13px] md:text-sm font-light leading-relaxed max-w-xs md:max-w-sm text-left md:self-end md:pb-2.5"
         >
           {CONTACT_HERO.desc}
         </motion.p>
-      </div>
-
-      {/* Divider */}
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-12">
-        <div className="border-t border-slate-100" />
       </div>
     </section>
   );
