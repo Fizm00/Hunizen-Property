@@ -11,6 +11,8 @@ import RegisterPage from "./pages/RegisterPage";
 import AboutPage from "./pages/AboutPage";
 import FaqPage from "./pages/FaqPage";
 import ContactPage from "./pages/ContactPage";
+import ProfilePage from "./pages/ProfilePage";
+import InvoicePage from "./pages/InvoicePage";
 
 function App() {
   useLenis();
@@ -26,6 +28,8 @@ function App() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/faq" element={<FaqPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/invoice/:id" element={<InvoicePage />} />
     </Routes>
   );
 }

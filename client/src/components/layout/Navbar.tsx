@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "../../constants";
 import { toSlug } from "../../utils/formatters";
+import defaultAvatar from "../../assets/default_user_avatar.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setIsOpen(false);
+
+  const [user] = useState<{ name: string } | null>(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
 
   return (
     <>
@@ -85,13 +91,26 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Login Button */}
-          <Link
-            to="/login"
-            className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black text-sm font-semibold px-5 md:px-6 py-2 md:py-2.5 rounded-full transition-all duration-300"
-          >
-            Masuk
-          </Link>
+          {/* User Profile Avatar / Login Button */}
+          {user ? (
+            <Link to="/profile" className="flex items-center gap-2 group">
+              <img
+                src={defaultAvatar}
+                alt="User Profile"
+                className="w-9 h-9 rounded-full object-cover border border-white/20 group-hover:border-white transition-colors"
+              />
+              <span className="hidden lg:inline text-xs font-semibold text-white/95 group-hover:text-white transition-colors">
+                {user.name}
+              </span>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black text-sm font-semibold px-5 md:px-6 py-2 md:py-2.5 rounded-full transition-all duration-300"
+            >
+              Masuk
+            </Link>
+          )}
 
           {/* Hamburger (Mobile) */}
           <button
@@ -176,13 +195,24 @@ export default function Navbar() {
                   </a>
                 );
               })}
-              <Link
-                to="/login"
-                onClick={closeMenu}
-                className="mt-4 bg-white text-black text-base font-bold px-8 py-3 rounded-full shadow-lg text-center"
-              >
-                Masuk ke Akun
-              </Link>
+              {user ? (
+                <Link
+                  to="/profile"
+                  onClick={closeMenu}
+                  className="mt-4 flex items-center gap-3 bg-white/10 border border-white/20 text-white text-base font-bold px-8 py-3 rounded-full shadow-lg text-center"
+                >
+                  <img src={defaultAvatar} alt="User Avatar" className="w-6 h-6 rounded-full object-cover" />
+                  <span>Profil Saya</span>
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="mt-4 bg-white text-black text-base font-bold px-8 py-3 rounded-full shadow-lg text-center"
+                >
+                  Masuk ke Akun
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

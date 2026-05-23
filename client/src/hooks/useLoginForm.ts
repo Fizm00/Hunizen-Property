@@ -37,7 +37,8 @@ export function useLoginForm() {
     try {
       const response = await authService.login({ phone, password });
       
-      if (response.success) {
+      if (response.success && response.user) {
+        localStorage.setItem("user", JSON.stringify(response.user));
         navigate("/");
       } else {
         setError(response.error || "Gagal masuk. Silakan periksa kembali kredensial Anda.");
@@ -55,6 +56,12 @@ export function useLoginForm() {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1200));
+      localStorage.setItem("user", JSON.stringify({
+        id: "usr-google",
+        name: "User Google",
+        phone: "+6281234567890",
+        email: "user.google@email.com",
+      }));
       navigate("/");
     } catch (err) {
       console.error("Google login failure:", err);
