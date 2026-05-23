@@ -2,8 +2,12 @@ import { Play, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
 import { CTA_VIDEO_CARDS } from "../../constants";
 import { staggerContainer, itemScaleUp, scrollViewport, sectionTransition } from "../../lib/animations";
+import ctaBg from "../../assets/hero_bg_waterfront.png";
+import { useNavigate } from "react-router-dom";
 
 export default function CTA() {
+  const navigate = useNavigate();
+
   return (
     <section className="w-full bg-white py-16 px-6 md:px-12 flex flex-col items-center justify-center">
 
@@ -15,6 +19,16 @@ export default function CTA() {
         transition={sectionTransition()}
         className="w-full max-w-7xl bg-brand-green rounded-[2.5rem] md:rounded-[4rem] px-6 md:px-16 py-20 md:py-24 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl border border-emerald-950/40"
       >
+        {/* Background Image with overlay mix */}
+        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+          <img
+            src={ctaBg}
+            alt="Waterfront House Aksen"
+            className="w-full h-full object-cover opacity-30 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-green/30 via-transparent to-brand-green/70" />
+        </div>
+
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -35,13 +49,13 @@ export default function CTA() {
         </p>
 
         {/* CTA Button */}
-        <a
-          href="#cari"
+        <button
+          onClick={() => navigate("/search")}
           className="inline-flex items-center gap-2 bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-lg mb-20 text-sm z-10"
         >
           <Rocket className="w-4 h-4 fill-brand-green" />
           Cari Kost Sekarang
-        </a>
+        </button>
 
         {/* Video Preview Cards */}
         <motion.div
