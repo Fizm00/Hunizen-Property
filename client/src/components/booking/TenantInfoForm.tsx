@@ -40,7 +40,6 @@ export default function TenantInfoForm({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {/* Full Name */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Nama Lengkap</label>
           <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors ${errors.name ? "border-red-400" : "border-slate-200"}`}>
@@ -56,7 +55,6 @@ export default function TenantInfoForm({
           {errors.name && <span className="text-[10px] font-bold text-red-500 mt-0.5">{errors.name}</span>}
         </div>
 
-        {/* WhatsApp Phone */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Nomor WhatsApp</label>
           <div className={`flex items-center h-12 px-4 border rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors ${errors.phone ? "border-red-400" : "border-slate-200"}`}>
@@ -72,7 +70,6 @@ export default function TenantInfoForm({
           {errors.phone && <span className="text-[10px] font-bold text-red-500 mt-0.5">{errors.phone}</span>}
         </div>
 
-        {/* Gender */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Jenis Kelamin</label>
           <div className="flex gap-3">
@@ -117,7 +114,6 @@ export default function TenantInfoForm({
           )}
         </div>
 
-        {/* Occupation */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-extrabold text-slate-400 uppercase tracking-wide">Pekerjaan</label>
           <div className="flex items-center h-12 px-4 border border-slate-200 rounded-xl bg-slate-50/30 focus-within:border-brand-green transition-colors relative">

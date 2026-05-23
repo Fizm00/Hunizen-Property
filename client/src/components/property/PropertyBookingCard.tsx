@@ -20,7 +20,6 @@ export default function PropertyBookingCard({
 }: PropertyBookingCardProps) {
   return (
     <div className="hidden lg:block sticky top-28 bg-white border border-slate-100 rounded-3xl p-6 shadow-md flex-col gap-6">
-      {/* Pricing row */}
       <div className="flex justify-between items-end">
         <div>
           <span className="text-sm text-slate-400 font-bold block uppercase tracking-wider">
@@ -44,9 +43,7 @@ export default function PropertyBookingCard({
 
       <div className="h-px bg-slate-100 w-full" />
 
-      {/* Checkout Form */}
       <div className="flex flex-col gap-4">
-        {/* Date Picker */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
             Mulai Kos
@@ -62,7 +59,6 @@ export default function PropertyBookingCard({
           </div>
         </div>
 
-        {/* Duration select */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
             Durasi Sewa
@@ -82,7 +78,6 @@ export default function PropertyBookingCard({
         </div>
       </div>
 
-      {/* Call-to-actions */}
       <div className="flex flex-col gap-3.5 mt-2">
         <button
           onClick={handleBooking}
@@ -102,7 +97,6 @@ export default function PropertyBookingCard({
         </a>
       </div>
 
-      {/* Verifications guarantee info */}
       <div className="flex items-center gap-2 p-3 bg-brand-green-light rounded-xl text-brand-green text-xs font-bold border border-brand-green-accent/20">
         <ShieldCheck className="w-4.5 h-4.5 shrink-0" />
         <span>Pembayaran Anda aman. Jaminan uang kembali jika kost tidak sesuai.</span>

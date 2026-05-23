@@ -13,9 +13,8 @@ export default function FaqCta() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={scrollViewport}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-7xl rounded-[2rem] md:rounded-[3rem] overflow-hidden relative shadow-xl bg-zinc-950 border border-zinc-800/85 flex flex-col items-center justify-center text-center px-8 md:px-16 py-16 md:py-24 text-white"
+        className="w-full max-w-7xl rounded-4xl md:rounded-[3rem] overflow-hidden relative shadow-xl bg-zinc-950 border border-zinc-800/85 flex flex-col items-center justify-center text-center px-8 md:px-16 py-16 md:py-24 text-white"
       >
-        {/* Background Image with Dark Overlay (Aksen Gelap) */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <img 
             src={heroBgWaterfront} 
@@ -25,10 +24,8 @@ export default function FaqCta() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
         </div>
 
-        {/* Decorative blur glows */}
         <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-zinc-800/10 rounded-full blur-[80px] pointer-events-none" />
 
-        {/* Content Container */}
         <div className="relative z-10 flex flex-col items-center gap-5 max-w-2xl">
           <span className="text-zinc-400 font-black text-xs uppercase tracking-widest">
             Hubungi Kami
@@ -40,7 +37,6 @@ export default function FaqCta() {
             {FAQ_CTA_CONTENT.desc}
           </p>
           
-          {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-3">
             <a
               href="https://wa.me/628123456789"

@@ -8,7 +8,6 @@ export default function AboutTestimonial() {
     <section className="w-full py-24 px-6 md:px-12 bg-white flex justify-center border-t border-slate-100">
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        {/* Left Side Info */}
         <div className="lg:col-span-6 flex flex-col items-start gap-6">
           <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight leading-tight">
             {TESTIMONIAL_CONTENT.title}
@@ -17,12 +16,11 @@ export default function AboutTestimonial() {
             {TESTIMONIAL_CONTENT.desc}
           </p>
           
-          {/* Signature mockup */}
           <div className="mt-4 flex flex-col gap-1.5">
             <span className="font-serif italic font-light text-2xl tracking-wide text-brand-green/80 select-none">
               {TESTIMONIAL_CONTENT.signature.name}
             </span>
-            <div className="w-24 h-[1px] bg-slate-300" />
+            <div className="w-24 h-px bg-slate-300" />
             <span className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">
               {TESTIMONIAL_CONTENT.signature.role}
             </span>
@@ -36,14 +34,13 @@ export default function AboutTestimonial() {
           </button>
         </div>
 
-        {/* Right Side: Image with Overlapping Quote */}
         <div className="lg:col-span-6 relative flex items-center justify-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={scrollViewport}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-[500px] aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100 bg-slate-50"
+            className="relative w-full max-w-[500px] aspect-4/3 rounded-4xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-50"
           >
             <img 
               src={aboutAnalyticsDesk} 
@@ -53,7 +50,6 @@ export default function AboutTestimonial() {
             <div className="absolute inset-0 bg-slate-900/10 pointer-events-none" />
           </motion.div>
 
-          {/* Overlapping Quote Box - Bold border, sharp shadow */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -15,7 +15,6 @@ export default function Showcase() {
     <section className="w-full bg-white pb-20 px-6 md:px-12 flex flex-col items-center">
       <div className="w-full max-w-7xl">
 
-        {/* Banner: Dapatkan Potongan Admin */}
         <motion.div
           initial={{ y: 60, opacity: 0, filter: "blur(8px)" }}
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
@@ -23,14 +22,12 @@ export default function Showcase() {
           transition={sectionTransition()}
           className="w-full bg-brand-green rounded-4xl md:rounded-[3rem] flex flex-col md:flex-row overflow-hidden shadow-xl mb-24 relative md:max-h-[420px]"
         >
-          {/* Banner Left Image */}
           <div className="flex-1 relative min-h-[200px] md:min-h-full">
             <div className="absolute inset-0 bg-linear-to-r from-transparent via-brand-green/40 to-brand-green z-10 hidden md:block" />
             <div className="absolute inset-0 bg-linear-to-t from-transparent via-brand-green/40 to-brand-green z-10 block md:hidden" />
             <img src={adminPromoBg} alt="Promo Admin Illustration" className="w-full h-full object-cover" />
           </div>
 
-          {/* Banner Right Content */}
           <div className="flex-1 p-8 md:p-12 lg:p-14 flex flex-col justify-center items-start md:items-end text-left md:text-right z-10">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3">
               Dapatkan Potongan Admin!
@@ -47,10 +44,8 @@ export default function Showcase() {
           </div>
         </motion.div>
 
-        {/* Why Choose Us Grid */}
         <div className="w-full">
 
-          {/* Header */}
           <motion.div
             initial={{ y: 30, opacity: 0, filter: "blur(6px)" }}
             whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
@@ -71,10 +66,8 @@ export default function Showcase() {
             </div>
           </motion.div>
 
-          {/* Asymmetrical Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-            {/* Left Column: Big Card */}
             <motion.div
               variants={slideInLeft()}
               initial="hidden"
@@ -89,7 +82,6 @@ export default function Showcase() {
                 onToggle={() => toggleFavorite("security")}
               />
 
-              {/* Bottom Details Overlay */}
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl flex items-center justify-between z-10 border border-white/40">
                 <div className="flex flex-col max-w-[80%]">
                   <div className="flex items-center gap-2 mb-1.5">
@@ -106,7 +98,6 @@ export default function Showcase() {
               </div>
             </motion.div>
 
-            {/* Right Column: 2×2 Grid */}
             <motion.div
               variants={slideInRight()}
               initial="hidden"
@@ -130,7 +121,6 @@ export default function Showcase() {
                       size="sm"
                     />
 
-                    {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 z-10">
                       <div className="flex items-center gap-1.5 text-white mb-1">
                         <Icon className={`w-5 h-5 ${colorClass}`} />
@@ -139,7 +129,6 @@ export default function Showcase() {
                       <p className="text-[10px] text-slate-300 leading-normal">{item.desc}</p>
                     </div>
 
-                    {/* Default Bottom Banner */}
                     <div className="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl flex items-center gap-2 group-hover:opacity-0 transition-opacity duration-300 shadow-sm border border-white/20 z-10">
                       <Icon className={`w-5 h-5 ${colorClass}`} />
                       <span className="text-[11px] font-bold text-slate-700 truncate">{item.title}</span>

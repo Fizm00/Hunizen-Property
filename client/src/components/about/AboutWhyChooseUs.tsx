@@ -8,7 +8,6 @@ export default function AboutWhyChooseUs() {
     <section className="w-full py-24 px-6 md:px-12 bg-slate-50 flex justify-center border-y border-slate-100">
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        {/* Left Column */}
         <div className="lg:col-span-5 flex flex-col items-start gap-6">
           <span className="text-xs font-black text-brand-green uppercase tracking-widest">
             {WHY_CHOOSE_US_HEADER.tag}
@@ -27,7 +26,6 @@ export default function AboutWhyChooseUs() {
           </Link>
         </div>
 
-        {/* Right Column: 2x2 Cards Grid */}
         <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
           {WHY_CHOOSE_US_CARDS.map((card, idx) => {
             const IconComponent = card.Icon;
@@ -38,7 +36,7 @@ export default function AboutWhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={scrollViewport}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="bg-white p-7 rounded-[2rem] shadow-sm border border-slate-100/60 flex flex-col gap-4 hover:shadow-md transition-shadow"
+                className="bg-white p-7 rounded-4xl shadow-sm border border-slate-100/60 flex flex-col gap-4 hover:shadow-md transition-shadow"
               >
                 <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100/40">
                   <IconComponent className="w-5 h-5" />

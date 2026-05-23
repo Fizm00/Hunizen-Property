@@ -37,7 +37,6 @@ export default function RentParameters({
   return (
     <div className="bg-white border border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-6">
       
-      {/* Occupants Count Counter */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
         <div>
           <h3 className="text-sm font-black text-slate-800">Jumlah Penyewa</h3>
@@ -71,7 +70,6 @@ export default function RentParameters({
         </div>
       </div>
 
-      {/* Duration Counter */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
         <div>
           <h3 className="text-sm font-black text-slate-800">Durasi Ngekos</h3>
@@ -105,7 +103,6 @@ export default function RentParameters({
         </div>
       </div>
 
-      {/* Start Date Picker */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h3 className="text-sm font-black text-slate-800">Tanggal Mulai Ngekos</h3>
@@ -127,7 +124,6 @@ export default function RentParameters({
         </div>
       </div>
 
-      {/* Room Type Selector (Optional fallback) */}
       {property.roomTypes && property.roomTypes.length > 1 && (
         <div className="flex flex-col gap-2 pt-4 border-t border-slate-100">
           <h3 className="text-sm font-black text-slate-800">Tipe Kamar Terpilih</h3>
@@ -151,7 +147,6 @@ export default function RentParameters({
         </div>
       )}
 
-      {/* Urgency warning banner */}
       <div className="flex items-start gap-3 p-4 bg-amber-50/50 border border-amber-100 rounded-2xl mt-4">
         <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-xs text-amber-800 leading-relaxed font-semibold">

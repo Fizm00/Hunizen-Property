@@ -13,8 +13,6 @@ export function useLoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // Form Client-side Validations
     if (!phone.trim()) {
       setError("Nomor handphone wajib diisi");
       return;

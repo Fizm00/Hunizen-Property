@@ -29,7 +29,6 @@ export default function SuccessReceipt({
   paymentMethod
 }: SuccessReceiptProps) {
   
-  // Format today's date for transaction date
   const today = new Date();
   const transactionDate = today.toLocaleDateString("id-ID", {
     year: "numeric",
@@ -37,7 +36,6 @@ export default function SuccessReceipt({
     day: "numeric"
   });
 
-  // Format today's date and time for paid date
   const transactionTime = today.toLocaleTimeString("id-ID", {
     hour: "2-digit",
     minute: "2-digit"
@@ -45,7 +43,6 @@ export default function SuccessReceipt({
   
   const paidAtDate = `${transactionDate}, ${transactionTime} WIB`;
 
-  // Calculate checkout date based on start date and lease duration
   const getCheckOutDate = (startStr: string, months: number): string => {
     if (!startStr) return "";
     const date = new Date(startStr);
@@ -85,7 +82,6 @@ export default function SuccessReceipt({
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start w-full">
         
-        {/* Left Column: Transaction Details */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">
@@ -98,7 +94,6 @@ export default function SuccessReceipt({
           
           <div className="h-px bg-slate-200" />
 
-          {/* Details Table */}
           <div className="flex flex-col gap-4 text-sm font-semibold">
             <div className="flex justify-between items-center py-2.5 border-b border-slate-100">
               <span className="text-slate-400">No. Invoice</span>
@@ -147,11 +142,9 @@ export default function SuccessReceipt({
           </div>
         </div>
 
-        {/* Right Column: Card Summary */}
         <div className="lg:col-span-5 flex flex-col gap-5">
           <div className="bg-white border border-slate-200/60 rounded-3xl p-6 shadow-md flex flex-col gap-5 w-full">
             
-            {/* Property Info Row */}
             <div className="flex gap-4 items-start">
               <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-slate-100">
                 <img src={property.img} alt={property.title} className="w-full h-full object-cover" />
@@ -175,7 +168,6 @@ export default function SuccessReceipt({
 
             <div className="h-px bg-slate-100" />
 
-            {/* Informasi Sewa */}
             <div className="flex flex-col gap-3">
               <h5 className="font-black text-[11px] text-slate-800 uppercase tracking-wider">
                 Informasi sewa
@@ -204,7 +196,6 @@ export default function SuccessReceipt({
 
             <div className="h-px bg-slate-100" />
 
-            {/* Biaya */}
             <div className="flex flex-col gap-2.5 text-xs font-semibold text-slate-700">
               <div className="flex justify-between">
                 <span className="text-slate-400">Biaya sewa kos</span>
@@ -218,14 +209,12 @@ export default function SuccessReceipt({
 
             <div className="h-px bg-slate-100" />
 
-            {/* Total */}
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-800 uppercase tracking-wider">Total Pembayaran</span>
               <span className="text-base font-black text-brand-green">{formatIDR(totalPayment)}</span>
             </div>
           </div>
 
-          {/* Action Buttons Row */}
           <div className="flex gap-4 w-full">
             <button
               type="button"

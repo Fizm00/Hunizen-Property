@@ -23,7 +23,6 @@ export function ProfileBills() {
     window.open(`/invoice/${id}`, "_blank");
   };
 
-  // Filter bills
   const filteredBills = MOCK_BILLS_DATA.filter((bill: BillItem) => {
     const matchesSearch = bill.propertyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bill.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -35,7 +34,6 @@ export function ProfileBills() {
     return matchesSearch && matchesStatus;
   });
 
-  // Calculate totals
   const unpaidCount = MOCK_BILLS_DATA.filter((b) => b.status === "belum_bayar").length;
   const unpaidAmountVal = MOCK_BILLS_DATA
     .filter((b) => b.status === "belum_bayar")
@@ -60,8 +58,6 @@ export function ProfileBills() {
 
   return (
     <div className="flex flex-col gap-6">
-      
-      {/* 1. Header Title */}
       <div className="flex flex-col gap-1.5">
         <h3 className="font-extrabold text-slate-800 text-lg md:text-xl flex items-center gap-2">
           <Receipt className="w-5 h-5 text-brand-green" />
@@ -74,10 +70,8 @@ export function ProfileBills() {
 
       <div className="w-full h-px bg-slate-100" />
 
-      {/* 2. Flat Summary Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         
-        {/* Unpaid Bills Summary */}
         <div className="bg-amber-50 border border-amber-250 p-4.5 rounded-2xl flex flex-col gap-1.5">
           <span className="text-[10px] text-amber-800 font-bold uppercase tracking-wider flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
@@ -91,7 +85,6 @@ export function ProfileBills() {
           </div>
         </div>
 
-        {/* Paid Bills Summary */}
         <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl flex flex-col gap-1.5">
           <span className="text-[10px] text-slate-450 font-bold uppercase tracking-wider flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -107,11 +100,9 @@ export function ProfileBills() {
 
       </div>
 
-      {/* 3. Search and Filtering bar */}
       <div className="flex flex-col sm:flex-row gap-3 items-center">
         
-        {/* Search Input Box */}
-        <div className="relative w-full sm:flex-grow">
+        <div className="relative w-full sm:grow">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -122,7 +113,6 @@ export function ProfileBills() {
           />
         </div>
 
-        {/* Status Dropdown */}
         <div className="w-full sm:w-44 shrink-0">
           <select
             value={statusFilter}
@@ -137,7 +127,6 @@ export function ProfileBills() {
 
       </div>
 
-      {/* 4. Bills List Container */}
       <div className="flex flex-col gap-4">
         {filteredBills.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center p-12 border border-dashed border-slate-200 rounded-2xl bg-slate-50 gap-3">
@@ -150,8 +139,6 @@ export function ProfileBills() {
               key={bill.id}
               className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 transition-all hover:shadow-sm"
             >
-              
-              {/* Left Side: Invoice ID, Title, Room description, Due date */}
               <div className="flex-1 flex flex-col gap-2">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-[8px] font-black text-brand-green bg-brand-green-light px-1.5 py-0.5 rounded border border-brand-green/10 uppercase tracking-wider">
@@ -181,12 +168,10 @@ export function ProfileBills() {
                 </div>
               </div>
 
-              {/* Right Side: Status Badge, Amount & Actions */}
               <div className="flex flex-col items-end justify-between self-stretch md:self-auto gap-4 shrink-0 border-t border-slate-100 md:border-t-0 pt-4 md:pt-0">
                 
                 <div className="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-2">
                   
-                  {/* Status Badge */}
                   {bill.status === "belum_bayar" && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded text-[9px] font-bold">
                       <AlertCircle className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
@@ -200,14 +185,12 @@ export function ProfileBills() {
                     </span>
                   )}
 
-                  {/* Bill Amount */}
                   <span className="text-sm md:text-base font-extrabold text-slate-800">
                     {bill.amount}
                   </span>
 
                 </div>
 
-                {/* Actions group */}
                 <div className="flex gap-2 w-full justify-end">
                   {bill.status === "belum_bayar" ? (
                     <button

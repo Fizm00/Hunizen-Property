@@ -3,8 +3,6 @@ import type { FooterColumn } from "../../types";
 import { toSlug } from "../../utils/formatters";
 import { Link } from "react-router-dom";
 
-/* ─── Sub-Components ─── */
-
 interface LinkColumnProps {
   column: FooterColumn;
 }
@@ -69,8 +67,6 @@ function LinkColumn({ column }: LinkColumnProps) {
   );
 }
 
-/* ─── Main Component ─── */
-
 export default function Footer() {
   const standardColumns = FOOTER_COLUMNS.slice(0, 4);
   const companyColumn = FOOTER_COLUMNS[4];
@@ -79,21 +75,16 @@ export default function Footer() {
     <footer className="w-full bg-brand-green text-slate-400 pt-24 pb-12 px-6 md:px-12 flex flex-col items-center">
       <div className="w-full max-w-7xl">
 
-        {/* Grid Area */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-y-12 md:gap-x-12 mb-12">
 
-          {/* Left Area (Columns 1-4 + Brand and Social Media below) */}
           <div className="md:col-span-4 flex flex-col justify-between gap-12">
-            {/* Columns 1–4: Standard Link Columns */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-12 gap-x-6">
               {standardColumns.map((col) => (
                 <LinkColumn key={col.title} column={col} />
               ))}
             </div>
 
-            {/* Brand Logo/Name & Social Media Buttons */}
             <div className="flex flex-col gap-8 pt-8">
-              {/* Brand logo and name */}
               <div className="flex items-end gap-5 text-[#F4F3EC] leading-none select-none">
                 <svg
                   className="w-24 h-24 md:w-40 md:h-40 text-[#F4F3EC] opacity-90 mb-1 md:mb-3 shrink-0"
@@ -107,7 +98,6 @@ export default function Footer() {
                 </h1>
               </div>
 
-              {/* Social Media Buttons */}
               <div className="flex items-center gap-3">
                 <a
                   href="https://instagram.com"
@@ -160,13 +150,10 @@ export default function Footer() {
 
           </div>
 
-          {/* Right Area (Column 5: Company + Actions + Legal) */}
           <div className="flex flex-col gap-6 pr-4 justify-between min-h-[300px]">
 
-            {/* Company Links */}
             <LinkColumn column={companyColumn} />
 
-            {/* Action Buttons */}
             <div className="flex flex-col gap-2.5 mt-8 w-full">
               <a
                 href="#cari"
@@ -182,7 +169,6 @@ export default function Footer() {
               </a>
             </div>
 
-            {/* Legal Links */}
             <div className="flex flex-col gap-2.5 text-[10px] font-bold text-zinc-500 tracking-wider mt-8">
               {FOOTER_LEGAL_LINKS.map((link) => (
                 <a key={link} href={toSlug(link)} className="hover:text-slate-300 transition-colors">

@@ -5,21 +5,17 @@ import { CONTACT_HERO } from "../../constants/contact";
 export default function ContactHero() {
   return (
     <section className="relative w-full bg-white overflow-hidden">
-      {/* Transparent Navbar on Top — dark bg strip behind it */}
       <div className="absolute top-0 left-0 w-full h-20 bg-brand-green z-40">
         <Navbar />
       </div>
 
-      {/* Content — pushed down below the solid navbar strip */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pt-36 pb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-        {/* Left: Tag Badge + Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-2.5"
         >
-          {/* Plan Visit Pill Badge */}
           <span className="inline-flex items-center bg-slate-100 text-slate-800 text-[11px] font-medium px-4 py-1.5 rounded-full self-start tracking-wide uppercase">
             {CONTACT_HERO.tag}
           </span>
@@ -28,7 +24,6 @@ export default function ContactHero() {
           </h1>
         </motion.div>
 
-        {/* Right: Description (left-aligned text, but positioned in the right column, aligned bottom-wards) */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

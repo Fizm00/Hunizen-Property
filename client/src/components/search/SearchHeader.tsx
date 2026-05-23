@@ -15,7 +15,6 @@ export function SearchHeader({
   return (
     <header className="sticky top-0 z-30 flex justify-between items-center px-4 md:px-8 w-full h-20 bg-brand-green border-b border-brand-green-accent/60 shrink-0">
       
-      {/* Left Side: Logo */}
       <Link to="/" className="flex items-center gap-2 group shrink-0">
         <div className="text-[#F4F3EC] group-hover:text-white transition-colors">
           <Home className="w-6 h-6" strokeWidth={2.5} />
@@ -25,7 +24,6 @@ export function SearchHeader({
         </span>
       </Link>
 
-      {/* Center: Search input bar widget */}
       <div className="hidden sm:flex items-center px-4 py-1.5 gap-2 max-w-md w-full mx-4 bg-zinc-900 border border-zinc-800 rounded-full shadow-lg focus-within:border-brand-green-accent transition-all">
         <Search className="w-4 h-4 text-zinc-400 shrink-0" />
         <input
@@ -44,7 +42,6 @@ export function SearchHeader({
         </button>
       </div>
 
-      {/* Right Side: Quick navigation links */}
       <div className="flex items-center gap-6">
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
           <Link to="/" className="hover:text-white transition-colors">Tentang Kami</Link>

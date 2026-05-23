@@ -2,10 +2,6 @@ interface UnderlineTextProps {
   children: string;
 }
 
-/**
- * Renders text with the signature wavy SVG underline decoration.
- * Used consistently across section headers.
- */
 export default function UnderlineText({ children }: UnderlineTextProps) {
   return (
     <span className="relative inline-block text-brand-green">

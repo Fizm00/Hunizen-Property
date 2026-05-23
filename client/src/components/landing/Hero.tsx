@@ -20,7 +20,6 @@ export default function Hero() {
 
   const searchBarRef = useRef<HTMLDivElement>(null);
 
-  // Click outside detector using ref (safer, doesn't require transparent overlay)
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
@@ -35,7 +34,6 @@ export default function Hero() {
 
   return (
     <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <motion.img
           initial={{ scale: 1.15, opacity: 0 }}
@@ -48,9 +46,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/55" />
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center text-center mt-12 md:mt-16">
-        {/* Headline */}
         <motion.h1
           initial={{ y: 40, opacity: 0, filter: "blur(10px)" }}
           animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
@@ -61,7 +57,6 @@ export default function Hero() {
           <br className="hidden md:block" /> dengan Mudah dan Cepat!
         </motion.h1>
 
-        {/* "CARI?" label */}
         <motion.div
           initial={{ y: 20, opacity: 0, filter: "blur(6px)" }}
           animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
@@ -71,7 +66,6 @@ export default function Hero() {
           <span className="text-white text-2xl font-bold tracking-wide">CARI?</span>
         </motion.div>
 
-        {/* Search Bar Widget (Ref attached, no overlay needed) */}
         <motion.div
           ref={searchBarRef}
           initial={{ y: 50, opacity: 0, filter: "blur(8px)" }}
@@ -89,7 +83,7 @@ export default function Hero() {
                     e.stopPropagation();
                     setActiveDropdown(activeDropdown === filter.label ? null : filter.label);
                   }}
-                  className={`relative flex-grow-0 flex-shrink-0 ${filter.minWidth} flex flex-col items-start justify-center px-6 py-2.5 hover:bg-slate-50 rounded-2xl md:rounded-full transition-colors`}
+                  className={`relative grow-0 shrink-0 ${filter.minWidth} flex flex-col items-start justify-center px-6 py-2.5 hover:bg-slate-50 rounded-2xl md:rounded-full transition-colors`}
                 >
                   <span className="text-[10px] font-bold text-slate-800 tracking-wider uppercase">
                     {filter.label === "Location" ? "Lokasi" : filter.label}
@@ -102,7 +96,6 @@ export default function Hero() {
                     {selectedValue.text}
                   </span>
 
-                  {/* Dropdown Menu */}
                   {activeDropdown === filter.label && (
                     <div className="absolute top-full left-0 mt-2.5 w-60 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2.5 z-50 text-left">
                       {getOptionsFor(filter.label).map((option) => (
@@ -125,7 +118,6 @@ export default function Hero() {
               );
             })}
 
-            {/* Input Field for Custom Keyword Search */}
             <div className="hidden lg:flex flex-1 min-w-[150px] items-center px-6 py-2">
               <input
                 type="text"
@@ -137,7 +129,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Search Button */}
           <div className="pl-2 pr-1 w-full md:w-auto mt-2 md:mt-0 flex items-center justify-end">
             <button
               onClick={handleSearch}

@@ -26,7 +26,6 @@ export default function PropertySimilarList({
             onClick={() => navigate(`/property/${kost.id}`)}
             className="bg-white rounded-3xl overflow-hidden flex flex-col group hover:shadow-lg transition-all duration-300 border border-slate-100 p-2.5 cursor-pointer"
           >
-            {/* Image */}
             <div className="relative h-48 w-full overflow-hidden rounded-[1.25rem] bg-slate-100">
               <img
                 src={kost.img}
@@ -46,7 +45,6 @@ export default function PropertySimilarList({
               </span>
             </div>
 
-            {/* Info block */}
             <div className="p-4 flex flex-col grow justify-between">
               <div>
                 <div className="flex justify-between items-center text-[10px] font-bold text-slate-400">

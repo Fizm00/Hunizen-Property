@@ -21,9 +21,7 @@ export default function PropertyGallery({
 
   return (
     <>
-      {/* Grid Gallery Container */}
       <section className="relative w-full h-[320px] md:h-[480px] grid grid-cols-1 md:grid-cols-3 gap-3.5 rounded-[1.75rem] overflow-hidden bg-zinc-200">
-        {/* Main Large Image */}
         <div
           className="md:col-span-2 h-full overflow-hidden cursor-pointer relative"
           onClick={() => {
@@ -37,8 +35,6 @@ export default function PropertyGallery({
             className="w-full h-full object-cover hover:scale-[1.015] transition-transform duration-700"
           />
         </div>
-
-        {/* Sub Grid images (hidden on mobile, grid layout on desktop) */}
         <div className="hidden md:grid grid-rows-2 gap-3.5 h-full">
           <div className="grid grid-cols-2 gap-3.5">
             <div
@@ -101,7 +97,6 @@ export default function PropertyGallery({
           </div>
         </div>
 
-        {/* Mobile floating photo count badge */}
         <button
           onClick={() => setShowAllPhotos(true)}
           className="md:hidden absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5 shadow-lg cursor-pointer"
@@ -111,7 +106,6 @@ export default function PropertyGallery({
         </button>
       </section>
 
-      {/* Lightbox / Fullscreen Gallery Modal overlay */}
       <AnimatePresence>
         {showAllPhotos && (
           <motion.div
@@ -121,7 +115,6 @@ export default function PropertyGallery({
             data-lenis-prevent
             className="fixed inset-0 bg-black/98 z-50 flex flex-col justify-between p-6 select-none"
           >
-            {/* Top Close Row */}
             <div className="flex justify-between items-center w-full">
               <span className="text-sm font-bold text-zinc-400 tracking-wider">
                 Foto {activePhotoIdx + 1} dari {images.length}
@@ -134,7 +127,6 @@ export default function PropertyGallery({
               </button>
             </div>
 
-            {/* Slider Content */}
             <div className="flex items-center justify-between w-full h-[65vh] relative max-w-5xl mx-auto my-auto">
               <button
                 onClick={() =>
@@ -168,7 +160,6 @@ export default function PropertyGallery({
               </button>
             </div>
 
-            {/* Bottom thumbnail row */}
             <div className="flex items-center justify-center gap-3.5 overflow-x-auto py-4 max-w-2xl mx-auto w-full hide-scrollbar">
               {images.map((img, idx) => (
                 <div

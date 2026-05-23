@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-/**
- * Initialises Lenis smooth-scroll on mount and tears it down on unmount.
- * Call once at the app root (e.g. inside `App.tsx`).
- */
+
 export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({

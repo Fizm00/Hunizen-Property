@@ -96,8 +96,6 @@ export function ProfileVerification({
 
   return (
     <div className="flex flex-col gap-8 text-slate-800">
-      
-      {/* 1. Panel Email dan Nomor Handphone */}
       <div className="border border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h4 className="font-extrabold text-slate-800 text-sm md:text-base">
@@ -113,7 +111,6 @@ export function ProfileVerification({
 
         <div className="flex flex-col gap-4">
           
-          {/* Email Row */}
           <div className="flex items-center justify-between border border-slate-100 rounded-2xl p-4 bg-slate-50/50">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
@@ -136,7 +133,6 @@ export function ProfileVerification({
             </div>
           </div>
 
-          {/* Phone Row */}
           <div className="flex items-center justify-between border border-slate-100 rounded-2xl p-4 bg-slate-50/50">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
@@ -162,19 +158,16 @@ export function ProfileVerification({
         </div>
       </div>
 
-      {/* 2. Panel Verifikasi Identitas */}
       <div className="border border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col gap-6">
         <h4 className="font-extrabold text-slate-800 text-sm md:text-base">
           Verifikasi Identitas
         </h4>
 
-        {/* Gray Banner Description */}
         <div className="bg-slate-100 border-l-4 border-slate-400 p-4 rounded-r-2xl text-[11px] text-slate-500 leading-normal font-light">
           <p className="font-bold text-slate-700 mb-0.5">Lengkapi datamu agar proses pengajuan sewa lebih cepat.</p>
           <p>Kami berkomitmen sepenuhnya untuk melindungi informasi dan penggunaan data diri para pengguna kami.</p>
         </div>
 
-        {/* Jenis Identitas Select */}
         <div className="flex flex-col gap-2">
           <label className="text-xs font-bold text-slate-700">
             Jenis Identitas
@@ -191,7 +184,6 @@ export function ProfileVerification({
           </select>
         </div>
 
-        {/* Foto Identitas Upload boxes */}
         <div className="flex flex-col gap-2">
           <label className="text-xs font-bold text-slate-700">
             Unggah foto Identitas
@@ -199,7 +191,6 @@ export function ProfileVerification({
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
-            {/* Left Box: Kartu Identitas */}
             <div 
               onClick={() => idCardInputRef.current?.click()}
               className="border border-slate-200 hover:border-slate-350 bg-slate-50/50 hover:bg-slate-50 rounded-2xl p-6 h-36 flex flex-col items-center justify-center gap-2.5 cursor-pointer transition-all duration-200 relative overflow-hidden select-none"
@@ -227,7 +218,6 @@ export function ProfileVerification({
               />
             </div>
 
-            {/* Right Box: Foto Diri dengan Kartu Identitas */}
             <div 
               onClick={() => selfieInputRef.current?.click()}
               className="border border-slate-200 hover:border-slate-350 bg-slate-50/50 hover:bg-slate-50 rounded-2xl p-6 h-36 flex flex-col items-center justify-center gap-2.5 cursor-pointer transition-all duration-200 relative overflow-hidden select-none"
@@ -258,7 +248,6 @@ export function ProfileVerification({
           </div>
         </div>
 
-        {/* Agreement Checkbox */}
         <label className="flex items-start gap-2.5 cursor-pointer mt-2">
           <input
             type="checkbox"
@@ -272,7 +261,6 @@ export function ProfileVerification({
           </span>
         </label>
 
-        {/* Submit Simpan button */}
         <button
           type="button"
           onClick={handleVerifyIdentity}

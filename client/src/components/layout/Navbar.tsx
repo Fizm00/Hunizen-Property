@@ -19,7 +19,6 @@ export default function Navbar() {
     <>
       <nav className="absolute top-0 left-0 w-full bg-transparent px-6 md:px-12 py-6 flex items-center justify-between z-50">
 
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="text-white">
             <Home className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
@@ -29,10 +28,8 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Right Side */}
         <div className="flex items-center gap-4 md:gap-10">
 
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map((item) => {
               if (item === "Kost & Kontrakan") {
@@ -91,7 +88,6 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* User Profile Avatar / Login Button */}
           {user ? (
             <Link to="/profile" className="flex items-center gap-2 group">
               <img
@@ -112,7 +108,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Hamburger (Mobile) */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex md:hidden text-white p-1 hover:bg-white/10 rounded-lg transition-colors z-50"
@@ -124,7 +119,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

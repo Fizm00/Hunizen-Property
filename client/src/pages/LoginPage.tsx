@@ -13,10 +13,8 @@ export default function LoginPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-full bg-white font-sans text-slate-800 overflow-hidden">
       
-      {/* Left Pane: Login Form */}
       <div className="flex flex-col justify-center items-center px-6 py-12 sm:px-12 lg:px-20 relative w-full h-full bg-white">
         
-        {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -32,7 +30,6 @@ export default function LoginPage() {
           </Link>
         </motion.div>
  
-        {/* Form Container */}
         <motion.div
           variants={staggerContainer(0.05)}
           initial="hidden"
@@ -40,7 +37,6 @@ export default function LoginPage() {
           className="w-full max-w-md flex flex-col gap-8"
         >
           
-          {/* Header */}
           <motion.div variants={itemFadeUp(15, 0.5)} className="text-center md:text-left">
             <h1 className="text-3xl font-black text-slate-800 tracking-tight">
               Login ke Hunizen
@@ -50,7 +46,6 @@ export default function LoginPage() {
             </p>
           </motion.div>
  
-          {/* Form */}
           <motion.form onSubmit={handleLogin} variants={itemFadeUp(15, 0.5)} className="flex flex-col gap-4">
             {error && (
               <div className="p-3 bg-red-50 border border-red-100 rounded-2xl text-xs font-bold text-red-600">
@@ -58,7 +53,6 @@ export default function LoginPage() {
               </div>
             )}
  
-            {/* Phone Number Input */}
             <div className="flex flex-col gap-2">
               <label htmlFor="phone" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Nomor Handphone
@@ -79,7 +73,6 @@ export default function LoginPage() {
               </div>
             </div>
  
-            {/* Password Input */}
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <label htmlFor="password" className="text-xs font-black text-slate-700 uppercase tracking-wider">
@@ -116,7 +109,6 @@ export default function LoginPage() {
               </div>
             </div>
  
-            {/* Login Button */}
             <button
               type="submit"
               disabled={isLoading}
@@ -133,7 +125,6 @@ export default function LoginPage() {
             </button>
           </motion.form>
  
-          {/* Divider */}
           <motion.div variants={itemFadeUp(15, 0.5)} className="relative my-1">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-100"></div>
@@ -143,7 +134,6 @@ export default function LoginPage() {
             </div>
           </motion.div>
  
-          {/* Google Sign-In */}
           <motion.button
             variants={itemFadeUp(15, 0.5)}
             whileHover={{ scale: 1.01 }}
@@ -162,7 +152,6 @@ export default function LoginPage() {
             Login menggunakan Google
           </motion.button>
 
-          {/* Sign Up Prompt */}
           <motion.div variants={itemFadeUp(15, 0.5)} className="text-center mt-2">
             <p className="text-xs font-semibold text-slate-400">
               Belum punya akun Hunizen?{" "}
@@ -179,7 +168,6 @@ export default function LoginPage() {
 
       </div>
 
-      {/* Right Pane: Split Image (Visible on Large Screens Only) */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
@@ -194,7 +182,6 @@ export default function LoginPage() {
           alt="Hunizen Premium Bedroom"
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
         />
-        {/* Subtle top-left gradient overlay for soft shadows */}
         <div className="absolute inset-0 bg-linear-to-tr from-black/20 via-transparent to-transparent pointer-events-none" />
       </motion.div>
 

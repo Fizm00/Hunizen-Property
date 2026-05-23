@@ -3,14 +3,9 @@ import { Heart } from "lucide-react";
 interface FavoriteButtonProps {
   isFavorited: boolean;
   onToggle: () => void;
-  /** Tailwind size class — defaults to "w-11 h-11" (large) */
   size?: "sm" | "lg";
 }
 
-/**
- * Heart-shaped favourite toggle button with glassmorphic background.
- * Used in Showcase cards for both large and small variants.
- */
 export default function FavoriteButton({
   isFavorited,
   onToggle,

@@ -71,9 +71,8 @@ export function ProfileBiodata({
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        {/* Left Side: Avatar Upload Panel */}
         <div className="flex flex-col items-center gap-4">
-          <div className="relative w-48 h-48 rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm bg-slate-50 group">
+          <div className="relative w-48 h-48 rounded-4xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50 group">
             <img 
               src={avatarUrl} 
               alt="Avatar Preview" 
@@ -112,10 +111,8 @@ export function ProfileBiodata({
           </div>
         </div>
 
-        {/* Right Side: Form Inputs */}
         <div className="md:col-span-2 flex flex-col gap-4">
           
-          {/* Nama Lengkap */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Nama Lengkap
@@ -131,7 +128,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Jenis Kelamin */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Jenis Kelamin
@@ -151,7 +147,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Tanggal Lahir */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Tanggal Lahir
@@ -166,7 +161,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Pekerjaan */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Pekerjaan
@@ -187,7 +181,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Kota Asal */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Kota Asal
@@ -208,7 +201,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Status */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Status
@@ -229,7 +221,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Pendidikan Terakhir */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Pendidikan Terakhir
@@ -250,7 +241,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Nomor Kontak Darurat */}
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
             <label className="text-xs font-bold text-slate-600 sm:col-span-1">
               Nomor Kontak Darurat
@@ -266,7 +256,6 @@ export function ProfileBiodata({
             </div>
           </div>
 
-          {/* Save Button */}
           <div className="flex justify-end mt-4">
             <button
               type="submit"

@@ -6,8 +6,6 @@ import type { KostCard } from "../../types";
 import { staggerContainer, scrollViewport, sectionTransition } from "../../lib/animations";
 import UnderlineText from "../ui/UnderlineText";
 
-/* ─── Sub-Components ─── */
-
 interface SectionHeaderProps {
   prefix: string;
   highlight: string;
@@ -27,7 +25,6 @@ function SectionHeader({ prefix, highlight }: SectionHeaderProps) {
         <UnderlineText>{highlight}</UnderlineText>
       </h2>
 
-      {/* Slider Prev/Next Controls */}
       <div className="flex gap-2">
         {[ChevronLeft, ChevronRight].map((Icon, i) => (
           <button
@@ -41,8 +38,6 @@ function SectionHeader({ prefix, highlight }: SectionHeaderProps) {
     </motion.div>
   );
 }
-
-/* ─── Section Renderer ─── */
 
 interface PropertySectionProps {
   titlePrefix: string;
@@ -76,15 +71,12 @@ function PropertySection({ titlePrefix, titleHighlight, items, variant }: Proper
   );
 }
 
-/* ─── Main Component ─── */
-
 export default function PropertyList() {
   const { promo, recommended, loading } = useProperties();
 
   if (loading) {
     return (
       <section className="w-full bg-white py-16 px-6 md:px-12 flex flex-col items-center">
-        {/* Loading Promo skeleton */}
         <div className="w-full max-w-7xl mb-20 animate-pulse">
           <div className="h-10 w-72 bg-slate-100 rounded-xl mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

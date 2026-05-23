@@ -1,6 +1,4 @@
 import { CreditCard, Wallet, ShieldCheck, CheckCircle2 } from "lucide-react";
-
-// Import payment logos from assets
 import gopayLogo from "../../assets/paymentasset/gopay.svg";
 import shopeepayLogo from "../../assets/paymentasset/shoppeepay.svg";
 import danaLogo from "../../assets/paymentasset/dana.svg";
@@ -25,7 +23,6 @@ export default function PaymentForm({
   isSubmitting
 }: PaymentFormProps) {
   
-  // Logos using official SVGs provided in assets
   const logos: Record<string, React.ReactNode> = {
     gopay: <img src={gopayLogo} alt="GoPay" className="h-6 w-auto max-h-full object-contain filter brightness-95" />,
     shopeepay: <img src={shopeepayLogo} alt="ShopeePay" className="h-6.5 w-auto max-h-full object-contain" />,
@@ -66,7 +63,6 @@ export default function PaymentForm({
 
   return (
     <div className="bg-white border border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-6 w-full">
-      {/* Header section */}
       <div className="border-b border-slate-100 pb-4">
         <h2 className="text-lg font-black text-slate-800 flex items-center gap-2">
           <CreditCard className="w-5 h-5 text-black" />
@@ -76,7 +72,6 @@ export default function PaymentForm({
       </div>
 
       <div className="flex flex-col gap-6">
-        {/* E-Wallet Grid */}
         <div className="flex flex-col gap-3">
           <h3 className="text-xs font-black text-slate-500 uppercase tracking-wider">E-Wallet</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -114,7 +109,6 @@ export default function PaymentForm({
           </div>
         </div>
 
-        {/* M-Banking Grid */}
         <div className="flex flex-col gap-3">
           <h3 className="text-xs font-black text-slate-500 uppercase tracking-wider">M-Banking / Transfer Virtual Account</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -152,7 +146,6 @@ export default function PaymentForm({
           </div>
         </div>
 
-        {/* COD Option */}
         <div className="flex flex-col gap-3">
           <h3 className="text-xs font-black text-slate-500 uppercase tracking-wider">Bayar di Tempat</h3>
           <button
@@ -174,7 +167,6 @@ export default function PaymentForm({
         </div>
       </div>
 
-      {/* Guaranteed Secure Info */}
       <div className="flex items-center gap-2.5 p-3.5 bg-slate-50 border border-slate-100 rounded-2xl mt-2">
         <ShieldCheck className="w-4.5 h-4.5 text-zinc-500 shrink-0" />
         <span className="text-[10.5px] text-zinc-500 font-semibold leading-normal">
@@ -182,7 +174,6 @@ export default function PaymentForm({
         </span>
       </div>
 
-      {/* Submit Trigger Button */}
       <button
         type="button"
         onClick={onSubmit}

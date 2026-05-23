@@ -36,10 +36,8 @@ export default function ContactForm() {
 
   return (
     <section className="w-full bg-white pb-16 px-4 sm:px-6 md:px-8 lg:px-10 flex justify-center">
-      {/* Container Grid: Sibling elements side-by-side, NOT wrapped in a single card */}
       <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* ─── Left: Form Container Card (7 spans) ─── */}
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 30 }}
@@ -49,7 +47,6 @@ export default function ContactForm() {
           className="lg:col-span-7 bg-[#F4F7F5] rounded-[32px] p-6 sm:p-8 md:p-10 flex flex-col gap-6 justify-between"
         >
           <div className="flex flex-col gap-6">
-            {/* Row 1: Name + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <FormField
                 label={CONTACT_FORM_FIELDS.name.label}
@@ -66,7 +63,6 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Row 2: Phone + Select Service */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <FormField
                 label={CONTACT_FORM_FIELDS.phone.label}
@@ -84,7 +80,6 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Row 3: Preferred Date + Number of Occupants */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <DateField
                 label={CONTACT_FORM_FIELDS.date.label}
@@ -100,7 +95,6 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Row 4: Message */}
             <div className="flex flex-col">
               <label className="text-xs font-semibold text-slate-800 mb-1.5 block">
                 {CONTACT_FORM_FIELDS.message.label}
@@ -115,7 +109,6 @@ export default function ContactForm() {
             </div>
           </div>
 
-          {/* Submit Buttons (Side-by-side, locked to h-12 height) */}
           <div className="flex items-center gap-3 mt-4">
             <button
               type="submit"
@@ -133,7 +126,6 @@ export default function ContactForm() {
           </div>
         </motion.form>
 
-        {/* ─── Right: Portrait Image Card (5 spans) ─── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +139,6 @@ export default function ContactForm() {
             className="w-full h-full object-cover"
           />
 
-          {/* Overlay Badge - Hunian Impian (Solid Brand Green, No Glassmorphism) */}
           <div className="absolute top-6 right-6 bg-brand-green text-white text-[10px] font-bold tracking-widest uppercase py-2.5 px-4 rounded-full shadow-md">
             Hunian Impian
           </div>
@@ -157,8 +148,6 @@ export default function ContactForm() {
     </section>
   );
 }
-
-/* ─── Internal Sub-Components ─── */
 
 interface FormFieldProps {
   label: string;

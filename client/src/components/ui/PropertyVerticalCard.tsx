@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import type { KostCard, KostSpecs } from "../../types";
 import { itemFadeUp } from "../../lib/animations";
 
-/* ─── Sub-Components ─── */
-
 interface KostBadgeProps {
   variant: "promo" | "recom";
 }
@@ -45,8 +43,6 @@ function SpecsRow({ specs }: SpecsRowProps) {
   );
 }
 
-/* ─── Main Component ─── */
-
 interface PropertyVerticalCardProps {
   property: KostCard;
   variant: "promo" | "recom";
@@ -62,8 +58,7 @@ export function PropertyVerticalCard({ property, variant }: PropertyVerticalCard
       className="bg-white rounded-3xl overflow-hidden flex flex-col group border border-slate-100/60 p-2 cursor-pointer"
     >
       <Link to={`/property/${property.id}`} className="flex flex-col h-full w-full">
-        {/* Image Container */}
-        <div className="relative h-60 w-full overflow-hidden rounded-[1.5rem] bg-slate-100">
+        <div className="relative h-60 w-full overflow-hidden rounded-3xl bg-slate-100">
           <img
             src={property.img}
             alt={property.title}
@@ -73,8 +68,7 @@ export function PropertyVerticalCard({ property, variant }: PropertyVerticalCard
           <KostBadge variant={variant} />
         </div>
 
-        {/* Details Box */}
-        <div className="p-5 flex flex-col flex-grow">
+        <div className="p-5 flex flex-col grow">
           <span className="text-sm font-semibold text-slate-400 mb-1">
             {property.price}
           </span>
@@ -85,7 +79,7 @@ export function PropertyVerticalCard({ property, variant }: PropertyVerticalCard
             {property.location}
           </p>
           
-          <div className="w-full h-[1px] bg-slate-100 mb-4" />
+          <div className="w-full h-px bg-slate-100 mb-4" />
           
           <SpecsRow specs={property.specs} />
         </div>

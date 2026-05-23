@@ -78,7 +78,6 @@ export function ProfileMyKost() {
   return (
     <div className="flex flex-col gap-6">
       
-      {/* 1. Header Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-col gap-1.5">
           <h3 className="font-extrabold text-slate-800 text-lg md:text-xl flex items-center gap-2">
@@ -99,7 +98,6 @@ export function ProfileMyKost() {
 
       <div className="w-full h-px bg-slate-100" />
 
-      {/* 2. Lease Timeline Tracker */}
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div>
@@ -111,7 +109,6 @@ export function ProfileMyKost() {
           </span>
         </div>
         
-        {/* Flat Progress Bar */}
         <div className="relative w-full h-3 bg-slate-200 rounded-md overflow-hidden border border-slate-350">
           <div 
             className="absolute top-0 left-0 h-full bg-brand-green rounded-md transition-all duration-500"
@@ -135,13 +132,10 @@ export function ProfileMyKost() {
         </div>
       </div>
 
-      {/* 3. Main Details Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        {/* Left Side: Property Specs & Landlord Info (lg:col-span-5) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           
-          {/* Property Visual Card */}
           <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-3 flex flex-col gap-4">
             <div className="relative rounded-xl overflow-hidden">
               <img 
@@ -167,7 +161,6 @@ export function ProfileMyKost() {
 
               <div className="h-px bg-slate-100" />
 
-              {/* Room Specifications Table */}
               <div className="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-655">
                 <div className="bg-slate-50 border border-slate-200 p-2 rounded-lg flex flex-col gap-0.5">
                   <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Ukuran Kamar</span>
@@ -189,7 +182,6 @@ export function ProfileMyKost() {
 
               <div className="h-px bg-slate-100" />
 
-              {/* Room Facilities Tag List */}
               <div>
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1.5">Fasilitas Kamar</span>
                 <div className="flex flex-wrap gap-1">
@@ -208,7 +200,6 @@ export function ProfileMyKost() {
             </div>
           </div>
 
-          {/* Landlord Contact Box */}
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center font-extrabold shrink-0 border border-brand-green-accent">
@@ -231,10 +222,8 @@ export function ProfileMyKost() {
 
         </div>
 
-        {/* Right Side: Contract Info & Rules (lg:col-span-7) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           
-          {/* Contract Details Card */}
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
             <h5 className="font-extrabold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
               <FileText className="w-4 h-4 text-brand-green" />
@@ -281,7 +270,6 @@ export function ProfileMyKost() {
             </div>
           </div>
 
-          {/* Rules Card */}
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
             <h5 className="font-extrabold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-brand-green" />
@@ -308,7 +296,6 @@ export function ProfileMyKost() {
 
       </div>
 
-      {/* 4. Interactive Complaint / Maintenance Center */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
         
         <div className="flex flex-col gap-1">
@@ -323,7 +310,6 @@ export function ProfileMyKost() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-slate-100 pt-6">
           
-          {/* Left: Report Form (lg:col-span-5) */}
           <form onSubmit={handleSubmitComplaint} className="lg:col-span-5 flex flex-col gap-4">
             <h5 className="font-extrabold text-slate-800 text-xs sm:text-sm">
               Formulir Laporan Baru
@@ -387,7 +373,6 @@ export function ProfileMyKost() {
             </button>
           </form>
 
-          {/* Right: Complaints History List (lg:col-span-7) */}
           <div className="lg:col-span-7 flex flex-col gap-4 self-stretch">
             <h5 className="font-extrabold text-slate-800 text-xs sm:text-sm">
               Riwayat & Status Laporan Anda
@@ -422,7 +407,6 @@ export function ProfileMyKost() {
                         </span>
                       </div>
                       
-                      {/* Status Badge */}
                       {item.status === "selesai" && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[9px] font-bold">
                           <Check className="w-3 h-3 text-emerald-600 font-black" />

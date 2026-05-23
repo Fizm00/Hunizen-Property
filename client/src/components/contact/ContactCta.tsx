@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { CONTACT_CTA } from "../../constants/contact";
 import { scrollViewport } from "../../lib/animations";
-
-/* Asset imports for the side-by-side vertical photos */
 import propStaggered2 from "../../assets/prop_staggered_2.png";
 import propStaggered3 from "../../assets/prop_staggered_3.png";
 
@@ -21,14 +19,11 @@ export default function ContactCta() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-[1440px] bg-brand-green-light rounded-[32px] p-6 sm:p-8 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center"
       >
-        {/* ─── Left: Text Content ─── */}
         <div className="flex flex-col gap-5 items-start">
-          {/* Start Now Pill Badge */}
           <span className="inline-flex items-center bg-white text-slate-800 text-[11px] font-medium px-4 py-1.5 rounded-full tracking-wide uppercase shadow-xs">
             {CONTACT_CTA.tag}
           </span>
 
-          {/* Heading with Serif Italic Accent */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-slate-900 tracking-tight leading-[1.05] max-w-md">
             {CONTACT_CTA.title}
             <br />
@@ -38,13 +33,11 @@ export default function ContactCta() {
             {CONTACT_CTA.titleEnd}
           </h2>
 
-          {/* Description */}
           <p className="text-slate-500 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
             {CONTACT_CTA.desc}
           </p>
         </div>
 
-        {/* ─── Right: Side-by-side Vertical Images ─── */}
         <div className="grid grid-cols-2 gap-4 h-[280px] sm:h-[350px] lg:h-[400px]">
           {CTA_IMAGES.map((img, idx) => (
             <div

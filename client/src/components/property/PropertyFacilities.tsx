@@ -26,17 +26,9 @@ const getFacilityIcon = (name: string) => {
   if (f.includes("dapur") || f.includes("masak")) return Utensils;
   if (f.includes("tv")) return Tv;
   if (f.includes("laundry") || f.includes("cuci")) return Check;
-  
-  // Power / Electricity
   if (f.includes("listrik")) return Plug;
-  
-  // Security / Host guard
   if (f.includes("penjaga") || f.includes("keamanan") || f.includes("security")) return Shield;
-  
-  // Hot water
   if (f.includes("air panas") || f.includes("heater")) return Flame;
-  
-  // Bathroom / Bath
   if (f.includes("kamar mandi dalam") || f.includes("km dalam")) return Bath;
   if (f.includes("kloset") || f.includes("toilet")) return Toilet;
   if (f.includes("shower")) return ShowerHead;

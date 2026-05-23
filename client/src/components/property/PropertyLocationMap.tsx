@@ -11,7 +11,6 @@ interface PropertyLocationMapProps {
   nearbyPlaces: NearbyPlace[];
 }
 
-// Custom Leaflet Icons
 const propertyIcon = L.divIcon({
   html: `
     <div class="flex items-center justify-center w-10 h-10 bg-zinc-900 border-2 border-[#F4F3EC] rounded-full shadow-lg">
@@ -54,7 +53,6 @@ export default function PropertyLocationMap({
         </p>
       </div>
 
-      {/* Interactive Map Box */}
       <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden bg-zinc-100 relative z-10 border border-slate-100">
         <MapContainer
           center={latLng}
@@ -67,16 +65,13 @@ export default function PropertyLocationMap({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {/* Property Marker */}
           <Marker position={latLng} icon={propertyIcon}>
             <Popup className="font-sans">
               <span className="font-bold text-xs">{title}</span>
             </Popup>
           </Marker>
 
-          {/* Place Markers */}
           {nearbyPlaces.map((np, idx) => {
-            // Offset coordinates slightly to show them near the property
             const latOffset = idx === 0 ? 0.003 : idx === 1 ? -0.004 : 0.002;
             const lngOffset = idx === 0 ? -0.002 : idx === 1 ? 0.003 : 0.005;
             const markerLatLng: [number, number] = [
@@ -96,7 +91,6 @@ export default function PropertyLocationMap({
         </MapContainer>
       </div>
 
-      {/* Nearby Places Cards */}
       <div className="flex flex-col gap-3">
         <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wide">Tempat di sekitar</h4>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

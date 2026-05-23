@@ -6,11 +6,7 @@ import { propertyService } from "../services/propertyService";
 import type { PropertyDetail } from "../types";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-
-// Hooks
 import { useBookingForm } from "../hooks/useBookingForm";
-
-// Components
 import BookingSteps from "../components/booking/BookingSteps";
 import TenantInfoForm from "../components/booking/TenantInfoForm";
 import RentParameters from "../components/booking/RentParameters";
@@ -23,7 +19,6 @@ export default function BookingPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get initial values passed from the property detail page
   const routeState = location.state as {
     checkInDate?: string;
     duration?: string;
@@ -51,7 +46,6 @@ export default function BookingPage() {
     fetchProperty();
   }, [id]);
 
-  // Hook initialization (only runs when property is loaded)
   const hookOptions = {
     priceVal: property?.priceVal || 0,
     initialCheckInDate: routeState?.checkInDate,
@@ -99,7 +93,6 @@ export default function BookingPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 flex flex-col gap-6">
-        {/* Step & Breadcrumbs Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-6">
           <div className="flex items-center gap-3">
             {status.step < 3 && (
@@ -136,7 +129,6 @@ export default function BookingPage() {
             </div>
           </div>
 
-          {/* Progress Steps */}
           <BookingSteps currentStep={status.step} />
         </div>
 
@@ -150,10 +142,8 @@ export default function BookingPage() {
               transition={{ duration: 0.4 }}
               className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start w-full"
             >
-              {/* Form Section (Left Column) */}
               {status.step === 1 ? (
                 <form onSubmit={actions.handleSubmit} className="lg:col-span-2 flex flex-col gap-6">
-                  {/* 1. Tenant Info Form */}
                   <TenantInfoForm
                     name={formState.name}
                     setName={formState.setName}
@@ -168,7 +158,6 @@ export default function BookingPage() {
                     propertyType={status.propertyType}
                   />
 
-                  {/* 2. Room & Rent Parameters */}
                   <RentParameters
                     occupantsCount={formState.occupantsCount}
                     incrementOccupants={actions.incrementOccupants}
@@ -183,7 +172,6 @@ export default function BookingPage() {
                     property={property}
                   />
 
-                  {/* 3. Additional Notes Card */}
                   <div className="bg-white border border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-4">
                     <div>
                       <h2 className="text-sm font-black text-slate-800">Catatan Tambahan (Opsional)</h2>
@@ -198,7 +186,6 @@ export default function BookingPage() {
                     />
                   </div>
 
-                  {/* Lanjut ke Pembayaran Trigger Button */}
                   <button
                     type="submit"
                     className="w-full py-4 bg-brand-green hover:bg-brand-green-hover text-white text-sm font-bold rounded-full transition-all shadow-md active:scale-98 cursor-pointer border-0 mt-2 flex items-center justify-center gap-2"
@@ -217,7 +204,6 @@ export default function BookingPage() {
                 </div>
               )}
 
-              {/* Booking Summary Card (Right Column) */}
               <div className="lg:col-span-1">
                 <InvoiceSummary
                   property={property}
@@ -230,7 +216,6 @@ export default function BookingPage() {
 
             </motion.div>
           ) : (
-            /* SUCCESS SUBMITTED RECEIPT COMPONENT */
             <SuccessReceipt
               bookingId={status.bookingId}
               property={property}

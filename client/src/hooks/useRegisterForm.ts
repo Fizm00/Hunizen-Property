@@ -18,7 +18,6 @@ export function useRegisterForm() {
     e.preventDefault();
     setError("");
 
-    // Form Client-side Validations
     if (!name.trim()) {
       setError("Nama Lengkap wajib diisi");
       return;

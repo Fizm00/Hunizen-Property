@@ -12,10 +12,8 @@ interface FaqHeroProps {
 export default function FaqHero({ searchQuery, setSearchQuery }: FaqHeroProps) {
   return (
     <section className="relative w-full h-[450px] md:h-[500px] flex items-center justify-center bg-zinc-950 overflow-hidden px-6 text-center">
-      {/* Transparent Navbar on Top */}
       <Navbar />
 
-      {/* Background Image with Dark Overlay (Aksen Gelap) */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <img 
           src={aboutAnalyticsDesk} 
@@ -25,10 +23,8 @@ export default function FaqHero({ searchQuery, setSearchQuery }: FaqHeroProps) {
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
       </div>
 
-      {/* Decorative Blur Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-zinc-800/10 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Content Container */}
       <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center gap-5 mt-12">
         <motion.span 
           initial={{ opacity: 0, y: 15 }}
@@ -57,7 +53,6 @@ export default function FaqHero({ searchQuery, setSearchQuery }: FaqHeroProps) {
           {FAQ_HERO_CONTENT.desc}
         </motion.p>
 
-        {/* Search Box */}
         <motion.div 
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}

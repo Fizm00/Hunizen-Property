@@ -30,7 +30,6 @@ export function PropertyHorizontalCard({
           : "border-zinc-800/50 hover:border-zinc-700"
       }`}
     >
-      {/* Thumbnail Image */}
       <div className="relative w-full sm:w-44 h-40 shrink-0 overflow-hidden rounded-[1.25rem]">
         <img
           src={property.img}
@@ -38,7 +37,6 @@ export function PropertyHorizontalCard({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
         
-        {/* Gender Badge */}
         <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-wide backdrop-blur-md shadow-sm text-white ${
           property.type === "Campur"
             ? "bg-amber-600/90"
@@ -50,10 +48,8 @@ export function PropertyHorizontalCard({
         </span>
       </div>
 
-      {/* Content Details */}
       <div className="flex-1 flex flex-col justify-between py-1">
         <div>
-          {/* Rating & Availability */}
           <div className="flex justify-between items-center gap-2 w-full">
             <span className="flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-bold text-amber-500 bg-amber-500/10 rounded-md">
               <Star className="w-3 h-3 fill-amber-500 stroke-amber-500" />
@@ -65,18 +61,14 @@ export function PropertyHorizontalCard({
             </span>
           </div>
 
-          {/* Title */}
           <h3 className="mt-2 font-bold text-base text-zinc-100 group-hover:text-white transition-colors line-clamp-1">
             {property.title}
           </h3>
-
-          {/* Location */}
           <p className="flex items-center gap-1 mt-1 text-xs text-zinc-400">
             <MapPin className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
             <span className="line-clamp-1">{property.location}</span>
           </p>
 
-          {/* Specs icons row */}
           <div className="flex items-center gap-3 mt-3.5 text-zinc-400">
             <div className="flex items-center gap-1 text-[11px] font-medium">
               <Bed className="w-3.5 h-3.5 text-zinc-500" />
@@ -101,7 +93,6 @@ export function PropertyHorizontalCard({
           </div>
         </div>
 
-        {/* Pricing Row */}
         <div className="flex justify-between items-end mt-3 pt-3 border-t border-zinc-800/40 w-full">
           <div className="flex flex-col">
             {property.originalPrice && (

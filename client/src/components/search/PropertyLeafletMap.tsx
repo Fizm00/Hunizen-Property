@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { SearchKostCard } from "../../types";
 import { formatPriceLabel } from "../../utils/formatters";
 
-// Setup Leaflet Map controller for smooth camera panning/zooming
 interface MapControllerProps {
   selectedLatLng: [number, number] | null;
 }
@@ -27,7 +26,6 @@ function MapController({ selectedLatLng }: MapControllerProps) {
   return null;
 }
 
-// Generate premium HTML custom marker tag (Airbnb Style)
 const createLeafletMarkerIcon = (
   priceLabel: string,
   isActive: boolean,
@@ -127,7 +125,6 @@ export function PropertyLeafletMap({
         })}
       </MapContainer>
 
-      {/* 2. Floating Detail Popup Overlay (Sync with React state) */}
       <AnimatePresence>
         {selectedProperty && (
           <motion.div
@@ -137,7 +134,6 @@ export function PropertyLeafletMap({
             className="absolute bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:w-80 bg-zinc-950/98 backdrop-blur-md border border-zinc-800 rounded-3xl p-3 shadow-2xl z-20"
           >
             <div className="relative w-full">
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedPropertyId(null)}
                 className="absolute top-2 right-2 z-10 flex justify-center items-center w-7 h-7 bg-black/60 hover:bg-black/95 text-zinc-400 hover:text-white rounded-full transition-colors cursor-pointer"
@@ -145,7 +141,6 @@ export function PropertyLeafletMap({
                 <X className="w-4 h-4" />
               </button>
 
-              {/* Image box */}
               <div className="relative w-full h-40 overflow-hidden rounded-[1.25rem] bg-zinc-900">
                 <img
                   src={selectedProperty.img}
@@ -162,7 +157,6 @@ export function PropertyLeafletMap({
                 </span>
               </div>
 
-              {/* Text content details */}
               <div className="p-3">
                 <div className="flex justify-between items-center w-full">
                   <span className="flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-bold text-amber-500 bg-amber-500/10 rounded-md">

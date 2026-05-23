@@ -10,7 +10,6 @@ export default function Features() {
     <section id="fasilitas" className="w-full bg-white py-20 px-6 md:px-12 flex flex-col items-center">
       <div className="w-full max-w-7xl">
 
-        {/* Header Area */}
         <motion.div
           initial={{ y: 30, opacity: 0, filter: "blur(6px)" }}
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
@@ -27,7 +26,6 @@ export default function Features() {
           </a>
         </motion.div>
 
-        {/* 3-Column Cards Grid */}
         <motion.div
           variants={staggerContainer(0.15)}
           initial="hidden"
@@ -41,7 +39,6 @@ export default function Features() {
               key={idx}
               className="bg-white rounded-3xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              {/* Image with Badge */}
               <div className="relative h-56 sm:h-64 w-full overflow-hidden p-2">
                 <img
                   src={card.img}
@@ -53,12 +50,9 @@ export default function Features() {
                 </div>
               </div>
 
-              {/* Card Body */}
               <div className="p-6 pt-4 flex flex-col grow">
                 <h3 className="text-xl font-bold text-slate-800 mb-1">{card.title}</h3>
                 <p className="text-xs text-slate-400 mb-6">{card.desc}</p>
-
-                {/* Bottom Row */}
                 <div className="flex items-center justify-between mt-auto pt-4">
                   <div className="flex items-center divide-x divide-slate-200">
                     {card.specs.map((spec, i) => (
@@ -76,7 +70,6 @@ export default function Features() {
           ))}
         </motion.div>
 
-        {/* Bottom Banner */}
         <motion.div
           initial={{ y: 60, opacity: 0, filter: "blur(8px)" }}
           whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}

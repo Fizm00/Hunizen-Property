@@ -4,8 +4,6 @@ import { Heart, Share2, Star, MapPin, ChevronRight, Info } from "lucide-react";
 import { usePropertyDetail } from "../hooks/usePropertyDetail";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-
-// Modular UI sub-components
 import PropertyGallery from "../components/property/PropertyGallery";
 import PropertyHighlights from "../components/property/PropertyHighlights";
 import PropertyHostInfo from "../components/property/PropertyHostInfo";
@@ -28,8 +26,6 @@ export default function PropertyDetailPage() {
     property,
     similarProperties,
     loading,
-    
-    // UI Interactive States & Setters
     showAllPhotos,
     setShowAllPhotos,
     activePhotoIdx,
@@ -38,18 +34,12 @@ export default function PropertyDetailPage() {
     setIsDescExpanded,
     showAllReviews,
     setShowAllReviews,
-    
-    // Booking Form States & Setters
     checkInDate,
     setCheckInDate,
     duration,
     setDuration,
-    
-    // Favorites
     isFavorited,
     toggleFavorite,
-    
-    // Handlers
     handleShare,
     handleBooking,
     handleSelectRoomTypeAndBook
@@ -78,13 +68,9 @@ export default function PropertyDetailPage() {
 
   return (
     <div className="relative min-h-screen w-full bg-slate-50/60 font-sans text-slate-800 selection:bg-zinc-200 selection:text-zinc-900">
-      
-      {/* 1. Header Container (Dark Spacer behind transparent Navbar) */}
       <div className="w-full bg-brand-green h-20 relative z-50">
         <Navbar />
       </div>
-
-      {/* 2. Breadcrumbs Bar */}
       <div className="w-full bg-white border-b border-slate-100 py-3.5 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm font-semibold text-slate-400">
           <Link to="/" className="hover:text-slate-600 transition-colors">Home</Link>
@@ -96,8 +82,6 @@ export default function PropertyDetailPage() {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 flex flex-col gap-8 pb-32 md:pb-16">
-        
-        {/* 3. Grid Gallery Container */}
         <PropertyGallery
           property={property}
           showAllPhotos={showAllPhotos}
@@ -105,14 +89,10 @@ export default function PropertyDetailPage() {
           activePhotoIdx={activePhotoIdx}
           setActivePhotoIdx={setActivePhotoIdx}
         />
-
-        {/* 4. Split Layout Details & Checkout Card */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start w-full">
           
-          {/* Left Column (Main details list) */}
           <div className="lg:col-span-2 flex flex-col gap-0">
             
-            {/* Header info block */}
             <div className="pb-8 border-b border-slate-200/80 flex flex-col gap-4">
               <div className="flex justify-between items-start gap-4">
                 <div>
@@ -132,8 +112,6 @@ export default function PropertyDetailPage() {
                     </p>
                   </div>
                 </div>
-
-                {/* Share & Heart Action Buttons */}
                 <div className="flex items-center gap-2 shrink-0">
                   <button 
                     onClick={handleShare}
@@ -152,55 +130,36 @@ export default function PropertyDetailPage() {
                 </div>
               </div>
 
-              {/* Urgencies alert bar */}
               <div className="flex items-center gap-2 text-sm font-bold text-red-600 bg-red-50 border border-red-100 px-4 py-2.5 rounded-2xl w-fit">
                 <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping" />
                 <span>{property.roomLeft} Kamar tersisa</span>
               </div>
             </div>
-
-            {/* Highlights Section */}
             <PropertyHighlights highlights={property.highlights} />
-
-            {/* Host Section */}
             <PropertyHostInfo host={property.host} />
-
-            {/* Description Section */}
             <PropertyDescription 
               isDescExpanded={isDescExpanded}
               setIsDescExpanded={setIsDescExpanded}
             />
 
-            {/* Specifications Section */}
             <PropertySpecs roomSpecs={property.roomSpecs} />
 
-            {/* Facilities Detail List Section */}
             <PropertyFacilities 
               facilities={property.facilities}
               bathroomFacilities={property.bathroomFacilities}
             />
-
-            {/* House Rules Section */}
             <PropertyRules rulesDetails={property.rulesDetails} />
-
-            {/* Alternative Room Types */}
             <PropertyRoomTypes 
               roomTypes={property.roomTypes}
               onSelectRoomTypeAndBook={handleSelectRoomTypeAndBook}
             />
-
-            {/* Location & Interactive Map Section */}
             <PropertyLocationMap 
               title={property.title}
               location={property.location}
               latLng={property.latLng}
               nearbyPlaces={property.nearbyPlaces}
             />
-
-            {/* Rental Terms */}
             <PropertyRentalTerms rentalTerms={property.rentalTerms} />
-
-            {/* Reviews Section */}
             <PropertyReviews 
               rating={property.rating}
               reviewsList={property.reviewsList}
@@ -210,7 +169,6 @@ export default function PropertyDetailPage() {
 
           </div>
 
-          {/* Right Column (Sticky Booking Card on Desktop) */}
           <div className="lg:col-span-1">
             <PropertyBookingCard 
               property={property}
@@ -224,18 +182,14 @@ export default function PropertyDetailPage() {
 
         </div>
 
-        {/* 5. Recommended Properties Carousel */}
         <PropertySimilarList similarProperties={similarProperties} />
 
       </main>
-
-      {/* 6. Mobile floating checkout sticky bar */}
       <PropertyMobileStickyBar 
         property={property}
         handleBooking={handleBooking}
       />
 
-      {/* 7. Footer Component */}
       <Footer />
 
     </div>

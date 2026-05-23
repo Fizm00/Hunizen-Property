@@ -11,13 +11,11 @@ export function usePropertyDetail(id: string | undefined) {
   const [similarProperties, setSimilarProperties] = useState<SearchKostCard[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // UI Interactive States
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [isDescExpanded, setIsDescExpanded] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
 
-  // Booking Card States
   const [checkInDate, setCheckInDate] = useState("");
   const [duration, setDuration] = useState("Per Bulan");
   const [selectedRoomType, setSelectedRoomType] = useState<RoomType | null>(null);
@@ -25,7 +23,6 @@ export function usePropertyDetail(id: string | undefined) {
   const { isFavorited, toggleFavorite } = useFavorites();
   const favorited = id ? isFavorited(id) : false;
 
-  // Load details and recommended items
   useEffect(() => {
     if (!id) return;
     
@@ -33,7 +30,6 @@ export function usePropertyDetail(id: string | undefined) {
     async function loadData() {
       try {
         setLoading(true);
-        // Scroll back to top
         window.scrollTo(0, 0);
 
         const data = await propertyService.getPropertyById(id as string);
@@ -41,12 +37,10 @@ export function usePropertyDetail(id: string | undefined) {
 
         if (isMounted && data) {
           setProperty(data);
-          // Pick similar items (excluding current)
           const similar = searchList
             .filter((p) => p.id !== id && p.location.includes("Yogyakarta"))
             .slice(0, 3);
           setSimilarProperties(similar);
-          // Set default selected room type if available
           if (data.roomTypes && data.roomTypes.length > 0) {
             setSelectedRoomType(data.roomTypes[0]);
           } else {
@@ -115,7 +109,6 @@ export function usePropertyDetail(id: string | undefined) {
     similarProperties,
     loading,
     
-    // UI Interactive States & Setters
     showAllPhotos,
     setShowAllPhotos,
     activePhotoIdx,
@@ -125,7 +118,6 @@ export function usePropertyDetail(id: string | undefined) {
     showAllReviews,
     setShowAllReviews,
     
-    // Booking Form States & Setters
     checkInDate,
     setCheckInDate,
     duration,
@@ -133,11 +125,9 @@ export function usePropertyDetail(id: string | undefined) {
     selectedRoomType,
     setSelectedRoomType,
     
-    // Favorites
     isFavorited: favorited,
     toggleFavorite: handleToggleFavorite,
     
-    // Handlers
     handleShare,
     handleBooking,
     handleSelectRoomTypeAndBook

@@ -13,7 +13,6 @@ export function usePropertySearch() {
   const [loading, setLoading] = useState<boolean>(true);
   const location = useLocation();
 
-  // Parse initial query params from URL on mount
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   const [searchQuery, setSearchQuery] = useState<string>(() => {
@@ -50,7 +49,6 @@ export function usePropertySearch() {
   const [hoveredPropertyId, setHoveredPropertyId] = useState<string | null>(null);
   const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
 
-  // Track location.search during render to sync URL changes to state without an effect
   const [prevSearch, setPrevSearch] = useState(location.search);
 
   if (location.search !== prevSearch) {
@@ -95,7 +93,6 @@ export function usePropertySearch() {
     }
   }
 
-  // Load properties asynchronously on mount
   useEffect(() => {
     let isMounted = true;
     async function fetchSearchProperties() {
@@ -119,10 +116,8 @@ export function usePropertySearch() {
     };
   }, []);
 
-  // Filter listings
   const filteredProperties = useMemo<SearchKostCard[]>(() => {
     const filtered = properties.filter((item) => {
-      // 1. Search Query Filter
       if (searchQuery.trim() !== "") {
         const query = searchQuery.toLowerCase();
         const matchesTitle = item.title.toLowerCase().includes(query);
@@ -130,7 +125,6 @@ export function usePropertySearch() {
         if (!matchesTitle && !matchesLocation) return false;
       }
 
-      // 1b. Extra URL Location Filter (if query was also used)
       if (urlLocation.trim() !== "") {
         const locFilter = urlLocation.toLowerCase();
         if (!item.location.toLowerCase().includes(locFilter)) {
@@ -138,22 +132,16 @@ export function usePropertySearch() {
         }
       }
 
-      // 2. Gender Type Filter
       if (activeGender !== "Semua Tipe" && item.type !== activeGender) {
         return false;
       }
-
-      // 3. Period Filter
       if (activePeriod !== "Semua Periode" && item.period !== activePeriod) {
         return false;
       }
 
-      // 4. Price Filter
       if (item.priceVal < minPrice || item.priceVal > maxPrice) {
         return false;
       }
-
-      // 5. Rules Filter
       if (activeRules.length > 0) {
         const hasAllRules = activeRules.every((rule) =>
           item.rules?.includes(rule)
@@ -161,7 +149,6 @@ export function usePropertySearch() {
         if (!hasAllRules) return false;
       }
 
-      // 6. Facilities Filter
       if (activeFacilities.length > 0) {
         const hasAllFacilities = activeFacilities.every((facility) =>
           item.facilities.includes(facility)
@@ -172,24 +159,20 @@ export function usePropertySearch() {
       return true;
     });
 
-    // Sort the result
     if (activeSort === "terendah") {
       return [...filtered].sort((a, b) => a.priceVal - b.priceVal);
     } else if (activeSort === "tertinggi") {
       return [...filtered].sort((a, b) => b.priceVal - a.priceVal);
     } else {
-      // "rekomendasi"
       return [...filtered].sort((a, b) => b.rating - a.rating);
     }
   }, [properties, searchQuery, urlLocation, activeGender, activePeriod, activeFacilities, minPrice, maxPrice, activeRules, activeSort]);
 
-  // Selected property details
   const selectedProperty = useMemo<SearchKostCard | null>(() => {
     if (!selectedPropertyId) return null;
     return properties.find((item) => item.id === selectedPropertyId) || null;
   }, [properties, selectedPropertyId]);
 
-  // Toggle facility filter selection
   const handleFacilityToggle = useCallback((facility: string) => {
     setActiveFacilities((prev) =>
       prev.includes(facility)
@@ -198,7 +181,6 @@ export function usePropertySearch() {
     );
   }, []);
 
-  // Toggle rule filter selection
   const handleRuleToggle = useCallback((rule: string) => {
     setActiveRules((prev) =>
       prev.includes(rule)
@@ -207,7 +189,6 @@ export function usePropertySearch() {
     );
   }, []);
 
-  // Calculate active filters count
   const activeFiltersCount = useMemo(() => {
     let count = activeFacilities.length + activeRules.length;
     if (activeGender !== "Semua Tipe") count++;
@@ -218,7 +199,6 @@ export function usePropertySearch() {
     return count;
   }, [activeFacilities, activeRules, activeGender, activePeriod, minPrice, maxPrice, activeSort]);
 
-  // Reset all filters to initial state
   const resetFilters = useCallback(() => {
     setActiveGender("Semua Tipe");
     setActivePeriod("Semua Periode");

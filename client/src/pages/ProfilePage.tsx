@@ -17,8 +17,6 @@ import { useProfile } from "../hooks/useProfile";
 export default function ProfilePage() {
   const { state, actions } = useProfile();
   const [isPageLoading, setIsPageLoading] = useState(true);
-
-  // Scroll to top on mount and manage simulated page loading
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -36,25 +34,20 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-800">
       
-      {/* 1. Header Banner with Navbar */}
       <header className="relative w-full h-[220px] flex items-center bg-brand-green overflow-hidden shrink-0">
         <Navbar />
+
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[16px_16px] pointer-events-none" />
         
-        {/* Subtle decorative dot pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-        
-        {/* Banner Content */}
         <div className="relative z-10 w-full max-w-[1680px] mx-auto px-4 md:px-8 flex flex-col justify-end h-full pb-8">
           <div className="flex flex-col gap-2">
             
-            {/* Breadcrumbs */}
             <div className="flex items-center gap-1.5 text-xs text-slate-300 font-medium">
               <Link to="/" className="hover:text-white transition-colors">Home</Link>
               <ChevronRight className="w-3.5 h-3.5" />
               <span className="text-white font-semibold">Profil Saya</span>
             </div>
 
-            {/* Title */}
             <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               PENGATURAN PROFIL
             </h1>
@@ -63,11 +56,9 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      {/* 2. Main Profile Grid Container */}
-      <main className="flex-grow w-full max-w-[1680px] mx-auto px-4 md:px-8 py-12 md:py-16">
+      <main className="grow w-full max-w-[1680px] mx-auto px-4 md:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column: Sidebar Card */}
           <div className="lg:col-span-4 w-full">
             <ProfileSidebar
               activeTab={state.activeMenuTab}
@@ -78,12 +69,10 @@ export default function ProfilePage() {
             />
           </div>
 
-          {/* Right Column: Main Content Card */}
           <div className="lg:col-span-8 w-full bg-white border border-slate-200/70 rounded-3xl p-6 md:p-8 shadow-sm">
             {state.activeMenuTab === "pengaturan" && (
               <div className="flex flex-col">
                 
-                {/* Right Tabs Header */}
                 <div className="flex gap-6 border-b border-slate-100 pb-3">
                   <button
                     onClick={() => actions.setActiveSubTab("biodata")}
@@ -175,7 +164,6 @@ export default function ProfilePage() {
              state.activeMenuTab !== "ulasan" && 
              state.activeMenuTab !== "transaksi" && 
              state.activeMenuTab !== "tagihan" && (
-              /* Other tabs placeholder under development state */
               <div className="flex flex-col items-center justify-center text-center py-16 px-4 gap-4">
                 <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 text-slate-400">
                   <AlertCircle className="w-8 h-8" />
@@ -201,7 +189,6 @@ export default function ProfilePage() {
         </div>
       </main>
 
-      {/* 3. Global Footer */}
       <Footer />
       
     </div>

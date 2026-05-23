@@ -116,7 +116,6 @@ export function AdvancedFilterModal({
             data-lenis-prevent
             className="flex flex-col gap-6 p-6 md:p-8 w-full max-w-5xl max-h-[90vh] bg-zinc-900 border border-zinc-800 rounded-3xl overflow-y-auto custom-scrollbar"
           >
-            {/* Modal Header */}
             <div className="flex justify-between items-center w-full pb-2 border-b border-zinc-800/60">
               <div>
                 <h3 className="text-lg font-bold text-white tracking-tight">Filter</h3>
@@ -130,13 +129,10 @@ export function AdvancedFilterModal({
               </button>
             </div>
 
-            {/* 3-Column Layout */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               
-              {/* Column 1: Core Tipe, Waktu Bayar, Harga, Urutkan */}
               <div className="flex flex-col gap-6">
                 
-                {/* 1. Tipe Kos */}
                 <div className="flex flex-col gap-2.5 w-full">
                   <span className="text-xs font-semibold text-zinc-300">Tipe Kos</span>
                   <div className="grid grid-cols-3 gap-2 w-full">
@@ -159,7 +155,6 @@ export function AdvancedFilterModal({
                   </div>
                 </div>
 
-                {/* 2. Waktu Bayar Kos */}
                 <div className="flex flex-col gap-2.5 w-full">
                   <span className="text-xs font-semibold text-zinc-300">Waktu Bayar Kos</span>
                   <div className="grid grid-cols-3 gap-2 w-full">
@@ -182,7 +177,6 @@ export function AdvancedFilterModal({
                   </div>
                 </div>
 
-                {/* 3. Harga */}
                 <div className="flex flex-col gap-2.5 w-full">
                   <span className="text-xs font-semibold text-zinc-300">Harga</span>
                   <div className="grid grid-cols-2 gap-3 w-full">
@@ -215,7 +209,6 @@ export function AdvancedFilterModal({
                   </div>
                 </div>
 
-                {/* 4. Urutkan */}
                 <div className="flex flex-col gap-2.5 w-full">
                   <span className="text-xs font-semibold text-zinc-300">Urutkan</span>
                   <div className="grid grid-cols-3 gap-2 w-full">
@@ -240,7 +233,6 @@ export function AdvancedFilterModal({
 
               </div>
 
-              {/* Column 2: Fasilitas Kamar */}
               <div className="flex flex-col gap-2.5">
                 <span className="text-xs font-semibold text-zinc-300">Fasilitas Kamar</span>
                 <div className="grid grid-cols-2 gap-2 w-full">
@@ -270,10 +262,8 @@ export function AdvancedFilterModal({
                 </div>
               </div>
 
-              {/* Column 3: Fasilitas Bersama & Aturan Kos */}
               <div className="flex flex-col gap-6">
                 
-                {/* Fasilitas Bersama */}
                 <div className="flex flex-col gap-2.5">
                   <span className="text-xs font-semibold text-zinc-300">Fasilitas Bersama</span>
                   <div className="grid grid-cols-2 gap-2 w-full">
@@ -303,7 +293,6 @@ export function AdvancedFilterModal({
                   </div>
                 </div>
 
-                {/* Aturan Kos */}
                 <div className="flex flex-col gap-2.5 w-full">
                   <span className="text-xs font-semibold text-zinc-300">Aturan Kos</span>
                   <div className="grid grid-cols-2 gap-2 w-full">
@@ -337,7 +326,6 @@ export function AdvancedFilterModal({
 
             </div>
 
-            {/* Modal Footer Controls */}
             <div className="flex items-center gap-3 pt-5 border-t border-zinc-800 mt-2 w-full">
               <button
                 onClick={resetFilters}

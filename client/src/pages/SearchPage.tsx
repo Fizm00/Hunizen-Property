@@ -43,14 +43,12 @@ export default function SearchPage() {
   return (
     <div className="flex flex-col w-full h-screen bg-[#09090B] text-zinc-100 font-sans select-none overflow-hidden">
       
-      {/* 1. Sticky Header */}
       <SearchHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         openFilterModal={() => setIsFilterModalOpen(true)}
       />
 
-      {/* 2. Sticky Filter Chips Bar */}
       <FilterChipsBar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -62,17 +60,14 @@ export default function SearchPage() {
         activeFiltersCount={activeFiltersCount}
       />
 
-      {/* 3. Main Split Screen Content */}
       <main className="relative flex flex-1 w-full min-h-0 overflow-hidden">
         
-        {/* Left Side: Property Listings */}
         <section
           data-lenis-prevent
           className={`flex-col gap-6 p-4 md:p-6 lg:p-8 w-full md:w-[55%] lg:w-[50%] h-full overflow-y-auto custom-scrollbar ${
             mobileView === "map" ? "hidden md:flex" : "flex"
           }`}
         >
-          {/* Header text */}
           <div className="flex justify-between items-center w-full">
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
@@ -87,7 +82,6 @@ export default function SearchPage() {
               )}
             </div>
             
-            {/* Sorting indicator */}
             <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 bg-zinc-900/60 border border-zinc-800/80 rounded-xl">
               <span>Urutkan:</span>
               <span className="font-semibold text-zinc-200">
@@ -96,7 +90,6 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* Cards Stack */}
           {loading ? (
             <div className="flex flex-col gap-4 w-full">
               {[1, 2, 3].map((n) => (
@@ -123,7 +116,6 @@ export default function SearchPage() {
               ))}
             </div>
           ) : (
-            /* Empty State */
             <div className="flex flex-col justify-center items-center flex-1 p-8 text-center bg-zinc-950/20 border border-dashed border-zinc-800 rounded-3xl">
               <div className="flex justify-center items-center w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 mb-4">
                 <SlidersHorizontal className="w-5 h-5" />
@@ -142,7 +134,6 @@ export default function SearchPage() {
           )}
         </section>
 
-        {/* Right Side: Interactive Vector Map */}
         <section
           className={`flex-1 h-full bg-[#121214] relative overflow-hidden ${
             mobileView === "list" ? "hidden md:block" : "block"
@@ -158,7 +149,6 @@ export default function SearchPage() {
           />
         </section>
 
-        {/* Floating Mobile Toggle Button */}
         <div className="absolute bottom-6 left-1/2 z-30 -translate-x-1/2 md:hidden">
           <button
             onClick={() => setMobileView(mobileView === "list" ? "map" : "list")}
@@ -182,7 +172,6 @@ export default function SearchPage() {
 
       </main>
 
-      {/* 4. Advanced Filter Modal (Glassmorphism overlay) */}
       <AdvancedFilterModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}

@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-/**
- * Custom hook to manage property favorites with localStorage persistence.
- */
+
 export function useFavorites() {
   const [favorites, setFavorites] = useState<Record<string, boolean>>(() => {
     try {
@@ -14,7 +12,6 @@ export function useFavorites() {
     }
   });
 
-  // Persist to localStorage whenever favorites state changes
   useEffect(() => {
     try {
       localStorage.setItem("hunizen_favorites", JSON.stringify(favorites));

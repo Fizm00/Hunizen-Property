@@ -1,5 +1,3 @@
-/* ─── Konstanta Filter Pencarian Hero ─── */
-
 export interface SearchOption {
   label: string;
   value: string;

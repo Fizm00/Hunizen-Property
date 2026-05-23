@@ -53,9 +53,8 @@ interface FaqCategoriesProps {
 }
 
 export default function FaqCategories({ categories, searchQuery }: FaqCategoriesProps) {
-  // Track open state for accordion items by using a key string "category-index"
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({
-    "general-0": true // Open the first general item by default
+    "general-0": true 
   });
 
   const toggleItem = (key: string) => {
@@ -95,7 +94,6 @@ export default function FaqCategories({ categories, searchQuery }: FaqCategories
           className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start scroll-mt-24"
           id={category.id}
         >
-          {/* Left Column: Category Meta */}
           <div className="lg:col-span-4 flex flex-col items-start gap-3 lg:sticky lg:top-24">
             <h2 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight leading-tight">
               {category.title}
@@ -113,7 +111,6 @@ export default function FaqCategories({ categories, searchQuery }: FaqCategories
             </a>
           </div>
 
-          {/* Right Column: Accordion Items */}
           <div className="lg:col-span-8 w-full flex flex-col">
             {category.items.map((item, idx) => {
               const itemKey = `${category.id}-${idx}`;

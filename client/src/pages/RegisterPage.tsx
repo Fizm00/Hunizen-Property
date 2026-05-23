@@ -32,10 +32,8 @@ export default function RegisterPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-full bg-white font-sans text-slate-800 overflow-hidden">
       
-      {/* Left Pane: Register Form */}
       <div className="flex flex-col justify-center items-center px-6 py-12 sm:px-12 lg:px-20 relative w-full h-full bg-white overflow-y-auto">
         
-        {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -51,7 +49,6 @@ export default function RegisterPage() {
           </Link>
         </motion.div>
 
-        {/* Form Container */}
         <motion.div
           variants={staggerContainer(0.05)}
           initial="hidden"
@@ -59,7 +56,6 @@ export default function RegisterPage() {
           className="w-full max-w-md flex flex-col gap-6 my-8"
         >
           
-          {/* Header */}
           <motion.div variants={itemFadeUp(15, 0.5)} className="text-center md:text-left">
             <h1 className="text-3xl font-black text-slate-800 tracking-tight">
               Registrasi ke Hunizen
@@ -69,7 +65,6 @@ export default function RegisterPage() {
             </p>
           </motion.div>
 
-          {/* Form */}
           <motion.form onSubmit={handleRegister} variants={itemFadeUp(15, 0.5)} className="flex flex-col gap-4">
             {error && (
               <div className="p-3 bg-red-50 border border-red-100 rounded-2xl text-xs font-bold text-red-600">
@@ -77,7 +72,6 @@ export default function RegisterPage() {
               </div>
             )}
 
-            {/* Full Name Input */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="name" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Nama Lengkap
@@ -98,7 +92,6 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Phone Number Input */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="phone" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Nomor Handphone
@@ -119,7 +112,6 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Email Input */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="email" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Alamat Email
@@ -140,7 +132,6 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Password Input */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="password" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Password
@@ -169,7 +160,6 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Confirm Password Input */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="confirmPassword" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                 Ulangi Password
@@ -198,7 +188,6 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Register Button */}
             <button
               type="submit"
               disabled={isLoading}
@@ -215,7 +204,6 @@ export default function RegisterPage() {
             </button>
           </motion.form>
 
-          {/* Login Prompt */}
           <motion.div variants={itemFadeUp(15, 0.5)} className="text-center mt-2 flex flex-col gap-3">
             <p className="text-xs font-semibold text-slate-400">
               Sudah punya akun Hunizen?{" "}
@@ -238,7 +226,6 @@ export default function RegisterPage() {
 
       </div>
 
-      {/* Right Pane: Split Image (Visible on Large Screens Only) */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
@@ -253,7 +240,6 @@ export default function RegisterPage() {
           alt="Hunizen Premium Bedroom"
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
         />
-        {/* Subtle top-left gradient overlay for soft shadows */}
         <div className="absolute inset-0 bg-linear-to-tr from-black/20 via-transparent to-transparent pointer-events-none" />
       </motion.div>
 

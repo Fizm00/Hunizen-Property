@@ -29,23 +29,21 @@ export default function AboutBentoGrid() {
           <div className="w-16 h-1.5 bg-brand-green rounded-full" />
         </motion.div>
 
-        {/* Bento Grid Layout - Perfectly aligned 4-column grid with NO empty spaces */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[180px]">
-          
-          {/* Bento Card 1: Large Image (span col-2, row-2) */}
+
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={scrollViewport}
             transition={{ duration: 0.8 }}
-            className="md:col-span-2 md:row-span-2 rounded-[2rem] overflow-hidden relative group shadow-md min-h-[380px]"
+            className="md:col-span-2 md:row-span-2 rounded-4xl overflow-hidden relative group shadow-md min-h-[380px]"
           >
             <img 
               src={heroBg} 
               alt="Premium Cozy Bedroom" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8 text-white flex flex-col gap-2">
               <span className="bg-emerald-400 text-[#0F2C20] px-2.5 py-1 rounded font-black text-[10px] uppercase tracking-widest self-start shadow-sm">
                 {BENTO_CARDS.card1.tag}
@@ -57,13 +55,12 @@ export default function AboutBentoGrid() {
             </div>
           </motion.div>
 
-          {/* Bento Card 2: Stat Box 1 (col-span-1, row-span-1) - Image Background */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={scrollViewport}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-[2rem] overflow-hidden relative group shadow-md"
+            className="rounded-4xl overflow-hidden relative group shadow-md"
           >
             <img 
               src={heroBgWaterfront} 
@@ -80,13 +77,12 @@ export default function AboutBentoGrid() {
             </div>
           </motion.div>
 
-          {/* Bento Card 3: Stat Box 2 (col-span-1, row-span-1) - Image Background */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={scrollViewport}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-[2rem] overflow-hidden relative group shadow-md"
+            className="rounded-4xl overflow-hidden relative group shadow-md"
           >
             <img 
               src={promoKost1} 
@@ -103,13 +99,12 @@ export default function AboutBentoGrid() {
             </div>
           </motion.div>
 
-          {/* Bento Card 6: Small Image Card (col-span-1, row-span-1) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={scrollViewport}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="rounded-[2rem] overflow-hidden relative group shadow-md"
+            className="rounded-4xl overflow-hidden relative group shadow-md"
           >
             <img 
               src={aboutAnalyticsDesk} 
@@ -124,20 +119,19 @@ export default function AboutBentoGrid() {
             </div>
           </motion.div>
 
-          {/* Bento Card 4: Vertical Image (col-span-1, row-span-2) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={scrollViewport}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="md:col-span-1 md:row-span-2 rounded-[2rem] overflow-hidden relative group shadow-md min-h-[380px]"
+            className="md:col-span-1 md:row-span-2 rounded-4xl overflow-hidden relative group shadow-md min-h-[380px]"
           >
             <img 
               src={recomKost1} 
               alt="Akses Lokasi Strategis" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/35 to-transparent" />
             <div className="absolute bottom-8 left-6 right-6 text-white flex flex-col gap-2">
               <span className="bg-white text-slate-900 px-2.5 py-1 rounded font-black text-[10px] uppercase tracking-widest self-start shadow-sm">
                 {BENTO_CARDS.card4.tag}
@@ -149,13 +143,12 @@ export default function AboutBentoGrid() {
             </div>
           </motion.div>
 
-          {/* Bento Card 5: Horizontal Image Card (col-span-3, row-span-1) */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={scrollViewport}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="md:col-span-3 md:row-span-1 rounded-[2rem] overflow-hidden relative group shadow-md"
+            className="md:col-span-3 md:row-span-1 rounded-4xl overflow-hidden relative group shadow-md"
           >
             <img 
               src={aboutTeamMeeting} 

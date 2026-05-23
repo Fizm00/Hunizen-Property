@@ -27,7 +27,6 @@ export default function PropertyReviews({
         </h2>
       </div>
 
-      {/* Metrics Rating Progress Bars */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
         {[
           { label: "Kebersihan", score: 5.0 },
@@ -54,7 +53,6 @@ export default function PropertyReviews({
 
       <div className="h-px bg-slate-100 w-full" />
 
-      {/* Reviews List */}
       <div className="flex flex-col gap-6">
         {reviewsList.map((rev, i) => (
           <div key={i} className="flex flex-col gap-3">
@@ -81,7 +79,6 @@ export default function PropertyReviews({
         </button>
       </div>
 
-      {/* Review Modal overlay */}
       <AnimatePresence>
         {showAllReviews && (
           <motion.div
@@ -97,7 +94,6 @@ export default function PropertyReviews({
               exit={{ scale: 0.95, y: 15 }}
               className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[85vh]"
             >
-              {/* Modal header */}
               <div className="flex justify-between items-center p-5 border-b border-slate-100">
                 <h3 className="font-extrabold text-slate-800 text-lg">Semua Review</h3>
                 <button
@@ -108,7 +104,6 @@ export default function PropertyReviews({
                 </button>
               </div>
 
-              {/* Reviews body list */}
               <div className="p-5 grow overflow-y-auto flex flex-col gap-6 custom-scrollbar">
                 {reviewsList.map((rev, i) => (
                   <div

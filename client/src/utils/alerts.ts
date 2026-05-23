@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 
-// Custom Toast mixin matching our app style
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -18,9 +17,6 @@ const Toast = Swal.mixin({
   },
 });
 
-/**
- * Show a modern, non-blocking toast notification at the top-right of the screen.
- */
 export function showToast(icon: "success" | "error" | "warning" | "info", title: string) {
   Toast.fire({
     icon,
@@ -28,9 +24,6 @@ export function showToast(icon: "success" | "error" | "warning" | "info", title:
   });
 }
 
-/**
- * Show a premium, custom-styled modal dialog.
- */
 export function showAlert(
   icon: "success" | "error" | "warning" | "info" | "question",
   title: string,

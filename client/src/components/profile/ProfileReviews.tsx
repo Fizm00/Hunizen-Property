@@ -70,13 +70,11 @@ export function ProfileReviews() {
     });
   };
 
-  // Calculate statistics
   const totalReviews = reviews.length;
   const averageRating = totalReviews > 0 
     ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
     : "0.0";
 
-  // Rating count breakdown
   const ratingBreakdown = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
   reviews.forEach((r) => {
     if (r.rating >= 1 && r.rating <= 5) {
@@ -87,7 +85,6 @@ export function ProfileReviews() {
   return (
     <div className="flex flex-col gap-6">
       
-      {/* 1. Header Title */}
       <div className="flex flex-col gap-1.5">
         <h3 className="font-extrabold text-slate-800 text-lg md:text-xl flex items-center gap-2">
           <MessageSquare className="w-5 h-5 text-brand-green" />
@@ -100,10 +97,8 @@ export function ProfileReviews() {
 
       <div className="w-full h-px bg-slate-100" />
 
-      {/* 2. Rating Stats Summary Card */}
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         
-        {/* Left Side: Score */}
         <div className="md:col-span-4 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-slate-200 pb-5 md:pb-0 md:pr-5 shrink-0">
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Rata-rata Rating</span>
           <span className="text-5xl font-black text-slate-800 tracking-tight my-1">
@@ -123,7 +118,7 @@ export function ProfileReviews() {
         </div>
 
         {/* Right Side: Progress Bars */}
-        <div className="md:col-span-8 flex flex-col gap-2 flex-grow">
+        <div className="md:col-span-8 flex flex-col gap-2 grow">
           {[5, 4, 3, 2, 1].map((stars) => {
             const count = ratingBreakdown[stars as 5 | 4 | 3 | 2 | 1];
             const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
@@ -133,7 +128,7 @@ export function ProfileReviews() {
                   <span className="font-bold text-slate-700">{stars}</span>
                   <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                 </div>
-                <div className="flex-grow h-2 bg-slate-200 rounded overflow-hidden border border-slate-350">
+                <div className="grow h-2 bg-slate-200 rounded overflow-hidden border border-slate-350">
                   <div 
                     className="h-full bg-brand-green rounded"
                     style={{ width: `${percentage}%` }}
@@ -147,10 +142,8 @@ export function ProfileReviews() {
 
       </div>
 
-      {/* 3. Main Split Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Column: Form Tulis Ulasan (lg:col-span-5) */}
         <form onSubmit={handleSubmitReview} className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col gap-4 shadow-sm">
           <div className="flex flex-col gap-1">
             <h4 className="font-extrabold text-slate-850 text-sm">
@@ -235,7 +228,6 @@ export function ProfileReviews() {
           </button>
         </form>
 
-        {/* Right Column: List History Ulasan (lg:col-span-7) */}
         <div className="lg:col-span-7 flex flex-col gap-4 self-stretch">
           <h4 className="font-extrabold text-slate-850 text-sm">
             Riwayat Ulasan Anda
@@ -254,7 +246,6 @@ export function ProfileReviews() {
                   className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col gap-3.5 text-xs text-slate-600 relative shadow-sm animate-fade-in"
                 >
                   
-                  {/* Top Bar: Property info & Delete button */}
                   <div className="flex justify-between items-start gap-4">
                     <div className="flex flex-col gap-0.5">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -284,7 +275,6 @@ export function ProfileReviews() {
                     </button>
                   </div>
 
-                  {/* Rating Stars Badge */}
                   <div className="flex items-center gap-1 py-0.5 px-2 bg-amber-50 text-amber-700 border border-amber-200 rounded w-max">
                     <div className="flex">
                       {[1, 2, 3, 4, 5].map((star) => (
@@ -297,12 +287,9 @@ export function ProfileReviews() {
                     <span className="text-[10px] font-extrabold ml-1 pt-0.5">{item.rating} / 5</span>
                   </div>
 
-                  {/* Review comment */}
                   <p className="text-slate-700 font-medium leading-relaxed bg-slate-50 border border-slate-200 rounded-xl p-3.5">
                     "{item.comment}"
                   </p>
-
-                  {/* Landlord reply box if exists */}
                   {item.landlordReply && (
                     <div className="bg-brand-green-light border border-brand-green/10 rounded-xl p-4 flex flex-col gap-1 ml-4 border-l-4 border-l-brand-green">
                       <div className="flex items-center gap-1.5">

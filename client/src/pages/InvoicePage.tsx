@@ -17,16 +17,13 @@ export default function InvoicePage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Retrieve user session info for the invoice
   const savedUser = localStorage.getItem("user");
   const user = savedUser ? JSON.parse(savedUser) : { name: "Budi Santoso", email: "budi.santoso@email.com", phone: "+6281234567890" };
 
-  // Attempt to find the invoice details from mock datasets
   let invoiceTitle = "Invoice Pembayaran";
   let propertyName = MOCK_ACTIVE_RENT.propertyName;
   let roomName = MOCK_ACTIVE_RENT.roomName;
@@ -37,20 +34,18 @@ export default function InvoicePage() {
   let paymentMethod = "Auto-Debet Bank";
   let itemDescription = "Sewa Bulanan Kost";
 
-  // Check in Bills
   const billMatch = MOCK_BILLS_DATA.find((b) => b.id === id);
   if (billMatch) {
     invoiceTitle = `Invoice ${billMatch.type}`;
     propertyName = billMatch.propertyName;
     roomName = billMatch.roomName;
     amount = billMatch.amount;
-    date = "1 Mei 2026"; // Mock billing date
+    date = "1 Mei 2026";
     dueDate = billMatch.dueDate;
     status = billMatch.status === "belum_bayar" ? "belum_bayar" : "lunas";
     paymentMethod = billMatch.status === "lunas" ? "Transfer Bank (Auto-Debet)" : "Menunggu Pembayaran";
     itemDescription = billMatch.type;
   } else {
-    // Check in Transactions
     const txnMatch = MOCK_TRANSACTIONS_DATA.find((t) => t.id === id);
     if (txnMatch) {
       invoiceTitle = `Kuitansi Pembayaran ${txnMatch.type}`;
@@ -63,7 +58,6 @@ export default function InvoicePage() {
       paymentMethod = txnMatch.method;
       itemDescription = txnMatch.type;
     } else {
-      // Check in Rent History requests
       const rentMatch = RENT_HISTORY_DATA.find((r) => r.id === id);
       if (rentMatch) {
         invoiceTitle = "Invoice Booking Sewa Kost";
@@ -86,7 +80,6 @@ export default function InvoicePage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased py-8 px-4 sm:px-6">
       
-      {/* Print-specific style layout overrides */}
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           body {
@@ -108,7 +101,6 @@ export default function InvoicePage() {
 
       <div className="max-w-3xl mx-auto flex flex-col gap-6">
         
-        {/* Navigation & Action Bar (Hidden in Print) */}
         <div className="no-print flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <button
             onClick={() => navigate(-1)}
@@ -127,10 +119,8 @@ export default function InvoicePage() {
           </button>
         </div>
 
-        {/* Invoice Main Sheet Container */}
-        <div className="print-container bg-white border border-slate-300 rounded-[2rem] p-8 md:p-12 shadow-sm flex flex-col gap-8">
+        <div className="print-container bg-white border border-slate-300 rounded-4xl p-8 md:p-12 shadow-sm flex flex-col gap-8">
           
-          {/* Header Section: Logo & Status Tag */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 border-b border-slate-100 pb-8">
             <div className="flex flex-col gap-1">
               <span className="text-xl font-black text-brand-green tracking-tight">HUNIZEN</span>
@@ -148,7 +138,6 @@ export default function InvoicePage() {
                 <span className="text-sm font-black text-slate-800">{id}</span>
               </div>
               
-              {/* Status Badge */}
               {status === "lunas" && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-250 text-xs font-bold rounded-lg uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
@@ -170,10 +159,7 @@ export default function InvoicePage() {
             </div>
           </div>
 
-          {/* Details Section: From / To */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-semibold text-slate-600">
-            
-            {/* Left: Supplier info */}
             <div className="flex flex-col gap-2 bg-slate-50 border border-slate-200 p-5 rounded-2xl">
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Penerbit Tagihan</span>
               <div className="flex flex-col gap-1 text-slate-700">
@@ -187,7 +173,6 @@ export default function InvoicePage() {
               </div>
             </div>
 
-            {/* Right: Tenant info */}
             <div className="flex flex-col gap-2 bg-slate-50 border border-slate-200 p-5 rounded-2xl">
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Penerima Tagihan (Penyewa)</span>
               <div className="flex flex-col gap-1 text-slate-700">
@@ -203,7 +188,6 @@ export default function InvoicePage() {
 
           </div>
 
-          {/* Dates & Payments Stats Table */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-semibold border-y border-slate-100 py-6 text-slate-600">
             <div className="flex flex-col gap-0.5">
               <span className="text-[9px] text-slate-400 font-bold uppercase">Tanggal Terbit</span>
@@ -232,17 +216,14 @@ export default function InvoicePage() {
             </div>
           </div>
 
-          {/* Itemized Table */}
           <div className="flex flex-col gap-2 mt-2">
             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Rincian Tagihan</span>
             
-            {/* Table Header */}
             <div className="bg-slate-50 border border-slate-200 rounded-t-xl px-4 py-3 grid grid-cols-12 text-xs font-bold text-slate-500">
               <span className="col-span-8 sm:col-span-9">Item / Deskripsi Tagihan</span>
               <span className="col-span-4 sm:col-span-3 text-right">Jumlah (Rupiah)</span>
             </div>
 
-            {/* Table Body Row */}
             <div className="border-x border-b border-slate-200 rounded-b-xl px-4 py-5 grid grid-cols-12 text-xs font-semibold text-slate-700 gap-y-3">
               <div className="col-span-8 sm:col-span-9 flex flex-col gap-1.5">
                 <span className="text-sm font-extrabold text-slate-850">{itemDescription}</span>
@@ -256,7 +237,6 @@ export default function InvoicePage() {
               </span>
             </div>
 
-            {/* Total Row */}
             <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-4.5 grid grid-cols-12 text-xs font-black text-slate-800 mt-2">
               <span className="col-span-8 sm:col-span-9 text-base font-extrabold text-slate-850">Total Pembayaran</span>
               <span className="col-span-4 sm:col-span-3 text-right text-base font-black text-brand-green">
@@ -265,7 +245,6 @@ export default function InvoicePage() {
             </div>
           </div>
 
-          {/* Footer Terms & Legal Notes */}
           <div className="border-t border-slate-100 pt-6 flex flex-col gap-3 text-[10px] text-slate-450 font-normal leading-relaxed">
             <span className="font-bold text-slate-500 uppercase tracking-wide">Ketentuan & Kebijakan Hunizen:</span>
             <ul className="list-disc pl-4 flex flex-col gap-1">

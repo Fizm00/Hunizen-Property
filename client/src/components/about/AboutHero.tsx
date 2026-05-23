@@ -8,10 +8,8 @@ import { HERO_CONTENT } from "../../constants/about";
 export default function AboutHero() {
   return (
     <section className="relative w-full h-[400px] flex items-center bg-slate-900 overflow-hidden">
-      {/* Transparent Navbar on Top */}
       <Navbar />
 
-      {/* Dark lounge background image with opacity overlay */}
       <div className="absolute inset-0 z-0">
         <img 
           src={aboutTeamMeeting} 
@@ -21,7 +19,6 @@ export default function AboutHero() {
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
       </div>
 
-      {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center mt-16">
         <motion.div
           initial={{ opacity: 0, x: -30 }}

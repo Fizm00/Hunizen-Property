@@ -12,19 +12,14 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans overflow-x-hidden text-slate-800">
-      {/* Hero Section with Navbar */}
       <ContactHero />
 
-      {/* Contact Form + Image */}
       <ContactForm />
 
-      {/* Contact Info Cards */}
       <ContactInfo />
 
-      {/* Bottom CTA */}
       <ContactCta />
 
-      {/* Global Footer */}
       <Footer />
     </div>
   );

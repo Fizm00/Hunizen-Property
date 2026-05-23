@@ -38,7 +38,6 @@ export function ProfileSidebar({
   return (
     <div className="flex flex-col gap-6 w-full">
       
-      {/* 1. User Summary Card */}
       <div className="bg-white border border-slate-200/70 rounded-3xl p-6 flex items-center gap-4 shadow-sm">
         <div className="relative">
           <img 
@@ -60,7 +59,6 @@ export function ProfileSidebar({
         </div>
       </div>
 
-      {/* 2. Sidebar Navigation Card */}
       <div className="bg-white border border-slate-200/70 rounded-3xl overflow-hidden shadow-sm py-4">
         <div className="flex flex-col">
           {PROFILE_SIDEBAR_MENU.map((item: SidebarMenuItem) => {
@@ -85,7 +83,6 @@ export function ProfileSidebar({
           
           <div className="w-full h-px bg-slate-100 my-3" />
           
-          {/* Logout Button */}
           <button
             onClick={onLogout}
             className="flex items-center gap-3.5 px-6 py-3.5 text-xs font-semibold text-red-600 hover:bg-red-50 border-l-4 border-transparent transition-all duration-200 text-left cursor-pointer"
@@ -96,7 +93,6 @@ export function ProfileSidebar({
         </div>
       </div>
 
-      {/* 3. Upgrade Landlord Promo Card */}
       <div className="bg-brand-green-light border border-brand-green-accent/15 rounded-3xl p-6 flex flex-col gap-4 text-center shadow-sm">
         <div className="flex flex-col gap-1.5">
           <h4 className="font-bold text-brand-green text-sm">

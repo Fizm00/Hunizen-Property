@@ -20,7 +20,6 @@ export default function InvoiceSummary({
   return (
     <div className="sticky top-28 bg-white border border-slate-200/60 rounded-3xl p-6 shadow-md flex flex-col gap-6">
       
-      {/* Property Card Mini representation */}
       <div className="flex gap-4 items-center">
         <div className="w-20 h-20 bg-slate-100 rounded-2xl overflow-hidden shrink-0">
           <img
@@ -51,7 +50,6 @@ export default function InvoiceSummary({
 
       <div className="h-px bg-slate-100 w-full" />
 
-      {/* Payment Details */}
       <div className="flex flex-col gap-4">
         <div>
           <h5 className="text-xs font-black text-slate-800 uppercase tracking-wider">
@@ -63,13 +61,11 @@ export default function InvoiceSummary({
         </div>
 
         <div className="flex flex-col gap-2.5 text-xs">
-          {/* Price per Month */}
           <div className="flex justify-between items-center text-slate-500 font-bold">
             <span>Biaya Sewa ({durationMonths} Bulan)</span>
             <span className="text-slate-700">{formatIDR(subtotal)}</span>
           </div>
 
-          {/* Service fee */}
           <div className="flex justify-between items-center text-slate-500 font-bold">
             <span className="flex items-center gap-1 group relative">
               Biaya Layanan Aplikasi
@@ -83,7 +79,6 @@ export default function InvoiceSummary({
 
           <div className="h-px bg-slate-100 w-full my-1.5" />
 
-          {/* Total payment */}
           <div className="flex justify-between items-center text-sm font-extrabold">
             <span className="text-slate-800">Total Pembayaran</span>
             <span className="text-slate-900 text-base">{formatIDR(totalPayment)}</span>
@@ -91,7 +86,6 @@ export default function InvoiceSummary({
         </div>
       </div>
 
-      {/* Security verification details */}
       <div className="flex items-start gap-2.5 p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
         <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
         <div className="text-[10.5px] text-emerald-800 leading-normal font-semibold">

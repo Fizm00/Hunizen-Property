@@ -28,7 +28,6 @@ export function FilterChipsBar({
   return (
     <div className="sticky top-20 z-20 flex justify-between items-center px-4 md:px-8 w-full h-14 bg-brand-green border-b border-brand-green-accent/40 overflow-x-auto shrink-0 scrollbar-none gap-3">
       
-      {/* Search bar specifically for mobile screens */}
       <div className="flex sm:hidden items-center px-3 py-1.5 w-full max-w-[200px] bg-zinc-900 border border-zinc-800 rounded-full">
         <Search className="w-3.5 h-3.5 text-zinc-400 mr-1.5 shrink-0" />
         <input
@@ -41,7 +40,6 @@ export function FilterChipsBar({
       </div>
 
       <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
-        {/* Gender Filter Chips */}
         {genders.map((gender) => (
           <button
             key={gender}
@@ -58,7 +56,6 @@ export function FilterChipsBar({
 
         <div className="h-4 w-px bg-zinc-800 mx-1 shrink-0" />
 
-        {/* Period Filter Chips */}
         {periods.map((period) => (
           <button
             key={period}
@@ -74,7 +71,6 @@ export function FilterChipsBar({
         ))}
       </div>
 
-      {/* Filter Modal Toggle Button */}
       <button
         onClick={openFilterModal}
         className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-all shrink-0 cursor-pointer"

@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { propertyService } from "../services/propertyService";
 import type { FeatureCard, KostCard } from "../types";
 
-/**
- * Custom hook to load landing page properties asynchronously from the service layer.
- */
 export function useProperties() {
   const [featured, setFeatured] = useState<FeatureCard[]>([]);
   const [promo, setPromo] = useState<KostCard[]>([]);
@@ -20,7 +17,6 @@ export function useProperties() {
         setLoading(true);
         setError(null);
 
-        // Fetch concurrently
         const [featData, promoData, recomData] = await Promise.all([
           propertyService.getFeaturedProperties(),
           propertyService.getPromoProperties(),
