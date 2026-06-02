@@ -12,7 +12,7 @@ export default function NotFoundPage() {
       <div className="absolute bottom-1/4 left-1/3 w-[300px] h-[300px] bg-brand-green-accent/15 rounded-full blur-[100px] pointer-events-none" />
       
       {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none" />
 
       {/* Header / Logo */}
       <header className="w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative z-10">
@@ -44,7 +44,7 @@ export default function NotFoundPage() {
             transition={{ duration: 0.8, ease: ease.expo }}
             className="relative"
           >
-            <h1 className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-700 tracking-tighter leading-none select-none">
+            <h1 className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-linear-to-b from-white to-zinc-700 tracking-tighter leading-none select-none">
               404
             </h1>
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-brand-green border border-brand-green-accent text-[10px] font-black tracking-widest text-emerald-400 uppercase rounded-full shadow-lg">

@@ -27,7 +27,7 @@ export default function BookingSteps({ currentStep = 1 }: BookingStepsProps) {
       <div className="flex items-center gap-1.5">
         {currentStep > 2 ? (
           <span className="w-5 h-5 rounded-full bg-brand-green-vibrant text-white flex items-center justify-center">
-            <Check className="w-3.5 h-3.5 stroke-[3]" />
+            <Check className="w-3.5 h-3.5 stroke-3" />
           </span>
         ) : (
           <span className={`w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center ${

@@ -1,0 +1,1027 @@
+{
+	"info": {
+		"_postman_id": "b18b4594-e0c1-4bdf-8798-752174c6e6eb",
+		"name": "Hunizen Property API",
+		"description": "API Collection for Hunizen Property Website. Built using Express, Mongoose, and TypeScript. Injected with automated JWT session storage in Login test script.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register Tenant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tenant Budi\",\n    \"phone\": \"081234567890\",\n    \"email\": \"budi.tenant@email.com\",\n    \"password\": \"password123\",\n    \"gender\": \"Laki-laki\",\n    \"role\": \"tenant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Landlord",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Landlord Pak Joko\",\n    \"phone\": \"087766554433\",\n    \"email\": \"joko.landlord@email.com\",\n    \"password\": \"password123\",\n    \"gender\": \"Laki-laki\",\n    \"role\": \"landlord\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"if (responseJson.success && responseJson.token) {",
+									"    pm.collectionVariables.set(\"jwt_token\", responseJson.token);",
+									"    console.log(\"JWT Token saved successfully:\", responseJson.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"081234567890\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile Biodata",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Budi Santoso (Updated)\",\n    \"job\": \"Software Developer\",\n    \"city\": \"Jakarta Selatan\",\n    \"maritalStatus\": \"Belum Menikah\",\n    \"education\": \"S1 Teknik Informatika\",\n    \"emergencyPhone\": \"089988776655\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"081234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/forgot-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Properties",
+			"item": [
+				{
+					"name": "List Properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/properties?city=Jakarta&type=Campur&minPrice=1000000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Jakarta"
+								},
+								{
+									"key": "type",
+									"value": "Campur"
+								},
+								{
+									"key": "minPrice",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Property Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/properties/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfca1a90c1f1025a1e2bf9",
+									"description": "Replace with real property ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Property",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Kost Hunizen Emerald Kemang\",\n    \"location\": \"Jl. Kemang Raya No. 45, Jakarta Selatan\",\n    \"type\": \"Campur\",\n    \"period\": \"Bulanan\",\n    \"priceVal\": 2500000,\n    \"price\": \"Rp 2.500.000 / bulan\",\n    \"roomLeft\": 5,\n    \"latLng\": [-6.2738, 106.8208],\n    \"facilities\": [\"WiFi\", \"AC\", \"Kamar Mandi Dalam\"],\n    \"rules\": [\"Dilarang membawa hewan\", \"Maksimal 2 orang\"],\n    \"gallery\": [],\n    \"highlights\": [\"Dekat Stasiun\", \"Aman 24 Jam\"],\n    \"roomSpecs\": [\"Kamar 3x4 meter\", \"Kasur Springbed\"],\n    \"bathroomFacilities\": [\"Water Heater\", \"Shower\"],\n    \"rulesDetails\": [\"Tamu dilarang menginap tanpa izin\"],\n    \"roomTypes\": [\n        {\n            \"name\": \"Standard Room\",\n            \"price\": \"Rp 2.500.000\",\n            \"specs\": {\"bed\": 1, \"bath\": 1, \"ac\": 1, \"wifi\": 1},\n            \"facilities\": [\"WiFi\", \"AC\"]\n        }\n    ],\n    \"nearbyPlaces\": [\n        {\n            \"name\": \"Kemang Village Mall\",\n            \"distance\": \"5 menit\",\n            \"rating\": 4.7\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/properties",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Property",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Kost Hunizen Emerald Kemang - Updated\",\n    \"priceVal\": 2700000,\n    \"price\": \"Rp 2.700.000 / bulan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/properties/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfca1a90c1f1025a1e2bf9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Property",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/properties/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfca1a90c1f1025a1e2bf9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Property Images",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gallery",
+									"type": "file",
+									"src": [],
+									"description": "Select property images to upload"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/properties/:id/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"properties",
+								":id",
+								"images"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfca1a90c1f1025a1e2bf9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"property\": \"64bfca1a90c1f1025a1e2bf9\",\n    \"roomType\": \"Standard Room\",\n    \"startDate\": \"2026-06-15\",\n    \"durationMonths\": 3,\n    \"occupantsCount\": 1,\n    \"additionalNotes\": \"Tolong siapkan kamar yang jendelanya menghadap luar\",\n    \"paymentMethod\": \"gopay\",\n    \"totalPayment\": 7500000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Bookings (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/my-bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"my-bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incoming Bookings (Landlord)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/incoming",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"incoming"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve / Reject Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"disetujui\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings/:id/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								":id",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfcb0090c1f1025a1e2c10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bills",
+			"item": [
+				{
+					"name": "Create Bill (Landlord)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenant\": \"64bfc01f90c1f1025a1e2ab2\",\n    \"property\": \"64bfca1a90c1f1025a1e2bf9\",\n    \"amount\": 2500000,\n    \"dueDate\": \"2026-07-01\",\n    \"type\": \"Sewa Bulanan\",\n    \"month\": \"Juli 2026\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Bills (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bills/my-bills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bills",
+								"my-bills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Landlord Issued Bills",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bills/landlord-bills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bills",
+								"landlord-bills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay Bill (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"paymentMethod\": \"gopay\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bills/:id/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bills",
+								":id",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfcc2290c1f1025a1e2c88"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get My Transactions (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/transactions/my-transactions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"my-transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Get Property Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/reviews/property/:propertyId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"property",
+								":propertyId"
+							],
+							"variable": [
+								{
+									"key": "propertyId",
+									"value": "64bfca1a90c1f1025a1e2bf9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Review (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"property\": \"64bfca1a90c1f1025a1e2bf9\",\n    \"rating\": 5,\n    \"comment\": \"Tempatnya sangat bersih dan nyaman sekali! Host juga ramah.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/reviews",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reply to Review (Landlord)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"landlordReply\": \"Terima kasih banyak atas ulasannya! Kami senang Anda merasa nyaman tinggal di sini.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/reviews/:id/reply",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":id",
+								"reply"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfcd5590c1f1025a1e2db1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Submit Complaint Ticket (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"property\": \"64bfca1a90c1f1025a1e2bf9\",\n    \"category\": \"Air & Listrik\",\n    \"title\": \"Aliran Air Kamar Mandi Lemah\",\n    \"description\": \"Sejak kemarin sore air di keran kamar mandi mengalir sangat kecil. Tolong dicek pompanya.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Complaint Tickets (Tenant)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/complaints/my-complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"complaints",
+								"my-complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incoming Complaints (Landlord)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/complaints/landlord-complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"complaints",
+								"landlord-complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Complaint Status (Landlord)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"proses\",\n    \"landlordNotes\": \"Teknisi pompa dijadwalkan datang besok pagi jam 10.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/complaints/:id/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"complaints",
+								":id",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64bfce8890c1f1025a1e2f33"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "jwt_token",
+			"value": ""
+		}
+	]
+}
