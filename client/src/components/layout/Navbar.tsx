@@ -1,5 +1,5 @@
 import { Home, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "../../constants";
@@ -10,10 +10,22 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setIsOpen(false);
 
-  const [user] = useState<{ name: string } | null>(() => {
+  const [user, setUser] = useState<{ name: string } | null>(() => {
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : null;
   });
+
+  useEffect(() => {
+    const handleProfileUpdate = () => {
+      const saved = localStorage.getItem("user");
+      setUser(saved ? JSON.parse(saved) : null);
+    };
+
+    window.addEventListener("profile-update", handleProfileUpdate);
+    return () => {
+      window.removeEventListener("profile-update", handleProfileUpdate);
+    };
+  }, []);
 
   return (
     <>

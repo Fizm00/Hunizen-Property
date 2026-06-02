@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import bannerBg from "../../assets/kost_banner.png";
 import { FEATURE_CARDS } from "../../constants";
 import { staggerContainer, itemFadeUp, scrollViewport, sectionTransition } from "../../lib/animations";
@@ -21,9 +22,9 @@ export default function Features() {
             Kami cariin Kost Terbaik{" "}
             <UnderlineText>Untukmu!</UnderlineText>
           </h2>
-          <a href="#semua" className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors group">
+          <Link to="/search" className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors group">
             Lihat semua properti <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div
@@ -85,9 +86,9 @@ export default function Features() {
               Daftarkan segera usaha kost anda dan rasakan kemudahan mengelola properti bersama jutaan pengguna kami.
             </p>
             <div>
-              <a href="#daftar" className="inline-block bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-colors shadow-lg">
+              <Link to="/register" className="inline-block bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-colors shadow-lg">
                 Daftar Sekarang
-              </a>
+              </Link>
             </div>
           </div>
 

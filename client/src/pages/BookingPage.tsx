@@ -29,6 +29,13 @@ export default function BookingPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const userSession = localStorage.getItem("user");
+    if (!userSession) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     if (!id) return;
     async function fetchProperty() {
       try {

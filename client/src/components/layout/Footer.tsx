@@ -155,18 +155,18 @@ export default function Footer() {
             <LinkColumn column={companyColumn} />
 
             <div className="flex flex-col gap-2.5 mt-8 w-full">
-              <a
-                href="#cari"
+              <Link
+                to="/search"
                 className="bg-[#F4F3EC] hover:bg-white text-brand-green text-center text-xs font-bold px-6 py-3.5 rounded-full transition-colors tracking-wide block"
               >
                 CARI SEKARANG
-              </a>
-              <a
-                href="#support"
+              </Link>
+              <Link
+                to="/contact"
                 className="bg-transparent hover:bg-white/5 border border-zinc-800 text-white text-center text-xs font-bold px-6 py-3.5 rounded-full transition-all tracking-wide block"
               >
                 HUBUNGI SUPPORT
-              </a>
+              </Link>
             </div>
 
             <div className="flex flex-col gap-2.5 text-[10px] font-bold text-zinc-500 tracking-wider mt-8">

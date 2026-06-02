@@ -25,7 +25,6 @@ export function useBookingForm({
   propertyType
 }: UseBookingFormOptions) {
   
-  // Helper to parse duration number (e.g. "Per Bulan" -> 1 month)
   const getInitialDurationMonths = (durationStr?: string): number => {
     if (!durationStr) return 1;
     if (durationStr.includes("3 Bulan")) return 3;
@@ -34,17 +33,21 @@ export function useBookingForm({
     return 1;
   };
 
-  // Form State
+  // Load user session
+  const [sessionUser] = useState<{ id: string; name: string; phone?: string; email?: string } | null>(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
+
   const [step, setStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState("gopay");
-  const [name, setName] = useState("Budi Santoso");
-  const [phone, setPhone] = useState("081234567890");
+  const [name, setName] = useState(sessionUser?.name || "");
+  const [phone, setPhone] = useState(sessionUser?.phone || "");
   const [selectedGender, setSelectedGender] = useState<"Laki-laki" | "Perempuan">(() => {
     if (propertyType === "Putri") return "Perempuan";
     return "Laki-laki";
   });
 
-  // Derived gender based on propertyType (auto-assign & lock)
   const gender = propertyType === "Putra"
     ? "Laki-laki"
     : propertyType === "Putri"
@@ -64,12 +67,9 @@ export function useBookingForm({
     initialRoomType || "Standard Room"
   );
 
-  // Status & Error States
   const [errors, setErrors] = useState<BookingFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingId, setBookingId] = useState("");
-
-  // Counter Actions
   const incrementOccupants = () => {
     if (occupantsCount < MAX_OCCUPANTS) {
       setOccupantsCount((prev) => prev + 1);
@@ -94,11 +94,9 @@ export function useBookingForm({
     }
   };
 
-  // Dynamic pricing summary
   const subtotal = priceVal * durationMonths;
   const totalPayment = subtotal + SERVICE_FEE;
 
-  // Validation & Submit Handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 

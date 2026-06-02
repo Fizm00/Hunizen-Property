@@ -4,6 +4,7 @@ import { propertyService } from "../services/propertyService";
 import { useFavorites } from "./useFavorites";
 import type { PropertyDetail, SearchKostCard, RoomType } from "../types";
 import { showToast, showAlert } from "../utils/alerts";
+import Swal from "sweetalert2";
 
 export function usePropertyDetail(id: string | undefined) {
   const navigate = useNavigate();
@@ -75,6 +76,34 @@ export function usePropertyDetail(id: string | undefined) {
 
   const handleBooking = useCallback(() => {
     if (!property) return;
+    
+    const userSession = localStorage.getItem("user");
+    if (!userSession) {
+      Swal.fire({
+        icon: "warning",
+        title: "Perlu Login",
+        text: "Anda harus masuk ke akun Hunizen terlebih dahulu untuk melanjutkan pemesanan sewa kost.",
+        confirmButtonText: "Login Sekarang",
+        showCancelButton: true,
+        cancelButtonText: "Batal",
+        background: "#18181B",
+        color: "#F4F3EC",
+        buttonsStyling: false,
+        customClass: {
+          popup: "rounded-3xl border border-zinc-800 p-8 shadow-2xl font-sans",
+          title: "text-lg font-black tracking-tight mb-2 text-[#F4F3EC] block",
+          htmlContainer: "text-xs text-slate-400 font-medium leading-relaxed mb-6 block",
+          confirmButton: "bg-[#F4F3EC] hover:bg-white text-[#09090B] text-xs font-black px-6 py-3 rounded-full transition-all shadow-md active:scale-95 cursor-pointer border-0 outline-none block mx-auto mb-2",
+          cancelButton: "bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-6 py-3 rounded-full transition-all active:scale-95 cursor-pointer border-0 outline-none block mx-auto"
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+      return;
+    }
+
     if (!checkInDate) {
       showAlert("warning", "Tanggal Belum Dipilih", "Silakan pilih tanggal mulai ngekos terlebih dahulu!");
       return;
@@ -90,11 +119,39 @@ export function usePropertyDetail(id: string | undefined) {
 
   const handleSelectRoomTypeAndBook = useCallback((roomType: RoomType) => {
     setSelectedRoomType(roomType);
+    if (!property) return;
+
+    const userSession = localStorage.getItem("user");
+    if (!userSession) {
+      Swal.fire({
+        icon: "warning",
+        title: "Perlu Login",
+        text: "Anda harus masuk ke akun Hunizen terlebih dahulu untuk melanjutkan pemesanan sewa kost.",
+        confirmButtonText: "Login Sekarang",
+        showCancelButton: true,
+        cancelButtonText: "Batal",
+        background: "#18181B",
+        color: "#F4F3EC",
+        buttonsStyling: false,
+        customClass: {
+          popup: "rounded-3xl border border-zinc-800 p-8 shadow-2xl font-sans",
+          title: "text-lg font-black tracking-tight mb-2 text-[#F4F3EC] block",
+          htmlContainer: "text-xs text-slate-400 font-medium leading-relaxed mb-6 block",
+          confirmButton: "bg-[#F4F3EC] hover:bg-white text-[#09090B] text-xs font-black px-6 py-3 rounded-full transition-all shadow-md active:scale-95 cursor-pointer border-0 outline-none block mx-auto mb-2",
+          cancelButton: "bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-6 py-3 rounded-full transition-all active:scale-95 cursor-pointer border-0 outline-none block mx-auto"
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+      return;
+    }
+
     if (!checkInDate) {
       showAlert("warning", "Tanggal Belum Dipilih", "Silakan pilih tanggal mulai ngekos terlebih dahulu!");
       return;
     }
-    if (!property) return;
     navigate(`/booking/${property.id}`, {
       state: {
         checkInDate,

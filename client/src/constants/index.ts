@@ -1,8 +1,6 @@
 import type { FeatureCard, KostCard, VideoCard, SearchFilter, FooterColumn, SearchKostCard, PropertyDetail } from "../types";
 import { DollarSign, MapPin, Sparkles, Percent } from "lucide-react";
 import type { WhyChooseUsItem } from "../types";
-
-/* ─── Asset Imports ─── */
 import feat1 from "../assets/kost_feature_1.png";
 import feat2 from "../assets/kost_feature_2.png";
 import feat3 from "../assets/kost_feature_3.png";
@@ -26,12 +24,7 @@ import propStaggered2 from "../assets/prop_staggered_2.png";
 import propStaggered3 from "../assets/prop_staggered_3.png";
 import heroBg from "../assets/hero_bg_indoor_kost.png";
 
-
-/* ─── Navbar ─── */
-
 export const NAV_ITEMS = ["Kost & Kontrakan", "Tentang Kami", "FAQ", "Kontak"] as const;
-
-/* ─── Hero Search Filters ─── */
 
 export const SEARCH_FILTERS: SearchFilter[] = [
   { label: "Location", placeholder: "Dimana?", minWidth: "min-w-[140px]" },
@@ -40,8 +33,6 @@ export const SEARCH_FILTERS: SearchFilter[] = [
   { label: "Fasilitas", placeholder: "Fasilitas Kost", minWidth: "min-w-[130px]" },
   { label: "Aturan", placeholder: "Aturan Kost", minWidth: "min-w-[130px]" },
 ];
-
-/* ─── Features Section ─── */
 
 export const FEATURE_CARDS: FeatureCard[] = [
   {
@@ -66,8 +57,6 @@ export const FEATURE_CARDS: FeatureCard[] = [
     specs: ["AC & WiFi", "KM Dalam", "Pembersihan"],
   },
 ];
-
-/* ─── Property List Section ─── */
 
 export const PROMO_KOST: KostCard[] = [
   {
@@ -123,8 +112,6 @@ export const RECOM_KOST: KostCard[] = [
   },
 ];
 
-/* ─── Showcase Section ─── */
-
 export const WHY_CHOOSE_US_ITEMS: Omit<WhyChooseUsItem, "icon">[] = [
   {
     id: "why-1",
@@ -152,7 +139,6 @@ export const WHY_CHOOSE_US_ITEMS: Omit<WhyChooseUsItem, "icon">[] = [
   },
 ];
 
-/** Icon mapping for each "why choose us" item, kept separate to avoid JSX in pure data */
 export const WHY_ICONS: Record<string, { Icon: typeof DollarSign; colorClass: string }> = {
   "why-1": { Icon: DollarSign, colorClass: "text-amber-600" },
   "why-2": { Icon: MapPin, colorClass: "text-blue-600" },
@@ -160,15 +146,11 @@ export const WHY_ICONS: Record<string, { Icon: typeof DollarSign; colorClass: st
   "why-4": { Icon: Percent, colorClass: "text-rose-600" },
 };
 
-/* ─── CTA Section ─── */
-
 export const CTA_VIDEO_CARDS: VideoCard[] = [
   { img: cardImg1, handle: "@hunizen.jogja" },
   { img: cardImg2, handle: "@hunizen.kemang" },
   { img: cardImg3, handle: "@hunizen.seturan" },
 ];
-
-/* ─── Footer Section ─── */
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {

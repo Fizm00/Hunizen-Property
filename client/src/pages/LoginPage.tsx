@@ -8,7 +8,7 @@ import { useLoginForm } from "../hooks/useLoginForm";
 export default function LoginPage() {
   const { state, actions } = useLoginForm();
   const { phone, password, showPassword, isLoading, error } = state;
-  const { setPhone, setPassword, setShowPassword, handleLogin, handleGoogleLogin } = actions;
+  const { setPhone, setPassword, setShowPassword, handleLogin, handleGoogleLogin, handleForgotPassword } = actions;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-full bg-white font-sans text-slate-800 overflow-hidden">
@@ -78,12 +78,13 @@ export default function LoginPage() {
                 <label htmlFor="password" className="text-xs font-black text-slate-700 uppercase tracking-wider">
                   Password
                 </label>
-                <a
-                  href="#lupa-password"
-                  className="text-xs font-bold text-slate-450 hover:text-slate-800 transition-colors"
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-xs font-bold text-slate-450 hover:text-slate-850 hover:text-slate-800 transition-colors cursor-pointer"
                 >
                   Lupa Password?
-                </a>
+                </button>
               </div>
               <div className="relative">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">

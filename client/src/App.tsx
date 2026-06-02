@@ -13,6 +13,7 @@ import FaqPage from "./pages/FaqPage";
 import ContactPage from "./pages/ContactPage";
 import ProfilePage from "./pages/ProfilePage";
 import InvoicePage from "./pages/InvoicePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   useLenis();
@@ -30,6 +31,7 @@ function App() {
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/invoice/:id" element={<InvoicePage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

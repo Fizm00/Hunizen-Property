@@ -92,6 +92,8 @@ export function useProfile() {
         localStorage.setItem("user", JSON.stringify(mockUser));
       }
 
+      window.dispatchEvent(new Event("profile-update"));
+
       showAlert("success", "Profil Berhasil Diperbarui", "Biodata diri Anda telah berhasil disimpan.");
     } catch (err) {
       console.error("Save profile error:", err);

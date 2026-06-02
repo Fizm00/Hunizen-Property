@@ -1,5 +1,6 @@
 import { Shield, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import adminPromoBg from "../../assets/banner_admin_promo.png";
 import mainWhyImg from "../../assets/kost_banner.png";
 import { WHY_CHOOSE_US_ITEMS, WHY_ICONS } from "../../constants";
@@ -35,12 +36,12 @@ export default function Showcase() {
             <p className="text-slate-400 text-sm md:text-base mb-6 max-w-sm">
               Daftarkan segera usaha kost atau kontrakan anda sekarang juga dan nikmati diskon biaya admin di awal!
             </p>
-            <a
-              href="#daftar"
+            <Link
+              to="/register"
               className="bg-white text-brand-green font-bold px-8 py-3.5 rounded-full hover:bg-slate-200 transition-all duration-300 shadow-md"
             >
               Daftar
-            </a>
+            </Link>
           </div>
         </motion.div>
 
