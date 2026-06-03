@@ -86,7 +86,7 @@ export default function PropertyBookingCard({
           Ajukan Sewa
         </button>
         <a
-          href={`https://wa.me/628123456789?text=Halo%20saya%20tertarik%20dengan%20kost%20${encodeURIComponent(
+          href={`https://wa.me/${(property.host?.phone || "+628123456789").replace(/[^0-9]/g, "").replace(/^0/, "62")}?text=Halo%20saya%20tertarik%20dengan%20kost%20${encodeURIComponent(
             property.title
           )}`}
           target="_blank"

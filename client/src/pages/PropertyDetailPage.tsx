@@ -75,7 +75,18 @@ export default function PropertyDetailPage() {
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm font-semibold text-slate-400">
           <Link to="/" className="hover:text-slate-600 transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to="/search" className="hover:text-slate-600 transition-colors">Kost Yogyakarta</Link>
+          {(() => {
+            const parts = property.location.split(",");
+            const city = parts[parts.length - 1]?.trim() || property.location;
+            return (
+              <Link 
+                to={`/search?query=${encodeURIComponent(city)}`} 
+                className="hover:text-slate-600 transition-colors"
+              >
+                Kost {city}
+              </Link>
+            );
+          })()}
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-slate-600 truncate">{property.title}</span>
         </div>

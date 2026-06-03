@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Home, Search, SlidersHorizontal } from "lucide-react";
+import { useState, useEffect } from "react";
+import defaultAvatar from "../../assets/default_user_avatar.png";
 
 interface SearchHeaderProps {
   searchQuery: string;
@@ -12,6 +14,30 @@ export function SearchHeader({
   setSearchQuery,
   openFilterModal,
 }: SearchHeaderProps) {
+  const [user, setUser] = useState<{ name: string; avatarUrl?: string } | null>(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  const [customAvatar, setCustomAvatar] = useState<string | null>(() => {
+    return localStorage.getItem("user_custom_avatar");
+  });
+
+  useEffect(() => {
+    const handleProfileUpdate = () => {
+      const saved = localStorage.getItem("user");
+      setUser(saved ? JSON.parse(saved) : null);
+      setCustomAvatar(localStorage.getItem("user_custom_avatar"));
+    };
+
+    window.addEventListener("profile-update", handleProfileUpdate);
+    return () => {
+      window.removeEventListener("profile-update", handleProfileUpdate);
+    };
+  }, []);
+
+  const avatarSrc = user?.avatarUrl || customAvatar || defaultAvatar;
+
   return (
     <header className="sticky top-0 z-30 flex justify-between items-center px-4 md:px-8 w-full h-20 bg-brand-green border-b border-brand-green-accent/60 shrink-0">
       
@@ -44,16 +70,29 @@ export function SearchHeader({
 
       <div className="flex items-center gap-6">
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
-          <Link to="/" className="hover:text-white transition-colors">Tentang Kami</Link>
-          <Link to="/" className="hover:text-white transition-colors">FAQ</Link>
-          <Link to="/" className="hover:text-white transition-colors">Kontak</Link>
+          <Link to="/about" className="hover:text-white transition-colors">Tentang Kami</Link>
+          <Link to="/faq" className="hover:text-white transition-colors">FAQ</Link>
+          <Link to="/contact" className="hover:text-white transition-colors">Kontak</Link>
         </nav>
-        <Link
-          to="/login"
-          className="bg-brand-green-accent hover:bg-brand-green-hover text-white text-xs md:text-sm font-semibold px-5 py-2 rounded-full shadow-sm shrink-0 transition-all duration-300"
-        >
-          Masuk
-        </Link>
+        {user ? (
+          <Link to="/profile" className="flex items-center gap-2 group shrink-0">
+            <img
+              src={avatarSrc}
+              alt="User Profile"
+              className="w-9 h-9 rounded-full object-cover border border-white/20 group-hover:border-white transition-colors"
+            />
+            <span className="hidden lg:inline text-xs font-semibold text-white/95 group-hover:text-white transition-colors">
+              {user.name}
+            </span>
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-brand-green-accent hover:bg-brand-green-hover text-white text-xs md:text-sm font-semibold px-5 py-2 rounded-full shadow-sm shrink-0 transition-all duration-300"
+          >
+            Masuk
+          </Link>
+        )}
       </div>
     </header>
   );

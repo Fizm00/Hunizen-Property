@@ -1,73 +1,151 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Star, 
   MessageSquare, 
-  Trash2, 
   AlertCircle, 
   Send,
   Building,
   Calendar,
   User
 } from "lucide-react";
-import { MOCK_REVIEWS_DATA } from "../../constants/profile";
+import { propertyService, type ApiReview } from "../../services/propertyService";
+import { reviewService } from "../../services/reviewService";
 import type { UserReviewItem } from "../../types/profile";
+import type { SearchKostCard } from "../../types";
 import { showAlert, showToast } from "../../utils/alerts";
 
 export function ProfileReviews() {
-  const [reviews, setReviews] = useState<UserReviewItem[]>(MOCK_REVIEWS_DATA);
-
-  const [selectedProperty, setSelectedProperty] = useState("Kost Apik Duren Sawit Tipe A");
-  const [selectedRoom, setSelectedRoom] = useState("Kamar No. 102 - Lantai 2");
+  const [reviews, setReviews] = useState<UserReviewItem[]>([]);
+  const [properties, setProperties] = useState<SearchKostCard[]>([]);
+  const [selectedPropertyId, setSelectedPropertyId] = useState("");
   const [rating, setRating] = useState(5);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const handleSubmitReview = (e: React.FormEvent) => {
+  useEffect(() => {
+    let isMounted = true;
+    async function loadData() {
+      setLoading(true);
+      try {
+        const props = await propertyService.getSearchProperties();
+        if (isMounted) {
+          setProperties(props);
+          if (props.length > 0) {
+            setSelectedPropertyId(props[0].id);
+          }
+        }
+
+        const userSaved = localStorage.getItem("user");
+        const currentUser = userSaved ? JSON.parse(userSaved) : null;
+        
+        if (currentUser) {
+          const reviewsPromises = props.map((p) => 
+            reviewService.getPropertyReviews(p.id).catch(() => [])
+          );
+          const allReviewsLists = await Promise.all(reviewsPromises);
+          
+          const tenantReviews: UserReviewItem[] = [];
+          
+          allReviewsLists.forEach((reviewList, idx) => {
+            const prop = props[idx];
+            reviewList.forEach((r: ApiReview) => {
+              if (r.tenant?._id === currentUser.id || r.tenant === currentUser.id) {
+                tenantReviews.push({
+                  id: r._id,
+                  propertyName: prop.title,
+                  roomName: "Standard Room",
+                  rating: r.rating,
+                  date: r.createdAt 
+                    ? new Date(r.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) 
+                    : "1 Juni 2026",
+                  comment: r.comment,
+                  landlordReply: r.landlordReply,
+                });
+              }
+            });
+          });
+
+          if (isMounted) {
+            setReviews(tenantReviews);
+          }
+        }
+      } catch (err) {
+        console.error("Gagal memuat ulasan:", err);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+    loadData();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!comment.trim()) {
       showToast("warning", "Tuliskan komentar ulasan Anda terlebih dahulu!");
       return;
     }
 
-    const newId = `REV-${Math.floor(1000 + Math.random() * 9000)}`;
-    const today = new Date();
-    const dateFormatted = today.toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
+    if (!selectedPropertyId) {
+      showToast("warning", "Pilih properti terlebih dahulu!");
+      return;
+    }
 
-    const newReview: UserReviewItem = {
-      id: newId,
-      propertyName: selectedProperty,
-      roomName: selectedRoom,
+    const res = await reviewService.createReview({
+      property: selectedPropertyId,
       rating,
-      date: dateFormatted,
-      comment: comment.trim()
-    };
-
-    setReviews([newReview, ...reviews]);
-    setComment("");
-    setRating(5);
-
-    showAlert(
-      "success",
-      "Ulasan Terkirim",
-      `Terima kasih! Ulasan Anda untuk ${selectedProperty} berhasil dipublikasikan.`
-    );
-  };
-
-  const handleDeleteReview = (id: string, propertyName: string) => {
-    showAlert(
-      "question",
-      "Hapus Ulasan?",
-      `Apakah Anda yakin ingin menghapus ulasan untuk ${propertyName}? Tindakan ini tidak dapat dibatalkan.`
-    ).then((result) => {
-      if (result.isConfirmed) {
-        setReviews(reviews.filter((r) => r.id !== id));
-        showToast("success", "Ulasan berhasil dihapus");
-      }
+      comment: comment.trim(),
     });
+
+    if (res.success) {
+      const userSaved = localStorage.getItem("user");
+      const currentUser = userSaved ? JSON.parse(userSaved) : null;
+      
+      if (currentUser) {
+        const reviewsPromises = properties.map((p) => 
+          reviewService.getPropertyReviews(p.id).catch(() => [])
+        );
+        const allReviewsLists = await Promise.all(reviewsPromises);
+        
+        const tenantReviews: UserReviewItem[] = [];
+        allReviewsLists.forEach((reviewList, idx) => {
+          const prop = properties[idx];
+          reviewList.forEach((r: ApiReview) => {
+            if (r.tenant?._id === currentUser.id || r.tenant === currentUser.id) {
+              tenantReviews.push({
+                id: r._id,
+                propertyName: prop.title,
+                roomName: "Standard Room",
+                rating: r.rating,
+                date: r.createdAt 
+                  ? new Date(r.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) 
+                  : "1 Juni 2026",
+                comment: r.comment,
+                landlordReply: r.landlordReply,
+              });
+            }
+          });
+        });
+        setReviews(tenantReviews);
+      }
+
+      setComment("");
+      setRating(5);
+
+      const propObj = properties.find((p) => p.id === selectedPropertyId);
+      showAlert(
+        "success",
+        "Ulasan Terkirim",
+        `Terima kasih! Ulasan Anda untuk ${propObj?.title || "properti"} berhasil dipublikasikan.`
+      );
+    } else {
+      showAlert("error", "Gagal Mengirim", res.message || "Gagal mengirimkan ulasan.");
+    }
   };
 
   const totalReviews = reviews.length;
@@ -81,6 +159,17 @@ export function ProfileReviews() {
       ratingBreakdown[r.rating as 5 | 4 | 3 | 2 | 1]++;
     }
   });
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-zinc-300 border-t-brand-green rounded-full animate-spin" />
+          <span className="text-xs text-slate-500 font-semibold">Memuat ulasan...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -117,7 +206,6 @@ export function ProfileReviews() {
           </span>
         </div>
 
-        {/* Right Side: Progress Bars */}
         <div className="md:col-span-8 flex flex-col gap-2 grow">
           {[5, 4, 3, 2, 1].map((stars) => {
             const count = ratingBreakdown[stars as 5 | 4 | 3 | 2 | 1];
@@ -160,19 +248,13 @@ export function ProfileReviews() {
             </label>
             <select
               id="review-property"
-              value={selectedProperty}
-              onChange={(e) => {
-                setSelectedProperty(e.target.value);
-                if (e.target.value === "Kost Apik Duren Sawit Tipe A") {
-                  setSelectedRoom("Kamar No. 102 - Lantai 2");
-                } else {
-                  setSelectedRoom("Kamar No. 04 - Lantai 1");
-                }
-              }}
+              value={selectedPropertyId}
+              onChange={(e) => setSelectedPropertyId(e.target.value)}
               className="w-full text-xs font-semibold text-slate-700 border border-slate-250 rounded-xl p-3 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green/20 bg-white"
             >
-              <option value="Kost Apik Duren Sawit Tipe A">Kost Apik Duren Sawit Tipe A</option>
-              <option value="Kost Cozy Stay Condongcatur Jogja">Kost Cozy Stay Condongcatur Jogja</option>
+              {properties.map((p) => (
+                <option key={p.id} value={p.id}>{p.title}</option>
+              ))}
             </select>
           </div>
 
@@ -243,7 +325,7 @@ export function ProfileReviews() {
               reviews.map((item) => (
                 <div 
                   key={item.id}
-                  className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col gap-3.5 text-xs text-slate-600 relative shadow-sm animate-fade-in"
+                  className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col gap-3.5 text-xs text-slate-655 relative shadow-sm"
                 >
                   
                   <div className="flex justify-between items-start gap-4">
@@ -265,14 +347,6 @@ export function ProfileReviews() {
                         {item.roomName}
                       </span>
                     </div>
-
-                    <button
-                      onClick={() => handleDeleteReview(item.id, item.propertyName)}
-                      className="text-slate-400 hover:text-red-650 transition-colors p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer border-0 outline-none"
-                      title="Hapus Ulasan"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
                   </div>
 
                   <div className="flex items-center gap-1 py-0.5 px-2 bg-amber-50 text-amber-700 border border-amber-200 rounded w-max">

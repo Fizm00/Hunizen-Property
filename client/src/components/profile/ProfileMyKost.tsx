@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   MapPin, 
   User, 
@@ -15,65 +15,132 @@ import {
   AlertTriangle,
   Send
 } from "lucide-react";
-import { MOCK_ACTIVE_RENT, MOCK_COMPLAINTS_DATA } from "../../constants/profile";
-import type { ComplaintItem } from "../../types/profile";
+import { MOCK_ACTIVE_RENT } from "../../constants/profile";
+import { complaintService } from "../../services/complaintService";
+import { bookingService, type ApiBooking } from "../../services/bookingService";
+import type { ComplaintItem, ActiveRentItem } from "../../types/profile";
 import { showAlert, showToast } from "../../utils/alerts";
 
+interface MyKostActiveRent extends ActiveRentItem {
+  rawBooking?: ApiBooking;
+}
+
 export function ProfileMyKost() {
-  const [complaints, setComplaints] = useState<ComplaintItem[]>(MOCK_COMPLAINTS_DATA);
+  const [activeRent, setActiveRent] = useState<MyKostActiveRent>(MOCK_ACTIVE_RENT);
+  const [complaints, setComplaints] = useState<ComplaintItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [formCategory, setFormCategory] = useState("Fasilitas Kamar");
   const [formTitle, setFormTitle] = useState("");
   const [formDesc, setFormDesc] = useState("");
 
+  useEffect(() => {
+    let isMounted = true;
+    async function loadData() {
+      setLoading(true);
+      try {
+        const [complaintsData, bookingsData] = await Promise.all([
+          complaintService.getMyComplaints(),
+          bookingService.getMyBookings().catch(() => []),
+        ]);
+
+        if (isMounted) {
+          setComplaints(complaintsData);
+          
+          // Cari booking sewa aktif milik tenant di database
+          const active = bookingsData.find((b) => b.status === "disetujui") || bookingsData[0];
+          
+          if (active) {
+            const prop = active.property;
+            setActiveRent({
+              id: active._id,
+              propertyName: prop?.title || "Kost Hunizen Emerald Kemang",
+              propertyImage: prop?.gallery?.[0] || "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=600",
+              location: prop?.location || "Jakarta Selatan",
+              roomName: active.roomType || "Standard Room",
+              startDate: active.startDate ? new Date(active.startDate).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "1 Juni 2026",
+              endDate: new Date(new Date(active.startDate || Date.now()).setMonth(new Date(active.startDate || Date.now()).getMonth() + (active.durationMonths || 1))).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
+              price: `Rp ${(active.totalPayment || prop?.priceVal || 0).toLocaleString("id-ID")}`,
+              landlordName: prop?.host?.name || "Pak Joko Widodo",
+              landlordPhone: prop?.host?.phone || "+6287766554433",
+              nextPaymentDate: new Date(new Date(active.startDate || Date.now()).setMonth(new Date(active.startDate || Date.now()).getMonth() + 1)).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
+              paymentStatus: active.status === "disetujui" ? "lunas" : "belum_bayar",
+              kostRules: prop?.rules || ["Akses 24 Jam", "Maks. 2 orang/kamar"],
+              rawBooking: active,
+            });
+          }
+        }
+      } catch (err) {
+        console.error("Gagal memuat data sewa aktif:", err);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+    loadData();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleContactLandlord = () => {
-    const text = `Halo, saya penyewa kamar ${MOCK_ACTIVE_RENT.roomName} ingin menanyakan perihal operasional kost.`;
-    const url = `https://wa.me/${MOCK_ACTIVE_RENT.landlordPhone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(text)}`;
+    const text = `Halo, saya penyewa kamar ${activeRent.roomName} ingin menanyakan perihal operasional kost.`;
+    const cleanPhone = activeRent.landlordPhone.replace(/[^0-9]/g, "").replace(/^0/, "62");
+    const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   };
 
   const handleDownloadContract = () => {
-    window.open(`/invoice/${MOCK_ACTIVE_RENT.id}`, "_blank");
+    window.open(`/invoice/${activeRent.id}`, "_blank");
   };
 
   const handleShowInvoiceDetails = () => {
-    window.open(`/invoice/${MOCK_ACTIVE_RENT.id}`, "_blank");
+    window.open(`/invoice/${activeRent.id}`, "_blank");
   };
 
-  const handleSubmitComplaint = (e: React.FormEvent) => {
+  const handleSubmitComplaint = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formTitle.trim() || !formDesc.trim()) {
       showToast("warning", "Harap isi semua kolom laporan pengaduan!");
       return;
     }
 
-    const newId = `REP-${Math.floor(1000 + Math.random() * 9000)}`;
-    const today = new Date();
-    const dateFormatted = today.toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
+    const propertyId = activeRent?.rawBooking?.property?._id || "64070a7b452be4df5f09623d"; // fallback default id jika mock
 
-    const newComplaint: ComplaintItem = {
-      id: newId,
+    const res = await complaintService.createComplaint({
+      property: propertyId,
       category: formCategory,
       title: formTitle.trim(),
       description: formDesc.trim(),
-      date: dateFormatted,
-      status: "baru"
-    };
+    });
 
-    setComplaints([newComplaint, ...complaints]);
-    setFormTitle("");
-    setFormDesc("");
+    if (res.success) {
+      const updated = await complaintService.getMyComplaints();
+      setComplaints(updated);
+      setFormTitle("");
+      setFormDesc("");
 
-    showAlert(
-      "success",
-      "Pengaduan Terkirim",
-      `Laporan keluhan Anda dengan ID ${newId} berhasil dikirim ke pengelola. Kami akan segera menghubungi Anda untuk perbaikan.`
-    );
+      showAlert(
+        "success",
+        "Pengaduan Terkirim",
+        `Laporan keluhan Anda berhasil dikirim ke pengelola. Kami akan segera menghubungi Anda untuk perbaikan.`
+      );
+    } else {
+      showAlert("error", "Gagal Mengirim", res.message || "Gagal mengirimkan pengaduan.");
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-zinc-300 border-t-brand-green rounded-full animate-spin" />
+          <span className="text-xs text-slate-500 font-semibold">Memuat kos aktif...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -105,29 +172,29 @@ export function ProfileMyKost() {
             <h4 className="font-extrabold text-slate-800 text-sm mt-0.5">Timeline Sewa Berjalan</h4>
           </div>
           <span className="text-xs font-extrabold text-brand-green bg-brand-green-light px-2.5 py-1 rounded-md border border-brand-green/10">
-            Sisa Sewa: <b className="font-black text-brand-green">69 Hari Lagi</b> (2 Bulan Lebih)
+            Masa sewa aktif terpantau dengan baik
           </span>
         </div>
         
         <div className="relative w-full h-3 bg-slate-200 rounded-md overflow-hidden border border-slate-350">
           <div 
             className="absolute top-0 left-0 h-full bg-brand-green rounded-md transition-all duration-500"
-            style={{ width: "25%" }}
+            style={{ width: "35%" }}
           />
         </div>
 
         <div className="flex justify-between items-center text-xs font-semibold text-slate-500">
           <div className="flex flex-col">
             <span className="text-slate-400 text-[10px] uppercase font-bold">Mulai Masuk</span>
-            <span className="text-slate-700 font-bold">{MOCK_ACTIVE_RENT.startDate}</span>
+            <span className="text-slate-700 font-bold">{activeRent.startDate}</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-slate-400 text-[10px] uppercase font-bold">Progress</span>
-            <span className="text-brand-green font-black">Hari Ke-23 (25%)</span>
+            <span className="text-brand-green font-black">Aktif</span>
           </div>
           <div className="flex flex-col items-end">
             <span className="text-slate-400 text-[10px] uppercase font-bold">Selesai Kontrak</span>
-            <span className="text-slate-700 font-bold">{MOCK_ACTIVE_RENT.endDate}</span>
+            <span className="text-slate-700 font-bold">{activeRent.endDate}</span>
           </div>
         </div>
       </div>
@@ -139,23 +206,23 @@ export function ProfileMyKost() {
           <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-3 flex flex-col gap-4">
             <div className="relative rounded-xl overflow-hidden">
               <img 
-                src={MOCK_ACTIVE_RENT.propertyImage} 
-                alt={MOCK_ACTIVE_RENT.propertyName} 
+                src={activeRent.propertyImage} 
+                alt={activeRent.propertyName} 
                 className="w-full h-44 object-cover bg-slate-50"
               />
               <div className="absolute top-3 left-3 bg-brand-green text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded">
-                {MOCK_ACTIVE_RENT.roomName}
+                {activeRent.roomName}
               </div>
             </div>
             
             <div className="px-1.5 pb-1 flex flex-col gap-3">
               <div>
                 <h4 className="font-extrabold text-slate-800 text-sm sm:text-base leading-snug">
-                  {MOCK_ACTIVE_RENT.propertyName}
+                  {activeRent.propertyName}
                 </h4>
                 <div className="flex items-center gap-1 text-slate-400 text-xs font-semibold mt-1">
                   <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  <span>{MOCK_ACTIVE_RENT.location}</span>
+                  <span>{activeRent.location}</span>
                 </div>
               </div>
 
@@ -207,8 +274,8 @@ export function ProfileMyKost() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Pemilik / Pengelola</span>
-                <span className="text-xs font-black text-slate-850">{MOCK_ACTIVE_RENT.landlordName}</span>
-                <span className="text-[10px] text-slate-500 font-semibold">{MOCK_ACTIVE_RENT.landlordPhone}</span>
+                <span className="text-xs font-black text-slate-850">{activeRent.landlordName}</span>
+                <span className="text-[10px] text-slate-500 font-semibold">{activeRent.landlordPhone}</span>
               </div>
             </div>
             <button
@@ -233,21 +300,21 @@ export function ProfileMyKost() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-y border-slate-100 py-4 text-xs font-semibold text-slate-600">
               <div className="flex flex-col gap-0.5">
                 <span className="text-slate-400 text-[10px] font-bold uppercase">ID Kontrak Sewa</span>
-                <span className="text-brand-green font-extrabold text-sm">{MOCK_ACTIVE_RENT.id}</span>
+                <span className="text-brand-green font-extrabold text-sm">{activeRent.id}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-slate-400 text-[10px] font-bold uppercase">Harga Sewa Bulanan</span>
-                <span className="text-slate-800 font-extrabold text-sm">{MOCK_ACTIVE_RENT.price}</span>
+                <span className="text-slate-800 font-extrabold text-sm">{activeRent.price}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-slate-400 text-[10px] font-bold uppercase">Jatuh Tempo Pembayaran</span>
-                <span className="text-slate-800 font-bold">{MOCK_ACTIVE_RENT.nextPaymentDate}</span>
+                <span className="text-slate-800 font-bold">{activeRent.nextPaymentDate}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-slate-400 text-[10px] font-bold uppercase">Status Pembayaran Bulan Ini</span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold w-max">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  Lunas Terbayar
+                  Aktif
                 </span>
               </div>
             </div>
@@ -277,7 +344,7 @@ export function ProfileMyKost() {
             </h5>
             
             <ul className="flex flex-col gap-2.5 text-xs text-slate-655 font-semibold">
-              {MOCK_ACTIVE_RENT.kostRules.map((rule, idx) => (
+              {activeRent.kostRules.map((rule: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-2 leading-relaxed">
                   <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
                     {idx + 1}

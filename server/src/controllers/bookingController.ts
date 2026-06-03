@@ -67,7 +67,14 @@ export async function getMyBookings(req: AuthRequest, res: Response, next: NextF
     }
 
     const bookings = await Booking.find({ tenant: req.user.id })
-      .populate('property', 'title location price gallery type host')
+      .populate({
+        path: 'property',
+        select: 'title location priceVal price gallery type host rules',
+        populate: {
+          path: 'host',
+          select: 'name phone email avatarUrl'
+        }
+      })
       .sort({ createdAt: -1 });
 
     res.status(200).json({

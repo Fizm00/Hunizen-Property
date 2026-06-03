@@ -10,15 +10,20 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setIsOpen(false);
 
-  const [user, setUser] = useState<{ name: string } | null>(() => {
+  const [user, setUser] = useState<{ name: string; avatarUrl?: string } | null>(() => {
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : null;
+  });
+
+  const [customAvatar, setCustomAvatar] = useState<string | null>(() => {
+    return localStorage.getItem("user_custom_avatar");
   });
 
   useEffect(() => {
     const handleProfileUpdate = () => {
       const saved = localStorage.getItem("user");
       setUser(saved ? JSON.parse(saved) : null);
+      setCustomAvatar(localStorage.getItem("user_custom_avatar"));
     };
 
     window.addEventListener("profile-update", handleProfileUpdate);
@@ -26,6 +31,8 @@ export default function Navbar() {
       window.removeEventListener("profile-update", handleProfileUpdate);
     };
   }, []);
+
+  const avatarSrc = user?.avatarUrl || customAvatar || defaultAvatar;
 
   return (
     <>
@@ -103,7 +110,7 @@ export default function Navbar() {
           {user ? (
             <Link to="/profile" className="flex items-center gap-2 group">
               <img
-                src={defaultAvatar}
+                src={avatarSrc}
                 alt="User Profile"
                 className="w-9 h-9 rounded-full object-cover border border-white/20 group-hover:border-white transition-colors"
               />
@@ -207,7 +214,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className="mt-4 flex items-center gap-3 bg-white/10 border border-white/20 text-white text-base font-bold px-8 py-3 rounded-full shadow-lg text-center"
                 >
-                  <img src={defaultAvatar} alt="User Avatar" className="w-6 h-6 rounded-full object-cover" />
+                  <img src={avatarSrc} alt="User Avatar" className="w-6 h-6 rounded-full object-cover" />
                   <span>Profil Saya</span>
                 </Link>
               ) : (

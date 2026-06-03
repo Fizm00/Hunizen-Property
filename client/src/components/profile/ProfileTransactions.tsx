@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   CreditCard, 
   Search, 
@@ -10,18 +10,36 @@ import {
   Download,
   AlertCircle
 } from "lucide-react";
-import { MOCK_TRANSACTIONS_DATA } from "../../constants/profile";
+import { transactionService } from "../../services/transactionService";
 import type { TransactionItem } from "../../types/profile";
 
 export function ProfileTransactions() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("semua");
+  const [transactions, setTransactions] = useState<TransactionItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadTransactions() {
+      setLoading(true);
+      const data = await transactionService.getMyTransactions();
+      if (isMounted) {
+        setTransactions(data);
+        setLoading(false);
+      }
+    }
+    loadTransactions();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleDownloadReceipt = (id: string) => {
     window.open(`/invoice/${id}`, "_blank");
   };
 
-  const filteredTransactions = MOCK_TRANSACTIONS_DATA.filter((txn: TransactionItem) => {
+  const filteredTransactions = transactions.filter((txn: TransactionItem) => {
     const matchesSearch = txn.propertyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       txn.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       txn.type.toLowerCase().includes(searchTerm.toLowerCase());
@@ -31,13 +49,13 @@ export function ProfileTransactions() {
     return matchesSearch && matchesStatus;
   });
 
-  const totalCount = MOCK_TRANSACTIONS_DATA.length;
-  const failedCount = MOCK_TRANSACTIONS_DATA.filter((t) => t.status === "gagal").length;
+  const totalCount = transactions.length;
+  const failedCount = transactions.filter((t) => t.status === "gagal").length;
   
-  const successAmountVal = MOCK_TRANSACTIONS_DATA
+  const successAmountVal = transactions
     .filter((t) => t.status === "berhasil")
     .reduce((acc, t) => {
-      const numeric = parseInt(t.amount.replace(/[^0-9]/g, ""));
+      const numeric = parseInt(t.amount.replace(/[^0-9]/g, "") || "0");
       return acc + numeric;
     }, 0);
 
@@ -46,6 +64,17 @@ export function ProfileTransactions() {
     currency: "IDR",
     maximumFractionDigits: 0
   }).format(successAmountVal);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-zinc-300 border-t-brand-green rounded-full animate-spin" />
+          <span className="text-xs text-slate-500 font-semibold">Memuat transaksi...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">

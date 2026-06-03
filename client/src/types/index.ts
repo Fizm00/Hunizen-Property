@@ -65,6 +65,7 @@ export interface PropertyDetail extends SearchKostCard {
     name: string;
     avatar: string;
     joined: string;
+    phone?: string;
   };
   highlights: string[];
   roomSpecs: string[];

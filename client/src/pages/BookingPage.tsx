@@ -54,6 +54,7 @@ export default function BookingPage() {
   }, [id]);
 
   const hookOptions = {
+    propertyId: id,
     priceVal: property?.priceVal || 0,
     initialCheckInDate: routeState?.checkInDate,
     initialDuration: routeState?.duration,

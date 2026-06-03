@@ -38,10 +38,16 @@ export function usePropertyDetail(id: string | undefined) {
 
         if (isMounted && data) {
           setProperty(data);
-          const similar = searchList
-            .filter((p) => p.id !== id && p.location.includes("Yogyakarta"))
-            .slice(0, 3);
-          setSimilarProperties(similar);
+          const cityWords = (data.location || "").split(",").map((s) => s.trim());
+          const targetCity = cityWords.length > 1 ? cityWords[cityWords.length - 2] : (cityWords[0] || "");
+          
+          let similar = searchList.filter(
+            (p) => p.id !== id && p.location.toLowerCase().includes(targetCity.toLowerCase())
+          );
+          if (similar.length === 0) {
+            similar = searchList.filter((p) => p.id !== id);
+          }
+          setSimilarProperties(similar.slice(0, 3));
           if (data.roomTypes && data.roomTypes.length > 0) {
             setSelectedRoomType(data.roomTypes[0]);
           } else {

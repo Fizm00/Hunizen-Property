@@ -1,9 +1,9 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface IComplaint extends Document {
-  tenant: Schema.Types.ObjectId; // References User
-  property: Schema.Types.ObjectId; // References Property
-  complaintId: string; // REP-9921
+  tenant: Schema.Types.ObjectId;
+  property: Schema.Types.ObjectId;
+  complaintId: string;
   category: 'Fasilitas Kamar' | 'Air & Listrik' | 'Kebersihan' | 'Keamanan' | 'Lainnya';
   title: string;
   description: string;

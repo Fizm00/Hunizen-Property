@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Receipt, 
   Search, 
@@ -8,22 +8,63 @@ import {
   Download,
   Calendar,
   Building} from "lucide-react";
-import { MOCK_BILLS_DATA } from "../../constants/profile";
+import { billService } from "../../services/billService";
 import type { BillItem } from "../../types/profile";
 
 export function ProfileBills() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("semua");
+  const [bills, setBills] = useState<BillItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const handlePayBill = (id: string) => {
-    window.open(`/invoice/${id}`, "_blank");
+  useEffect(() => {
+    let isMounted = true;
+    async function loadBills() {
+      setLoading(true);
+      const data = await billService.getMyBills();
+      if (isMounted) {
+        setBills(data);
+        setLoading(false);
+      }
+    }
+    loadBills();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handlePayBill = async (id: string) => {
+    const { showAlert } = await import("../../utils/alerts");
+    const { default: Swal } = await import("sweetalert2");
+
+    const result = await Swal.fire({
+      title: "Konfirmasi Pembayaran",
+      text: "Apakah Anda yakin ingin membayar tagihan ini?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Bayar",
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#10b981",
+      cancelButtonColor: "#6b7280",
+    });
+
+    if (result.isConfirmed) {
+      const res = await billService.payBill(id, "gopay");
+      if (res.success) {
+        showAlert("success", "Pembayaran Berhasil", "Tagihan Anda telah berhasil dibayar.");
+        const updated = await billService.getMyBills();
+        setBills(updated);
+      } else {
+        showAlert("error", "Pembayaran Gagal", res.message || "Gagal memproses pembayaran.");
+      }
+    }
   };
 
   const handleDownloadInvoice = (id: string) => {
     window.open(`/invoice/${id}`, "_blank");
   };
 
-  const filteredBills = MOCK_BILLS_DATA.filter((bill: BillItem) => {
+  const filteredBills = bills.filter((bill: BillItem) => {
     const matchesSearch = bill.propertyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bill.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bill.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -34,10 +75,10 @@ export function ProfileBills() {
     return matchesSearch && matchesStatus;
   });
 
-  const unpaidCount = MOCK_BILLS_DATA.filter((b) => b.status === "belum_bayar").length;
-  const unpaidAmountVal = MOCK_BILLS_DATA
+  const unpaidCount = bills.filter((b) => b.status === "belum_bayar").length;
+  const unpaidAmountVal = bills
     .filter((b) => b.status === "belum_bayar")
-    .reduce((acc, b) => acc + parseInt(b.amount.replace(/[^0-9]/g, "")), 0);
+    .reduce((acc, b) => acc + parseInt(b.amount.replace(/[^0-9]/g, "") || "0"), 0);
 
   const unpaidAmount = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -45,16 +86,27 @@ export function ProfileBills() {
     maximumFractionDigits: 0
   }).format(unpaidAmountVal);
 
-  const paidCount = MOCK_BILLS_DATA.filter((b) => b.status === "lunas").length;
-  const paidAmountVal = MOCK_BILLS_DATA
+  const paidCount = bills.filter((b) => b.status === "lunas").length;
+  const paidAmountVal = bills
     .filter((b) => b.status === "lunas")
-    .reduce((acc, b) => acc + parseInt(b.amount.replace(/[^0-9]/g, "")), 0);
+    .reduce((acc, b) => acc + parseInt(b.amount.replace(/[^0-9]/g, "") || "0"), 0);
 
   const paidAmount = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
   }).format(paidAmountVal);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-zinc-300 border-t-brand-green rounded-full animate-spin" />
+          <span className="text-xs text-slate-500 font-semibold">Memuat tagihan...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">

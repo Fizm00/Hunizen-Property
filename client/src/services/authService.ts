@@ -1,74 +1,126 @@
-import type { LoginCredentials, RegisterData, AuthResponse } from "../types/auth";
+import { api } from "./api";
+import axios from "axios";
+import type { LoginCredentials, RegisterData, AuthResponse, UserProfile } from "../types/auth";
 
-/**
- * AuthService handles authentication operations (Login and Registration).
- * It simulates network request latency and validates data format.
- */
 class AuthService {
-  private readonly latencyMs = 1000;
-
   /**
-   * Simulates a login API request.
+   * Mengirim request login ke API backend.
    */
   public async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    await new Promise((resolve) => setTimeout(resolve, this.latencyMs));
-
-    const { phone, password } = credentials;
-
-    // Simulated verification logic
-    if (!phone || !password) {
-      return { success: false, error: "Nomor handphone dan password wajib diisi" };
+    try {
+      const response = await api.post<{ success: boolean; token: string; user: UserProfile }>("/auth/login", credentials);
+      const { token, user } = response.data;
+      
+      // Simpan data otentikasi ke localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      
+      return { success: true, user, token };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const data = error.response.data as { message?: string };
+        return { success: false, error: data.message || "Gagal masuk" };
+      }
+      return { success: false, error: "Terjadi kesalahan koneksi ke server" };
     }
-
-    if (password.length < 6) {
-      return { success: false, error: "Password minimal terdiri dari 6 karakter" };
-    }
-
-    // Success response mockup
-    console.log("Logged in successfully via phone:", phone);
-    return {
-      success: true,
-      user: {
-        id: "usr-91023",
-        name: "Budi Santoso",
-        phone,
-        email: "budi.santoso@email.com",
-      },
-    };
   }
 
   /**
-   * Simulates a registration API request.
+   * Mengirim request registrasi akun baru ke API backend.
    */
   public async register(data: RegisterData): Promise<AuthResponse> {
-    await new Promise((resolve) => setTimeout(resolve, this.latencyMs));
-
-    const { name, phone, email, password, confirmPassword } = data;
-
-    // Simulated verification logic
-    if (!name || !phone || !email || !password || !confirmPassword) {
-      return { success: false, error: "Semua kolom wajib diisi" };
+    try {
+      const payload = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        password: data.password,
+        gender: data.gender || "Laki-laki",
+        role: "tenant", // Peran default adalah penyewa
+      };
+      
+      const response = await api.post<{ success: boolean; token: string; user: UserProfile }>("/auth/register", payload);
+      const { token, user } = response.data;
+      
+      // Simpan data otentikasi ke localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      
+      return { success: true, user, token };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const responseData = error.response.data as { message?: string; errors?: Record<string, string> };
+        let errMsg = responseData.message || "Gagal mendaftar";
+        if (responseData.errors) {
+          errMsg = Object.values(responseData.errors).join(", ");
+        }
+        return { success: false, error: errMsg };
+      }
+      return { success: false, error: "Terjadi kesalahan koneksi ke server" };
     }
+  }
 
-    if (password !== confirmPassword) {
-      return { success: false, error: "Konfirmasi password tidak cocok" };
+  /**
+   * Mengambil data profil lengkap pengguna yang sedang aktif (me).
+   */
+  public async getProfile(): Promise<AuthResponse> {
+    try {
+      const response = await api.get<{ success: boolean; user: UserProfile }>("/auth/me");
+      const { user } = response.data;
+      
+      localStorage.setItem("user", JSON.stringify(user));
+      return { success: true, user };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const data = error.response.data as { message?: string };
+        return { success: false, error: data.message || "Gagal mengambil profil" };
+      }
+      return { success: false, error: "Terjadi kesalahan koneksi ke server" };
     }
+  }
 
-    if (password.length < 6) {
-      return { success: false, error: "Password minimal terdiri dari 6 karakter" };
+  /**
+   * Memperbarui data profil pengguna ke server.
+   */
+  public async updateProfile(data: Partial<UserProfile>): Promise<AuthResponse> {
+    try {
+      const response = await api.put<{ success: boolean; user: UserProfile }>("/auth/profile", data);
+      const { user } = response.data;
+      
+      localStorage.setItem("user", JSON.stringify(user));
+      return { success: true, user };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const responseData = error.response.data as { message?: string };
+        return { success: false, error: responseData.message || "Gagal memperbarui profil" };
+      }
+      return { success: false, error: "Terjadi kesalahan koneksi ke server" };
     }
+  }
 
-    // Success response mockup
-    console.log("Registered successfully:", { name, phone, email });
-    return {
-      success: true,
-      user: {
-        id: `usr-${Math.floor(10000 + Math.random() * 90000)}`,
-        name,
-        phone,
-        email,
-      },
-    };
+  /**
+   * Mengirim request lupa password ke API backend.
+   */
+  public async forgotPassword(phone: string): Promise<{ success: boolean; message: string }> {
+    try {
+      const response = await api.post<{ success: boolean; message: string }>("/auth/forgot-password", { phone });
+      return {
+        success: response.data.success,
+        message: response.data.message,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const responseData = error.response.data as { message?: string };
+        return {
+          success: false,
+          message: responseData.message || "Gagal memproses lupa password",
+        };
+      }
+      return {
+        success: false,
+        message: "Terjadi kesalahan koneksi ke server",
+      };
+    }
   }
 }
 

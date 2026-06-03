@@ -10,6 +10,7 @@ import {
 } from "../constants/booking";
 
 interface UseBookingFormOptions {
+  propertyId?: string;
   priceVal: number;
   initialCheckInDate?: string;
   initialDuration?: string;
@@ -18,6 +19,7 @@ interface UseBookingFormOptions {
 }
 
 export function useBookingForm({
+  propertyId,
   priceVal,
   initialCheckInDate,
   initialDuration,
@@ -70,6 +72,7 @@ export function useBookingForm({
   const [errors, setErrors] = useState<BookingFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingId, setBookingId] = useState("");
+
   const incrementOccupants = () => {
     if (occupantsCount < MAX_OCCUPANTS) {
       setOccupantsCount((prev) => prev + 1);
@@ -124,25 +127,26 @@ export function useBookingForm({
 
       try {
         const response = await bookingService.submitBooking({
-          name,
-          phone,
-          gender,
-          occupation,
-          occupantsCount,
-          durationMonths,
+          property: propertyId || "",
+          roomType: selectedRoomType,
           startDate,
+          durationMonths,
+          occupantsCount,
           additionalNotes,
-          selectedRoomType,
-          paymentMethod
+          paymentMethod,
+          totalPayment
         });
 
         if (response.success) {
           setBookingId(response.bookingId);
           setStep(3);
           window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          setErrors({ name: response.error || "Gagal mengajukan booking" });
         }
       } catch (err) {
         console.error("Failed to submit booking:", err);
+        setErrors({ name: "Terjadi kesalahan saat menghubungi server" });
       } finally {
         setIsSubmitting(false);
       }

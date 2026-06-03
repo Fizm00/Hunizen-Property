@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import defaultAvatar from "../assets/default_user_avatar.png";
 import { showAlert, showToast } from "../utils/alerts";
+import { authService } from "../services/authService";
 
 export interface ProfileData {
   name: string;
@@ -27,11 +28,11 @@ export function useProfile() {
   const [activeSubTab, setActiveSubTab] = useState<"biodata" | "verifikasi">("biodata");
 
   const [name, setName] = useState(sessionUser?.name || "Username");
-  const [gender, setGender] = useState("Perempuan");
-  const [birthDate, setBirthDate] = useState("2024-02-29");
+  const [gender, setGender] = useState("Laki-laki");
+  const [birthDate, setBirthDate] = useState("");
   const [job, setJob] = useState("");
   const [city, setCity] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("Belum Menikah");
   const [education, setEducation] = useState("");
   const [emergencyPhone, setEmergencyPhone] = useState("+62");
 
@@ -42,6 +43,42 @@ export function useProfile() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [validationError, setValidationError] = useState("");
+
+  // Ambil profil lengkap dari server saat hook dimuat
+  useEffect(() => {
+    let isMounted = true;
+    async function loadProfile() {
+      setIsLoading(true);
+      const response = await authService.getProfile();
+      if (isMounted && response.success && response.user) {
+        const u = response.user;
+        setName(u.name || "");
+        setGender(u.gender || "Laki-laki");
+        setBirthDate(u.birthDate || "");
+        setJob(u.job || "");
+        setCity(u.city || "");
+        setMaritalStatus(u.maritalStatus || "Belum Menikah");
+        setEducation(u.education || "");
+        setEmergencyPhone(u.emergencyPhone || "");
+        if (u.avatarUrl) {
+          setAvatarUrl(u.avatarUrl);
+        }
+        setSessionUser({
+          id: u.id,
+          name: u.name,
+          phone: u.phone,
+          email: u.email,
+        });
+      }
+      if (isMounted) {
+        setIsLoading(false);
+      }
+    }
+    loadProfile();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleAvatarUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValidationError("");
@@ -80,31 +117,45 @@ export function useProfile() {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const response = await authService.updateProfile({
+        name,
+        gender: gender as "Laki-laki" | "Perempuan",
+        birthDate,
+        job,
+        city,
+        maritalStatus,
+        education,
+        emergencyPhone,
+        avatarUrl,
+      });
 
-      if (sessionUser) {
-        const updatedUser = { ...sessionUser, name };
+      if (response.success && response.user) {
+        const u = response.user;
+        const updatedUser = {
+          id: u.id,
+          name: u.name,
+          phone: u.phone,
+          email: u.email,
+        };
         setSessionUser(updatedUser);
         localStorage.setItem("user", JSON.stringify(updatedUser));
+        
+        window.dispatchEvent(new Event("profile-update"));
+        showAlert("success", "Profil Berhasil Diperbarui", "Biodata diri Anda telah berhasil disimpan.");
       } else {
-        const mockUser = { id: "usr-guest", name };
-        setSessionUser(mockUser);
-        localStorage.setItem("user", JSON.stringify(mockUser));
+        showAlert("error", "Gagal Menyimpan", response.error || "Terjadi kesalahan saat menyimpan data diri Anda.");
       }
-
-      window.dispatchEvent(new Event("profile-update"));
-
-      showAlert("success", "Profil Berhasil Diperbarui", "Biodata diri Anda telah berhasil disimpan.");
     } catch (err) {
       console.error("Save profile error:", err);
       showAlert("error", "Gagal Menyimpan", "Terjadi kesalahan saat menyimpan data diri Anda.");
     } finally {
       setIsLoading(false);
     }
-  }, [name, sessionUser]);
+  }, [name, gender, birthDate, job, city, maritalStatus, education, emergencyPhone, avatarUrl]);
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
     localStorage.removeItem("user_custom_avatar");
     
     showToast("success", "Berhasil keluar dari akun");

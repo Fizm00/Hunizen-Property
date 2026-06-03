@@ -224,9 +224,9 @@ export default function SuccessReceipt({
               Cetak
             </button>
             <a
-              href={`https://wa.me/628123456789?text=Halo%20saya%20telah%20mengirimkan%20pengajuan%20sewa%20dengan%20ID%20${bookingId}%20untuk%20kost%20${encodeURIComponent(
+              href={`https://wa.me/${(property.host?.phone || "+628123456789").replace(/[^0-9]/g, "")}?text=Halo%20saya%20telah%20mengirimkan%20pengajuan%20sewa%20dengan%20ID%20${bookingId}%2520untuk%2520kost%2520${encodeURIComponent(
                 property.title
-              )}.%20Mohon%20untuk%20segera%20dikonfirmasi.`}
+              )}.%2520Mohon%2520untuk%2520segera%2520dikonfirmasi.`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 py-3.5 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold rounded-full transition-all text-center shadow-md active:scale-98 cursor-pointer border-0 block"
