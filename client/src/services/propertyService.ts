@@ -103,6 +103,7 @@ function mapPropertyToSearchKost(p: ApiProperty): SearchKostCard {
     latLng: p.latLng || [-7.7715, 110.3855],
     facilities: p.facilities || [],
     rules: p.rules || [],
+    nearbyPlaces: p.nearbyPlaces || [],
   };
 }
 

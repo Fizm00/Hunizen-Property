@@ -35,6 +35,7 @@ export interface SearchKostCard extends KostCard {
   latLng: [number, number];
   facilities: string[];
   rules: string[];
+  nearbyPlaces?: NearbyPlace[];
 }
 
 export interface RoomType {

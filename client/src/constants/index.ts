@@ -320,7 +320,7 @@ export const SEARCH_PROPERTIES: SearchKostCard[] = [
   }
 ];
 
-export const PROPERTY_DETAILS_DB: Record<string, Omit<PropertyDetail, keyof SearchKostCard>> = {
+export const PROPERTY_DETAILS_DB: Record<string, Omit<PropertyDetail, Exclude<keyof SearchKostCard, "nearbyPlaces">>> = {
   "sp-1": {
     gallery: [promo1, feat1, feat2, feat3, heroBg],
     host: {
