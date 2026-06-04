@@ -64,27 +64,27 @@ export default function SearchPage() {
         
         <section
           data-lenis-prevent
-          className={`flex-col gap-6 p-4 md:p-6 lg:p-8 w-full md:w-[55%] lg:w-[50%] h-full overflow-y-auto custom-scrollbar ${
+          className={`flex-col gap-6 p-4 md:p-6 lg:p-8 w-full md:w-[55%] lg:w-[50%] h-full overflow-y-auto custom-scrollbar bg-white ${
             mobileView === "map" ? "hidden md:flex" : "flex"
           }`}
         >
           <div className="flex justify-between items-center w-full">
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+              <h1 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
                 Kost di Sekitarmu
               </h1>
               {loading ? (
-                <div className="mt-2 h-3.5 bg-zinc-800/60 rounded w-40 animate-pulse" />
+                <div className="mt-2 h-3.5 bg-slate-100 rounded w-40 animate-pulse" />
               ) : (
-                <p className="mt-1 text-xs text-zinc-400">
-                  Menampilkan <span className="font-semibold text-zinc-300">{filteredProperties.length}</span> properti terbaik
+                <p className="mt-1 text-xs text-slate-500">
+                  Menampilkan <span className="font-semibold text-slate-700">{filteredProperties.length}</span> properti terbaik
                 </p>
               )}
             </div>
             
-            <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 bg-zinc-900/60 border border-zinc-800/80 rounded-xl">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-xl">
               <span>Urutkan:</span>
-              <span className="font-semibold text-zinc-200">
+              <span className="font-semibold text-slate-700">
                 {activeSort === "terendah" ? "Harga Terendah" : activeSort === "tertinggi" ? "Harga Tertinggi" : "Rekomendasi"}
               </span>
             </div>
@@ -116,17 +116,17 @@ export default function SearchPage() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center flex-1 p-8 text-center bg-zinc-950/20 border border-dashed border-zinc-800 rounded-3xl">
-              <div className="flex justify-center items-center w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 mb-4">
+            <div className="flex flex-col justify-center items-center flex-1 p-8 text-center bg-slate-50/50 border border-dashed border-slate-200 rounded-3xl">
+              <div className="flex justify-center items-center w-12 h-12 bg-slate-100 border border-slate-200/80 rounded-full text-slate-400 mb-4">
                 <SlidersHorizontal className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-zinc-200 text-base">Tidak ada properti cocok</h3>
-              <p className="mt-1.5 text-xs text-zinc-500 max-w-xs">
+              <h3 className="font-bold text-slate-700 text-base">Tidak ada properti cocok</h3>
+              <p className="mt-1.5 text-xs text-slate-400 max-w-xs">
                 Coba sesuaikan kata kunci pencarian Anda atau bersihkan beberapa filter untuk melihat listing.
               </p>
               <button
                 onClick={resetFilters}
-                className="mt-4 px-5 py-2 text-xs font-semibold bg-[#F4F3EC] text-zinc-900 rounded-full hover:bg-white transition-colors cursor-pointer"
+                className="mt-4 px-5 py-2 text-xs font-semibold bg-brand-green text-white rounded-full hover:bg-brand-green-hover transition-colors cursor-pointer"
               >
                 Reset Semua Filter
               </button>
